@@ -1,0 +1,1 @@
+*Let's band* -- web platform enabling musicians to form local music bands
