@@ -5,7 +5,7 @@
     playing 
     <input type="text" placeholder="Rock&Roll">
     in
-    <input type="text" placeholder="Brussels">
+    <input type="text" id="band_city" placeholder="">
   </h2>
 
   <%= link_to "Find!", '#', class: "btn btn-large btn-primary" %>
@@ -18,8 +18,15 @@
     playing 
     <input type="text" placeholder="Guitar">
     in
-    <input type="text" placeholder="Brussels">
+    <input type="text" id="musician_city" placeholder="">
   </h2>
 
   <%= link_to "Find!", '#', class: "btn btn-large btn-primary" %>
 </div>
+
+<script src="http://j.maxmind.com/app/geoip.js" charset="ISO-8859-1" type="text/javascript" ></script>
+<script type="text/javascript">
+  var city = geoip_city()+', '+geoip_country_name();
+  document.getElementById('band_city').placeholder = city;
+  document.getElementById('musician_city').placeholder = city;
+</script>
