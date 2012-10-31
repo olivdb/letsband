@@ -11,7 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121030201500) do
+ActiveRecord::Schema.define(:version => 20121031203800) do
+
+  create_table "instruments", :force => true do |t|
+    t.string   "name"
+    t.string   "image_name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "skills", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "instrument_id"
+    t.integer  "expertise"
+    t.integer  "interest"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "skills", ["instrument_id"], :name => "index_skills_on_instrument_id"
+  add_index "skills", ["user_id", "instrument_id"], :name => "index_skills_on_user_id_and_instrument_id", :unique => true
+  add_index "skills", ["user_id"], :name => "index_skills_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "firstname"
@@ -20,8 +40,10 @@ ActiveRecord::Schema.define(:version => 20121030201500) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "password_digest"
+    t.string   "remember_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
 end

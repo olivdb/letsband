@@ -1,9 +1,13 @@
 FactoryGirl.define do
   factory :user do
-    firstname     "Oli"
-    surname "Vdb"
-    email    "ovdbigge@gmail.com"
+    sequence(:firstname) { |n| "Random" }
+    sequence(:surname) { |n| "Guy #{n}" }
+    sequence(:email) { |n| "random_guy_#{n}@example.com" }
     password "foobar"
     password_confirmation "foobar"
+  end
+
+  factory :instrument do
+  	sequence(:name) { |n| "Instrument #{n}" }
   end
 end
