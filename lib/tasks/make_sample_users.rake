@@ -10,7 +10,8 @@ namespace :db do
                  email: "example@railstutorial.org",
                  password: "foobar",
                  password_confirmation: "foobar")
-    user.city_id = rand(City.first.id..City.last.id)
+    #user.city_id = rand(City.first.id..City.last.id)
+    user.city_id = rrand(City.first.id, City.last.id)
     user.save
 
     n_skills = 0
@@ -18,11 +19,12 @@ namespace :db do
       begin
         n_skills = n_skills + 1
         user.skills.create!(
-          instrument_id: rand(Instrument.first.id..Instrument.last.id), 
+          instrument_id: rrand(Instrument.first.id, Instrument.last.id), 
           priority: n_skills,
-          expertise: rand(1..3),
-          experience: rand(1..5),
-          education: rand(0..4))
+          expertise: rrand(1,3),#rand(1..3),
+          experience: rrand(1,5),#rand(1..5),
+          education: rrand(0,4)#rand(0..4)
+        )
       rescue ActiveRecord::RecordNotUnique => exception
         n_skills = n_skills - 1
       end
@@ -38,7 +40,7 @@ namespace :db do
                    email: email,
                    password: password,
                    password_confirmation: password)
-      user.city_id = rand(City.first.id..City.last.id)
+      user.city_id = rrand(City.first.id, City.last.id) #rand(City.first.id..City.last.id)
       user.save
       
       n_skills = 0
@@ -46,15 +48,19 @@ namespace :db do
         begin
           n_skills = n_skills + 1
           user.skills.create!(
-            instrument_id: rand(Instrument.first.id..Instrument.last.id), 
+            instrument_id: rrand(Instrument.first.id, Instrument.last.id), 
             priority: n_skills,
-            expertise: rand(1..3),
-            experience: rand(1..5),
-            education: rand(0..1)*rand(0..2)*rand(0..2))
+            expertise: rrand(1, 3),
+            experience: rrand(1, 5),
+            education: rrand(0,1)*rrand(0,2)*rrand(0,2))
         rescue ActiveRecord::RecordNotUnique => exception
           n_skills = n_skills - 1
         end
       end
     end
   end
+end
+
+def rrand(start, finish)
+  start + rand(1 + finish - start)
 end
