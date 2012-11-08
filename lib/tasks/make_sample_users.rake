@@ -44,7 +44,7 @@ namespace :db do
       user.save
       
       n_skills = 0
-      (rand(1..2)+rand(0..1)*rand(0..1)).times do |n|
+      (rrand(1,2)+rrand(0,1)*rrand(0,1)).times do |n|
         begin
           n_skills = n_skills + 1
           user.skills.create!(
