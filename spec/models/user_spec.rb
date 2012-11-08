@@ -140,5 +140,38 @@ describe User do
     its(:instruments) { should include(instrument) }
   end
 
+  describe "search users with instrument and city" do
+    let(:instrument) { FactoryGirl.create(:instrument) }
+    let(:other_instrument) { FactoryGirl.create(:instrument) } 
+    let(:city) { FactoryGirl.create(:city) }
+    let(:other_city) { FactoryGirl.create(:city) } 
+    let(:user1) { FactoryGirl.create(:user) } 
+    let(:user2) { FactoryGirl.create(:user) } 
+    let(:user3) { FactoryGirl.create(:user) } 
+    let(:user4) { FactoryGirl.create(:user) } 
+    let(:params) { { instrument_id: instrument.id, city_id: city.id } }
+    before do
+      user1.city = city
+      user1.save
+      user1.skills.create!(instrument_id: instrument.id, expertise: 1, interest: 2)
+      user1.skills.create!(instrument_id: other_instrument.id, expertise: 1, interest: 2)
+      user2.city = city
+      user2.save
+      user2.skills.create!(instrument_id: instrument.id, expertise: 1, interest: 2)
+      user3.city = other_city
+      user3.save
+      user3.skills.create!(instrument_id: instrument.id, expertise: 1, interest: 2)
+      user4.city = city
+      user4.save
+      user4.skills.create!(instrument_id: other_instrument.id, expertise: 1, interest: 2)
+    end
+    subject { User.get_filtered(params) }
+    its(:length) { should == 2 }
+    it { should include(user1) }
+    it { should include(user2) }
+    it { should_not include(user3) }
+    it { should_not include(user4) }
+  end
+
 
 end

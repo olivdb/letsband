@@ -10,4 +10,8 @@ FactoryGirl.define do
   factory :instrument do
   	sequence(:name) { |n| "Instrument #{n}" }
   end
+
+  factory :city do
+    sequence(:name) { |n| "City #{n}" }
+  end
 end

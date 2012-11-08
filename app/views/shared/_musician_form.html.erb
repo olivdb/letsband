@@ -1,0 +1,25 @@
+<div class='center hero-unit'>
+<%= form_tag users_path, :method => 'get' do %>
+  <p>
+    I'm looking for a <b>musician</b> playing
+
+    <%= select_tag 'instrument_id', options_from_collection_for_select(Instrument.all, 'id', 'name', params[:instrument_id]), { class: 'input-medium search-query' } %>  
+
+    in
+
+    <%= text_field_tag 'city_name', nil, :class => 'search-query ui-autocomplete-input', :placeholder => 'City name', data: {autocomplete_source: cities_path}, class: 'input-large', id: 'city_name' %> 
+    <%= hidden_field_tag 'city_id' %> 
+
+    <%= submit_tag 'Find !', :name => nil, class: 'btn btn-primary' %>
+  </p>
+<% end %>
+</div>
+
+
+<!--
+<script src="http://j.maxmind.com/app/geoip.js" charset="ISO-8859-1" type="text/javascript" ></script>
+<script type="text/javascript">
+  var city = geoip_city() + ', ' + geoip_region_name() + ', ' + geoip_country_name();
+  document.getElementById('musician_city_name').placeholder = city;
+</script>
+-->

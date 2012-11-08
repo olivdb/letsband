@@ -11,7 +11,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031203800) do
+ActiveRecord::Schema.define(:version => 20121107224423) do
+
+  create_table "cities", :force => true do |t|
+    t.integer  "country_id"
+    t.integer  "region_id"
+    t.string   "name"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "cities", ["name", "region_id", "country_id"], :name => "by_name_and_region_id_and_country_id", :unique => true
+  add_index "cities", ["name"], :name => "index_cities_on_name"
+
+  create_table "countries", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "countries", ["code"], :name => "index_countries_on_code", :unique => true
+  add_index "countries", ["name"], :name => "index_countries_on_name", :unique => true
+
+  create_table "genres", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "instruments", :force => true do |t|
     t.string   "name"
@@ -20,11 +49,23 @@ ActiveRecord::Schema.define(:version => 20121031203800) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "regions", :force => true do |t|
+    t.integer  "country_id"
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "regions", ["code", "country_id"], :name => "by_code_and_country_id", :unique => true
+
   create_table "skills", :force => true do |t|
     t.integer  "user_id"
     t.integer  "instrument_id"
+    t.integer  "priority"
     t.integer  "expertise"
-    t.integer  "interest"
+    t.integer  "experience"
+    t.integer  "education"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
@@ -41,8 +82,10 @@ ActiveRecord::Schema.define(:version => 20121031203800) do
     t.datetime "updated_at",      :null => false
     t.string   "password_digest"
     t.string   "remember_token"
+    t.integer  "city_id"
   end
 
+  add_index "users", ["city_id"], :name => "index_users_on_city_id"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 

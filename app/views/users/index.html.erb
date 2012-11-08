@@ -1,0 +1,11 @@
+<% provide(:title, 'Musicians') %>
+
+<%= render 'shared/musician_form' %>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @users %>
+</ul>
+
+<%= will_paginate %>

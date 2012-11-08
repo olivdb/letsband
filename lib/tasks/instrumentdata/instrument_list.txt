@@ -1,0 +1,195 @@
+12-string guitar
+42-string Pikasa guitar
+Accordion
+Acoustic Bass Guitar
+Acoustic Guitar
+Alto Clarinet
+Alto Flute
+Alto Horn (Peck Horn)
+Alto Recorder
+Alto Sax
+Alto Trombone
+Argol
+Arranger
+Autoharp
+Backing Vocals
+Bagpipes
+Bandoneon
+Banjo
+Bansuri Flute
+Baritone Sax
+Bass
+Bass Clarinet
+Bass Drum
+Bass Flute
+Bass Harmonica
+Bass Recorder
+Bass Sax
+Bass Trombone
+Bass Trumpet
+Bassett Horn
+Bassoon
+Batá Drums
+Bells/Glockenspiel
+Berimbau
+Bird Whistle
+Bongos
+Bouzouki
+C-Melody Sax
+Cabasa/Afuche
+Cajon
+Castanets
+Celeste
+Chapman Stick
+Chekere/Shaker
+Cheng
+Chimes (Tubular Bells)
+Clarinet
+Claves
+Clavinet
+Conch Shells
+Conductor
+Congas
+Contrabass
+Contrabass Clarinet
+Contrabass Sarrusophone
+Contrabass Saxophone
+Contrabass Trombone
+Contrabassoon
+Contralto Clarinet
+Cornet
+Cowbell
+Crotales
+Cuatro
+Cymbals
+Dance
+Didgeridoo
+Director
+Doumbek
+Doussn'gouni (Hunter's Guitar)
+Drums
+Dulcimer
+Electric Bass
+Electric Guitar
+Electric Organ
+Electric Piano
+Electric Upright Bass
+Electronic Valve Instrument
+Electronic Wind Instrument
+English Horn
+Euphonium
+Finger Cymbals
+Flügelhorn
+Flute
+Frame Drum
+French Horn
+Gaita (Colombian)
+Ghatam
+Gong
+Goofus/Cuesnophone
+Guiro
+Guitar
+Hag'houge/Gembri
+Handclaps
+Harmonica
+Harmonium
+Harp
+Harpsichord
+Hot Fountain Pen
+Kalimba/Mbira (Thumb Piano)
+Karkaba (Metal Castanets)
+Kazoo
+Keyboards
+Kora
+Koto
+Leader
+Lute
+Mandola
+Mandolin
+Manzello
+Maracas
+Marimba
+Master of Ceremonies
+Mellophone
+Mellophonium
+Melodica
+Mridangam
+Musette
+Musical Saw
+NED Synclavier
+Oboe
+Ocarina
+Other
+Oud
+Pan Flute
+Penny Whistle
+Percussion
+Piano
+Piccolo
+Piccolo Bass
+Piccolo Trumpet
+Pipe Organ
+Prepared Piano
+Programming Synth/Drum Machine
+Rabab
+Rap
+Recorder
+Sarod
+Sarrusophone
+Saxello
+Saz
+Shakuhachi Flute
+Shawm
+Shenai
+Sitar
+Sleigh Bells
+Slide Guitar
+Slide Saxophone
+Slide Trumpet
+Slide Whistle
+Snare Drum
+Sopranino Clarinet
+Sopranino Saxophone
+Soprano Recorder
+Soprano Sax
+Speaking
+Steel Drums
+Steel Guitar
+Strings
+Stritch
+Synthesizer
+Tablas
+Tamboura
+Tambourine
+Tarogato
+Tenor Drum
+Tenor Horn
+Tenor Recorder
+Tenor Sax
+Theremin
+Timbales
+Timpani
+Triangle
+Trombone
+Trombonium
+Trumpet
+Tuba
+Turntable/Electronics
+Ukelele
+unknown
+Valve Trombone
+Vibraphone
+Viola
+Viola da Gamba
+Violin
+Violoncello
+Vitar
+Vocals
+Washboard
+Waterphone
+Whistling
+Wood Flute
+Woodblock
+Woodwinds
+Xylophone
+Zither

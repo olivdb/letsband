@@ -1,5 +1,7 @@
 Letsband::Application.routes.draw do
-  resources :users
+  resources :users 
+  resources :cities
+
   resources :sessions, only: [:new, :create, :destroy]
 
   root to: 'static_pages#home'

@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :firstname, :surname, :password, :password_confirmation
   has_secure_password
 
-  has_many :skills, dependent: :destroy
+  belongs_to :city
+  has_many :skills, dependent: :destroy, order: 'priority ASC'
   has_many :instruments, through: :skills  
 
   validates :firstname, presence: true, length: { maximum: 20 }
@@ -30,6 +31,51 @@ class User < ActiveRecord::Base
 
   def name
     self.firstname + ' ' + self.surname
+  end
+
+  def self.get_filtered(params)
+    #city = City.find_by_fullname(params[:city_name])
+    city = City.find_by_id(params[:city_id])
+    if city.present?
+      lon = city.longitude
+      lat = city.latitude
+      dmax = params[:radius]
+      if dmax.blank?
+        dmax = 100
+      end
+      dlon = dmax/(Math.cos(lat/180*Math::PI)*65.97).abs
+      lon1 = lon - dlon
+      lon2 = lon + dlon
+      dlat = dmax/65.97
+      lat1 = lat - dlat
+      lat2 = lat + dlat
+
+      User.paginate_by_sql(
+        [
+          'SELECT u.* FROM users AS u,skills AS s WHERE 
+            u.id = s.user_id AND 
+            s.instrument_id = ? AND 
+            u.city_id = ?', 
+          params[:instrument_id], 
+          city.id
+        ],
+        page: params[:page],
+        per_page: 50
+      )
+      User.joins(:skills).select('distinct(users.id), users.*') \
+          .where(['users.city_id = ? AND skills.instrument_id = ?', city.id, params[:instrument_id]]) \
+          .paginate(page: params[:page], per_page: 50)
+
+      User.includes(:city)
+          .joins(:skills)
+          .joins('INNER JOIN cities ON users.city_id = cities.id')
+          .where(cities: { country_id: city.country_id, latitude: lat1..lat2, longitude: lon1..lon2 }, skills: { instrument_id: params[:instrument_id] })
+          .order("(#{lat}-cities.latitude)*(#{lat}-cities.latitude) + (#{lon}-cities.longitude)*(#{lon}-cities.longitude) ASC")
+          .paginate(page: params[:page], per_page: 50)
+
+    else
+      User.where('0').paginate(page: params[:page])
+    end
   end
 
   private

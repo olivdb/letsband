@@ -3,8 +3,11 @@ class CreateSkills < ActiveRecord::Migration
     create_table :skills do |t|
       t.integer :user_id
       t.integer :instrument_id
+      t.integer :priority
       t.integer :expertise
-      t.integer :interest
+      t.integer :experience
+      t.integer :education
+
 
       t.timestamps
     end

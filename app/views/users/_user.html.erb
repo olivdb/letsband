@@ -1,0 +1,22 @@
+<li>
+  <div class = 'row'>
+    <div class = 'span2'>
+      <%= gravatar_for user, size: 80 %>
+    </div>
+    <div class = 'span8'>
+      <p>
+      	<%= link_to user.name, user %>
+        <% 
+          ref_city = City.find_by_id(params[:city_id])
+          distance_ref_city = ref_city.distance(user.city)
+        %>
+        <%= 'from ' + user.city.fullname + " (" + (distance_ref_city.round(1)).to_s + " km from " +ref_city.name + ")" %>
+      </p>
+      <p>
+        <ul class="users">
+          <%= render Skill.where(user_id:  user.id, instrument_id: params[:instrument_id]) %>
+        </ul>
+      </p>
+    </div>
+  </div>
+</li>

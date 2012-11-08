@@ -1,0 +1,30 @@
+  <li>
+    Expertise: 
+  	<% skill.expertise.times do %>
+    <%=  image_tag(skill.instrument.image_name, size: "32x32", alt: skill.instrument.name) %>
+    <% end %>
+
+    <% (3-skill.expertise).times do %>
+    <%=  image_tag(skill.instrument.image_name, size: "32x32", alt: skill.instrument.name, class: 'halfopacity') %>
+    <% end %>
+    
+    Experience (years): 
+    <%= image_tag(skill.experience.to_s + '.jpg', size: "32x32", alt: skill.experience.to_s + ' years of experience') %>
+    
+    <% if skill.education >= 1 %>
+        Education:
+    <% end %>
+
+    <% if skill.education == 1 %>
+    <%= image_tag('school.jpg', size: "32x32", alt: 'Academy student') %>
+    <% elsif skill.education >= 2 %>
+    <%= image_tag('degree.png', size: "32x32", alt: 'Academy graduate') %>
+    <% end %>
+
+    <% if skill.education == 3 %>
+    <%= image_tag('school.jpg', size: "32x32", alt: 'Conservatory student') %>
+    <% elsif skill.education >= 4 %>
+    <%= image_tag('degree.png', size: "32x32", alt: 'Conservatory graduate') %>
+    <% end %>
+
+  </li>
