@@ -30,7 +30,7 @@ class Band < ActiveRecord::Base
           .paginate(page: params[:page], per_page: 50)
 
     else
-      Band.where('0').paginate(page: params[:page])
+      Band.where('NULL').paginate(page: params[:page])
     end
   end
 

@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
           .paginate(page: params[:page], per_page: 50)
 
     else
-      User.where('0').paginate(page: params[:page])
+      User.where('NULL').paginate(page: params[:page])
     end
   end
 
