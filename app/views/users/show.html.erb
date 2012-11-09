@@ -18,16 +18,18 @@
     </p>
     <p>
       <h3>Memberships</h3>
-      <ul class="condensed">
-      <% @user.memberships.each do |membership| %>
-        <li>
-        Playing 
-        <%= image_tag(membership.instrument.image_name, size: "32x32", alt: membership.instrument.name) %>
-        in
-        <%= link_to membership.band.name, membership.band %>
-        </li>
-      <% end %>
-      </ul>
+      <div class="condensed">
+        <ul>
+        <% @user.memberships.each do |membership| %>
+          <li>
+          Playing 
+          <%= image_tag(membership.instrument.image_name, size: "32x32", alt: membership.instrument.name) %>
+          in
+          <%= link_to membership.band.name, membership.band %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
     </p>
   </div>
 </div>
