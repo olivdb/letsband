@@ -17,7 +17,7 @@
 	</p>
 	<p>
 		<h3>Members (<%= @band.users.count.to_s %>)</h3>
-		<div class="users-condensed">
+		<div class="condensed">
 			<ul>
 			<% @band.memberships.sort{ |a,b| a.instrument.name.downcase <=> b.instrument.name.downcase }.each do |membership| %>
 			  <li>
