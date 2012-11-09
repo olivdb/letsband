@@ -8,7 +8,7 @@ class Band < ActiveRecord::Base
   has_many :instruments, through: :memberships
 
   def self.get_filtered(params)
-    city = City.find_by_id(params[:city_id])
+    city = City.find_by_id(params[:band_city_id])
     if city.present?
       lon = city.longitude
       lat = city.latitude

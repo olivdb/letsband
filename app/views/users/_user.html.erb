@@ -7,7 +7,7 @@
       <p>
       	<%= link_to user.name, user %>
         <% 
-          ref_city = City.find_by_id(params[:city_id])
+          ref_city = City.find_by_id(params[:user_city_id])
           distance_ref_city = ref_city.distance(user.city)
         %>
         <%= 'from ' + user.city.fullname + " (" + (distance_ref_city.round(1)).to_s + " km from " +ref_city.name + ")" %>

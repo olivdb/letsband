@@ -7,8 +7,8 @@
 
     in
 
-    <%= text_field_tag 'city_name', nil, :class => 'search-query ui-autocomplete-input', :placeholder => 'City name', data: {autocomplete_source: cities_path}, class: 'input-large', id: 'city_name' %> 
-    <%= hidden_field_tag 'city_id' %> 
+    <%= text_field_tag 'band_city_name', nil, :class => 'search-query ui-autocomplete-input', :placeholder => 'City name', data: {autocomplete_source: cities_path}, class: 'input-large', id: 'band_city_name' %> 
+    <%= hidden_field_tag 'band_city_id' %> 
 
     <%= submit_tag 'Find !', :name => nil, class: 'btn btn-primary' %>
   </p>
