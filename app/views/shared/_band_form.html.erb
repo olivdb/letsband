@@ -1,5 +1,7 @@
 <div class='center hero-unit'>
-<%= form_tag bands_path, :method => 'get' do %>
+<%= form_tag bands_path, :method => 'get', onsubmit: "if('#{params[:band_city_name]}' && document.getElementById('band_city_name').value == ''){document.getElementById('band_city_name').value = '#{params[:band_city_name]}'; 
+      document.getElementById('band_city_has_been_selected').value = 1;
+      document.getElementById('band_city_id').value = '#{params[:band_city_id]}';}" do %>
   <p>
     I'm looking for a <b>music band</b> playing
 
@@ -7,8 +9,15 @@
 
     in
 
-    <%= text_field_tag 'band_city_name', nil, :class => 'search-query ui-autocomplete-input', :placeholder => 'City name', data: {autocomplete_source: cities_path}, class: 'input-large', id: 'band_city_name' %> 
-    <%= hidden_field_tag 'band_city_id' %> 
+    <%= text_field_tag 'band_city_name', params[:band_city_name], class: 'search-query ui-autocomplete-input input-large', placeholder: 'City name', data: {autocomplete_source: cities_path}, id: 'band_city_name',
+      onclick: 'this.select();',
+      onblur: "if('#{params[:band_city_name]}' && this.value == ''){this.value = '#{params[:band_city_name]}'; 
+      document.getElementById('band_city_has_been_selected').value = 1;
+      document.getElementById('band_city_id').value = '#{params[:band_city_id]}';}"  
+    %> 
+    <%= hidden_field_tag 'band_city_id', params[:band_city_id] %> 
+    <%= hidden_field_tag 'band_city_has_been_selected', 0 %>
+
 
     <%= submit_tag 'Find !', :name => nil, class: 'btn btn-primary' %>
   </p>

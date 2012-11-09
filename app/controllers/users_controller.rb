@@ -22,6 +22,20 @@ class UsersController < ApplicationController
   end
 
   def index
+      if(params[:user_city_has_been_selected] == '0')
+        if(!params[:user_city_name].blank?)
+          city = City.find_by_fullname(params[:user_city_name]) || City.order(:name).where("LOWER(name) like ?", "#{params[:user_city_name].downcase}%").limit(1).first
+          if city.present?
+            params[:user_city_id] = city.id
+            params[:user_city_name] = city.fullname
+          else
+            params[:user_city_id] = 0
+            params[:user_city_name] = ''
+          end
+        else
+          params[:user_city_id] = 0
+        end
+      end
       @users = User.get_filtered(params)
   end
 

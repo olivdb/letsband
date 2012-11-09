@@ -4,4 +4,6 @@
 jQuery ->
 	$('#band_city_name').autocomplete
 		source: $('#band_city_name').data('autocomplete-source')
-		select: (event,ui) -> $("#band_city_id").val(ui.item.id)
+		select: (event,ui) -> 
+			$("#band_city_id").val(ui.item.id)
+			$("#band_city_has_been_selected").val(1)
