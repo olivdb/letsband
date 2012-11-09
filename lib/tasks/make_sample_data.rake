@@ -6,6 +6,7 @@ namespace :db do
     Rake::Task['db:importcitieslight'].invoke
     Rake::Task['db:importinstruments'].invoke
  	Rake::Task['db:importgenres'].invoke
+ 	Rake::Task['db:makesamplebands'].invoke
     Rake::Task['db:makesampleusers'].invoke
   end
 end

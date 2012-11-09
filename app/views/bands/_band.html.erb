@@ -1,0 +1,26 @@
+<li>
+  <div class = 'row'>
+    <div class = 'span2'>
+       <%= image_for(band, size: 80) %>
+    </div>
+    <div class = 'span8'>
+      <p>
+      	<%= link_to band.name, band %>
+        <% 
+          ref_city = City.find_by_id(params[:city_id])
+          distance_ref_city = ref_city.distance(band.city)
+        %>
+        <%= 'in ' + band.city.fullname + " (" + (distance_ref_city.round(1)).to_s + " km from " +ref_city.name + ")" %>
+      </p>
+      <p>
+        <b><%= band.users.count.to_s %> members</b>
+        <% band.instruments.sort{ |a,b| a.name.downcase <=> b.name.downcase }.each do |instrument| %>
+          <%=  image_tag(instrument.image_name, size: "32x32", alt: instrument.name) %>
+        <% end %>
+      </p>
+      <p>
+        <%= band.description %>
+      </p>
+    </div>
+  </div>
+</li>

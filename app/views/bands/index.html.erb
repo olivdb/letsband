@@ -1,0 +1,11 @@
+<% provide(:title, 'Bands') %>
+
+<%= render 'shared/band_form' %>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @bands %>
+</ul>
+
+<%= will_paginate %>

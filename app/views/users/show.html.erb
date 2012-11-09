@@ -9,8 +9,18 @@
     </section>
   </aside>
   <div class="span8">
-  	<ul class="skills">
-    	<%= render @user.skills %>
+    <%= render partial: 'skills', object: @user.skills %>
+    <br/>
+    <ul class="memberships">
+    <% @user.memberships.each do |membership| %>
+      <li>
+      Playing 
+      <%= image_tag(membership.instrument.image_name, size: "32x32", alt: membership.instrument.name) %>
+      in
+      <%= link_to membership.band.name, membership.band %>
+      </li>
+    <% end %>
     </ul>
+
   </div>
 </div>

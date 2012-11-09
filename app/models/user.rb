@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_secure_password
 
   belongs_to :city
+  has_many :memberships, dependent: :destroy
+  has_many :bands, through: :memberships
   has_many :skills, dependent: :destroy, order: 'priority ASC'
   has_many :instruments, through: :skills  
 
@@ -49,22 +51,6 @@ class User < ActiveRecord::Base
       dlat = dmax/65.97
       lat1 = lat - dlat
       lat2 = lat + dlat
-
-      User.paginate_by_sql(
-        [
-          'SELECT u.* FROM users AS u,skills AS s WHERE 
-            u.id = s.user_id AND 
-            s.instrument_id = ? AND 
-            u.city_id = ?', 
-          params[:instrument_id], 
-          city.id
-        ],
-        page: params[:page],
-        per_page: 50
-      )
-      User.joins(:skills).select('distinct(users.id), users.*') \
-          .where(['users.city_id = ? AND skills.instrument_id = ?', city.id, params[:instrument_id]]) \
-          .paginate(page: params[:page], per_page: 50)
 
       User.includes(:city)
           .joins(:skills)

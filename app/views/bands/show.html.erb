@@ -1,0 +1,31 @@
+<% provide(:title, @band.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= image_for @band %>
+        <%= @band.name %>
+      </h1>
+    </section>
+  </aside>
+  <div class="span8">
+  	<p>
+    	<h3>Location</h3><br/> <%= @band.city.fullname %>
+    </p>
+	<p>
+		<h3>Description</h3><br/> <%= @band.description %>
+	</p>
+	<p>
+		<h3>Members ( <%= @band.users.count.to_s %> )</h3><br/>
+		<ul class="users">
+		<% @band.memberships.sort{ |a,b| a.instrument.name.downcase <=> b.instrument.name.downcase }.each do |membership| %>
+		  <li>
+			  <%= image_tag(membership.instrument.image_name, size: "32x32", alt: membership.instrument.name) %>
+			  <%= gravatar_for membership.user, size: 32 %>
+			  <%= link_to membership.user.name, membership.user %>
+		  </li>
+		<% end %>
+		</ul>
+	</p>	
+  </div>
+</div>

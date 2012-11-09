@@ -2,6 +2,7 @@ class City < ActiveRecord::Base
   attr_accessible :name, :country_id, :latitude, :longitude, :region_id
 
   has_many :users
+  has_many :bands
   belongs_to :region
   belongs_to :country
   

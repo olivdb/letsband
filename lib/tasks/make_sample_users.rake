@@ -4,6 +4,7 @@ namespace :db do
 
     User.delete_all
     Skill.delete_all
+    Membership.delete_all
 
     user = User.create!(firstname: "Example",
                  surname: "User",
@@ -30,6 +31,11 @@ namespace :db do
       end
     end
 
+    Membership.create!(user_id: user.id, 
+      band_id: rrand(Band.first.id, Band.last.id),
+      instrument_id: user.skills[rrand(0,user.skills.count-1)].instrument_id
+    )
+
     99.times do |n|
       firstname  = Faker::Name.first_name
       lastname  = Faker::Name.last_name
@@ -40,7 +46,7 @@ namespace :db do
                    email: email,
                    password: password,
                    password_confirmation: password)
-      user.city_id = rrand(City.first.id, City.last.id) #rand(City.first.id..City.last.id)
+      user.city_id = rrand(City.first.id, City.last.id)
       user.save
       
       n_skills = 0
@@ -57,6 +63,12 @@ namespace :db do
           n_skills = n_skills - 1
         end
       end
+
+      Membership.create!(user_id: user.id, 
+        band_id: rrand(Band.first.id, Band.last.id),
+        instrument_id: user.skills[rrand(0,user.skills.count-1)].instrument_id
+      )
+
     end
   end
 end

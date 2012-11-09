@@ -3,6 +3,7 @@ class Instrument < ActiveRecord::Base
 
   has_many :skills, dependent: :destroy
   has_many :users, through: :skills
+  has_many :memberships
   
   validates :name, presence: true
 

@@ -1,6 +1,11 @@
 Letsband::Application.routes.draw do
-  resources :users 
-  resources :cities
+  get "bands/index"
+
+  get "bands/show"
+
+  resources :users
+  resources :bands
+  resources :cities, only: [:index]
 
   resources :sessions, only: [:new, :create, :destroy]
 
