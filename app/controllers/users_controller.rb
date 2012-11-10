@@ -67,14 +67,18 @@ class UsersController < ApplicationController
         end
       end
     elsif(params[:section]=='skills')
-      #params[:user][:skills_attributes].each do |new_skill|
-      #  @user.skills.each do |old_skill|
-      #    puts new_skill.inspect
-      #    if new_skill[1]["instrument_id"] == old_skill.instrument_id.to_s && new_skill[1]["id"] != old_skill.id.to_s
-      #      old_skill.destroy
-      #    end
-      #  end
-      #end
+      @user.skills.destroy_all
+      params[:user][:skills_attributes].each do |skill|
+        skill[1]=skill[1].delete_if {|key, value| key  == "id" }
+        hash = { :skills_attributes => { '0' => skill[1] } }
+        if !@user.update_attributes(hash)
+          sign_in @user
+          render 'edit' and return
+        end
+      end
+      flash.now[:success] = "Profile updated"
+      sign_in @user
+      render 'edit' and return
     end
 
     if @user.update_attributes(params[:user])

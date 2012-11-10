@@ -5,7 +5,7 @@ class Skill < ActiveRecord::Base
   belongs_to :instrument
 
   validates :user_id, presence: true
-  validates :instrument_id, presence: true, :uniqueness => {:scope => :user_id}
+  validates :instrument_id, presence: true, :uniqueness => {:scope => :user_id, :message => 'already exists.'}
 
   validates :priority, presence: true
   validates :expertise, presence: true, inclusion: { in: 1..3 }
