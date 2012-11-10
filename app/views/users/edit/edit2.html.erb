@@ -1,0 +1,33 @@
+<% provide(:title, "Edit user") %> 
+<h1>Update your profile</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+
+    <div class="tabbable"> <!-- Only required for left/right tabs -->
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">General</a></li>
+        <li><a href="#tab2" data-toggle="tab">My Location</a></li>
+        <li><a href="#tab3" data-toggle="tab">My Skills</a></li>
+        <li><a href="#tab4" data-toggle="tab">My Bands</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+          <%= render 'users/edit/general' %>
+        </div>
+        <div class="tab-pane" id="tab2">
+          <%= render 'users/edit/location' %>
+        </div>
+        <div class="tab-pane" id="tab3">
+          <p>Howdy, I'm in Section 3.</p>
+        </div>
+        <div class="tab-pane" id="tab4">
+          <p>Howdy, I'm in Section 4.</p>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>

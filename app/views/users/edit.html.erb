@@ -3,26 +3,35 @@
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages' %>
 
-      <%= f.label :name %>
-      <%= f.text_field :firstname, placeholder: "First name", class: "half_width" %>
-      <%= f.text_field :surname, placeholder: "Last name", class: "half_width" %>
+   <ul class="nav nav-tabs">
+    <li class=<%= (params[:section].nil? || params[:section] == 'general') ? "active" : "" %>>
+      <%= link_to 'General', edit_user_path(@user, section: 'general') %>
+    </li>
+    <li class=<%= (params[:section] == 'location') ? "active" : "" %>>
+      <%= link_to 'My Location', edit_user_path(@user, section: 'location') %>
+    </li>
+    <li class=<%= (params[:section] == 'skills') ? "active" : "" %>>
+      <%= link_to 'My Skills', edit_user_path(@user, section: 'skills') %>
+    </li>
+    <li class=<%= (params[:section] == 'bands') ? "active" : "" %>>
+      <%= link_to 'My Bands', edit_user_path(@user, section: 'bands') %>
+    </li>
+  </ul>
+   
+  <% case params[:section] %>
+  <% when nil %>
+  <%= render 'users/edit/general' %>
+  <% when 'general' %>
+  <%= render 'users/edit/general' %>
+  <% when 'location' %>
+  <%= render 'users/edit/mylocation' %>
+  <% when 'skills' %>
+  <%= render 'users/edit/myskills' %>
+  <% when 'bands' %>
+  <%= render 'users/edit/mybands' %>
+  <% end %>
 
-      <%= f.label :email %>
-      <%= f.text_field :email , class: "full_width" %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: "full_width"  %>
-
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: "full_width" %>
-
-      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
-    <% end %>
-
-    <%= gravatar_for @user %>
-    <a href="http://gravatar.com/emails">change</a>
   </div>
 </div>

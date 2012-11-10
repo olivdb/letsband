@@ -1,0 +1,25 @@
+<fieldset>
+  <table>
+  <tr>
+    <td>
+      <%= f.select :instrument_id, options_from_collection_for_select(Instrument.all, 'id', 'name', f.object.instrument_id) %>
+    </td>
+    <td>
+      <%= f.select :expertise, [['Beginner', 1], ['Intermediate', 2], ['Expert', 3]]  %>
+    </td>
+    <td>
+      <%= f.select :experience, [['1 year or less',1], ['2 years',2], ['3 years',3], ['4 years',4], ['5 years',5], ['6 years',6], ['7 years',7], ['8 years',8], ['9 years or more',9]] %>
+    </td>
+    <td>
+      <%= f.select :education, [['None',0], ['Music Academy Student',1], ['Music Academy Graduate',2], ['Conservatory Student',3], ['Conservatory Graduate',4]] %>
+    </td>
+    <td>
+      <%= f.select :priority, [['Highest', 1], ['Very High', 2], ['High', 3], ['Medium', 4], ['Low', 5], ['Very Low', 6], ['Lowest', 7]]%>
+    </td>
+    <td>
+      <%= f.hidden_field :_destroy %>
+      <%= link_to image_tag("delete.png", size:'16x16'), "#", class: "remove_fields" %>
+    </td>
+  </tr>
+</table>
+</fieldset>

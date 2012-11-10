@@ -198,7 +198,7 @@ input, textarea, select, .uneditable-input {
   }
 }
 
-/* skill list */
+/* user index - skill list */
 .skills {
   table {
     width: 80%; 
@@ -208,6 +208,27 @@ input, textarea, select, .uneditable-input {
     th {
       text-align:left;
     }
+  }
+}
+
+.editskills {
+  table {
+    width: 100%; 
+    th {
+      width:85px;
+      text-align:center;
+      &:last-child {
+          width:16px;
+        }
+    }
+    td {
+      &:last-child {
+        padding-bottom:18px;
+      }
+    }
+  }
+  select {
+    width:85px;
   }
 }
 

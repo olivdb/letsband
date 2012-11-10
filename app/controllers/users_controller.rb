@@ -40,13 +40,48 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
+    if(params[:section].nil?)
+      params[:section] = 'general'
+    end
+    if(params[:section] == 'general')
+      @user.updating_password = true
+    else
+      @user.updating_password = false
+    end
   end
 
   def update
+
+    if(params[:section]=='location')
+      if(params[:user_city_has_been_selected] == '0')
+        if(!params[:user_city_name].blank?)
+          city = City.find_by_fullname(params[:user_city_name]) || City.order(:name).where("LOWER(name) like ?", "#{params[:user_city_name].downcase}%").limit(1).first
+          if city.present?
+            params[:user][:city_id] = city.id
+          else
+            #no city update
+          end
+        else
+          #no city update
+        end
+      end
+    elsif(params[:section]=='skills')
+      #params[:user][:skills_attributes].each do |new_skill|
+      #  @user.skills.each do |old_skill|
+      #    puts new_skill.inspect
+      #    if new_skill[1]["instrument_id"] == old_skill.instrument_id.to_s && new_skill[1]["id"] != old_skill.id.to_s
+      #      old_skill.destroy
+      #    end
+      #  end
+      #end
+    end
+
     if @user.update_attributes(params[:user])
-      flash[:success] = "Profile updated"
+      flash.now[:success] = "Profile updated"
       sign_in @user
-      redirect_to @user
+      render 'edit'
+      #redirect_to @user
     else
       render 'edit'
     end
