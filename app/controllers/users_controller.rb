@@ -71,12 +71,11 @@ class UsersController < ApplicationController
       params[:user][:skills_attributes].each do |skill|
         skill[1]=skill[1].delete_if {|key, value| key  == "id" }
         hash = { :skills_attributes => { '0' => skill[1] } }
-        if !@user.update_attributes(hash)
-          sign_in @user
-          render 'edit' and return
-        end
+        @user.update_attributes(hash)
       end
-      flash.now[:success] = "Profile updated"
+      if !@user.errors.any?
+        flash.now[:success] = "Profile updated"
+      end
       sign_in @user
       render 'edit' and return
     end
