@@ -2,22 +2,26 @@
 <div class="row">
   <aside class="span4">
     <section>
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
+      <table><tr>
+        <td><%= gravatar_for @user %></td>
+        <td><table>
+          <tr><td><h1><%= @user.name %></h1></td></tr>
+          <tr><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %></td></tr>
+        </table></td>
+      </tr></table>
     </section>
   </aside>
   <div class="span8">
-    <p>
-      <h3>Location</h3> <%= @user.city.present? ? @user.city.fullname : 'Unknown' %>
+    <p class="profile_element">
+      <table><tr><td><h3>Location</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'location')) %>) <% ) if current_user?(@user) %></td></tr></table>
+       <%= @user.city.present? ? @user.city.fullname : 'Unknown' %>
     </p>
-    <p>
-      <h3>Skills</h3>
+    <p class="profile_element">
+      <table><tr><td><h3>Skills</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'skills')) %>) <% ) if current_user?(@user) %></td></tr></table>
       <%= !@user.skills.empty? ? render(partial: 'skills', object: @user.skills) : 'Unknown' %>
     </p>
-    <p>
-      <h3>Memberships</h3>
+    <p class="profile_element">
+      <table><tr><td><h3>Memberships</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'bands')) %>) <% ) if current_user?(@user) %></td></tr></table>
       <div class="condensed">
         <% if @user.memberships.empty? %>
           None

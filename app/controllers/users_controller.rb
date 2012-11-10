@@ -52,7 +52,6 @@ class UsersController < ApplicationController
   end
 
   def update
-
     if(params[:section]=='location')
       if(params[:user_city_has_been_selected] == '0')
         if(!params[:user_city_name].blank?)
@@ -73,18 +72,20 @@ class UsersController < ApplicationController
         hash = { :skills_attributes => { '0' => skill[1] } }
         @user.update_attributes(hash)
       end
+      sign_in @user
       if !@user.errors.any?
         flash.now[:success] = "Profile updated"
+        render 'show'
+      else
+        render 'edit'
       end
-      sign_in @user
-      render 'edit' and return
+      return
     end
 
     if @user.update_attributes(params[:user])
       flash.now[:success] = "Profile updated"
       sign_in @user
-      render 'edit'
-      #redirect_to @user
+      render 'show'
     else
       render 'edit'
     end
