@@ -4,7 +4,7 @@
       document.getElementById('user_city_id').value = '#{params[:user_city_id]}';}" do %>
   <p>
     I'm looking for a <b>musician</b> playing
-
+    
     <%= select_tag 'instrument_id', options_from_collection_for_select(Instrument.all, 'id', 'name', params[:instrument_id]), { class: 'input-medium search-query' } %>  
 
     in

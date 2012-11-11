@@ -1,0 +1,28 @@
+<% provide(:title, "New Message") %>
+<% provide(:menu, "new") %>
+
+    <%= form_for(@message) do |f| %>
+		<% if @message.errors.any? %>
+		  <div id="error_explanation">
+		    <div class="alert alert-error">
+		      The form contains <%= pluralize(@message.errors.count, "error") %>.
+		    </div>
+		    <ul>
+		    <% @message.errors.full_messages.each do |msg| %>
+		      <li>* <%= msg %></li>
+		    <% end %>
+		    </ul>
+		  </div>
+		<% end %>
+
+		<%= f.label :recipient %>
+		<%= f.text_field :recipient, placeholder: "Recipient name" %>
+
+		<%= f.label :subject %>
+		<%= f.text_field :subject %>
+
+		<%= f.label :body %>
+		<%= f.text_area :body %>
+		<br/>
+		<%= f.submit "Send", class: "btn btn-large btn-primary" %>
+    <% end %>

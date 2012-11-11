@@ -1,0 +1,16 @@
+<% provide(:title, "Message") %> 
+<p>
+	Date: <%= @message.created_at %>
+</p>
+<p>
+	<%= gravatar_for @message.sender %>
+	<%= link_to @message.sender.name, @message.sender %>
+</p>
+
+<p>
+	<em><%= @message.subject %></em>
+</p>
+
+<p>
+	<%= @message.body %>
+</p>

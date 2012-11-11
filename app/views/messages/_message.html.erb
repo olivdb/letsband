@@ -1,0 +1,21 @@
+<% friend = current_user_is_recipient ? message.sender : message.recipient %>
+<li class="<%= message.message_read? ? "read" : "not_read" %>">
+	<table>
+		<tr>
+			<td><%= gravatar_for friend %></td>
+			<td>
+				<table>
+					<tr>
+						<td class="friend_name"><%= link_to friend.name, message %></td>
+						<td><%= link_to("Read", message) %></td>
+					</tr>
+					<tr>
+						<td colspan=1 class="subject"><em><%= message.subject %></em></td>
+						<td><%= link_to image_tag("delete.png", size:'16x16'), message, method: :delete,
+                          data: { confirm: "Are you sure you want to delete this message? This operation cannot be undone." } %></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</li>

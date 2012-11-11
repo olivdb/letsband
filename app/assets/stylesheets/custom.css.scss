@@ -258,5 +258,57 @@ input, textarea, select, .uneditable-input {
 /* user profile sections */
 .profile-elements {
   
+}
 
+.messages {
+  ul{
+    list-style: none;
+    margin: 0;
+    .read {
+      background-color: $grayLighter;
+      border-top: 1px solid white;
+      border-right: 1px solid $grayLighter;
+    }
+    .not_read {
+      background-color: white;
+      .friend_name, .subject {
+        font-weight:bold;
+      }
+      border-top: 1px solid $grayLighter;
+      border-right: 1px solid $grayLighter;
+    }
+    li {
+
+      overflow: auto;
+      padding: 0 0;
+
+      &:last-child {
+        border-bottom: 1px solid $grayLighter;
+      }
+      table {
+        border:none;
+        width:100%;
+        tr{
+          td{
+            &:first-child {
+              width:50px;
+            }
+            table{
+              border:none;
+              tr{
+                td{
+                  &:first-child {
+                    width:100%;
+                  }
+                  &:last-child{
+                    text-align: right;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

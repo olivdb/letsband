@@ -1,0 +1,9 @@
+<% provide(:title, "Sent Messages") %> 
+<% provide(:menu, "sent") %>
+<%= will_paginate %>
+<div class="messages">
+	<ul>
+		<%= render :partial => "message", :collection => @messages, :locals => { :current_user_is_recipient => false } %>
+	</ul>
+</div>
+<%= will_paginate %>

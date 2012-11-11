@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :firstname, :surname, :password, :password_confirmation, :city_id, :skills_attributes
   attr_accessor :updating_password
   has_secure_password
+  has_private_messages
   
 
 

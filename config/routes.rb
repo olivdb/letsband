@@ -1,13 +1,16 @@
 Letsband::Application.routes.draw do
-  get "bands/index"
 
-  get "bands/show"
 
   resources :users
   resources :bands
   resources :cities, only: [:index]
-
   resources :sessions, only: [:new, :create, :destroy]
+  resources :messages, only: [:new, :create, :destroy, :show] do
+    collection do
+      get 'received'
+      get 'sent'
+    end
+end
 
   root to: 'static_pages#home'
 
