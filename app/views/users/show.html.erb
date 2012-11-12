@@ -14,7 +14,7 @@
       <div class="profile_buttons">
         <ul>
           <li><%= render 'contact_form' %></li>
-          <li><%= button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", class: "btn btn-primary btn-small" %></li>
+          <li><%= (button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", class: "btn btn-primary btn-small") unless current_user?(@user) %></li>
         </ul>
       </div>
     </section>
