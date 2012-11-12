@@ -10,7 +10,7 @@ namespace :db do
         m.subject = Faker::Lorem.sentence(rrand(4,10))
         m.body = Faker::Lorem.paragraphs(rrand(3,10))
         m.save
-        if rand<0.5
+        if rand<0.05
           m = Message.read_message(m.id, recipient)
         end
       end

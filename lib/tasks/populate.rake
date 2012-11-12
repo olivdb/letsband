@@ -8,6 +8,6 @@ namespace :db do
  	Rake::Task['db:importgenres'].invoke
  	Rake::Task['db:makesamplebands'].invoke
     Rake::Task['db:makesampleusers'].invoke
-    Rake::Task['db:makesamplemessages'].invoke
+    #Rake::Task['db:makesamplemessages'].invoke
   end
 end
