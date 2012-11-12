@@ -1,1 +1,2 @@
 $("#contact_form").html("<%= escape_javascript(render('users/add_contact')) %>")
+$("#contact_<%=@user.id%>").hide()

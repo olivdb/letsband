@@ -18,3 +18,9 @@ jQuery ->
 		regexp = new RegExp($(this).data('id'), 'g')
 		$(this).before($(this).data('fields').replace(regexp, time))
 		event.preventDefault()
+
+	###
+	$('.delete_contact_link').click ->
+		$(this).closest('li.contact').hide()
+		false
+	###
