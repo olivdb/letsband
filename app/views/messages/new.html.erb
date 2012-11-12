@@ -24,7 +24,7 @@
 		<% end %>
 
 		<%= f.label :subject %>
-		<%= f.text_field :subject %>
+		<%= f.text_field :subject, value: (params[:message] && params[:message][:subject]) ? params[:message][:subject] : ''%>
 
 		<%= f.label :body %>
 		<%= f.text_area :body %>

@@ -6,11 +6,11 @@
 			<td>
 				<table>
 					<tr>
-						<td class="friend_name"><%= link_to friend.name, message %></td>
+						<td class="friend_name"><%= link_to friend.name, friend %></td>
 						<td><%= link_to("View", message) %></td>
 					</tr>
 					<tr>
-						<td colspan=1 class="subject"><em><%= message.subject %></em></td>
+						<td colspan=1 class="subject"><div class='message subject'><em><%= link_to (message.subject.blank? ? '(No subject)' : message.subject), message %></em></div></td>
 						<td><%= link_to image_tag("delete.png", size:'16x16'), message, method: :delete,
                           data: { confirm: "Are you sure you want to delete this message? This operation cannot be undone." } %></td>
 					</tr>

@@ -7,6 +7,7 @@ before_filter :signed_in_user
 
   def new
   	@message = Message.new
+    params[:message] = {:subject => params[:subject]} if params[:subject].present?
     render :action => 'new', :locals => {:recipient_id => params[:recipient_id]}
   end
 
@@ -21,7 +22,7 @@ before_filter :signed_in_user
       flash[:success] = "Message sent."
       redirect_to received_messages_url
     else
-      render 'new'
+      render :action => 'new', :locals => {:recipient_id => params[:message][:recipient_id]}
     end
   end
 
