@@ -4,7 +4,7 @@ namespace :db do
 
     Band.delete_all
 
-    10.times do |n|
+    30.times do |n|
       band = Band.create!(name: Faker::Company.name,
         genre_id: rrand(Genre.first.id, Genre.last.id),
         city_id: rrand(City.first.id, City.last.id),

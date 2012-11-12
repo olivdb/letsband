@@ -1,0 +1,9 @@
+<% unless current_user?(@user) %>
+  <div id="contact_form">
+  <% if signed_in? && current_user.contact_records.find_by_contact_id(@user) %>
+    <%= render 'remove_contact' %>
+  <% else %>
+    <%= render 'add_contact' %>
+  <% end %>
+  </div>
+<% end %>

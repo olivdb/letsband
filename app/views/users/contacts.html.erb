@@ -1,0 +1,9 @@
+<% provide(:title, "Contact List") %>
+<% provide(:menu, "contacts") %>
+<%= will_paginate %>
+<div class="messages">
+	<ul>
+		<%= render :partial => "contact", :collection => @users, :as => :contact %>
+	</ul>
+</div>
+<%= will_paginate %>

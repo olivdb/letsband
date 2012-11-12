@@ -7,10 +7,16 @@ before_filter :signed_in_user
 
   def new
   	@message = Message.new
+    render :action => 'new', :locals => {:recipient_id => params[:recipient_id]}
   end
 
   def create
-    @message = Message.new(params[:user])
+    @message = Message.new
+    @message.recipient_id = params[:message][:recipient_id]
+    @message.sender_id = current_user.id
+    @message.subject = params[:message][:subject]
+    @message.body = params[:message][:body]
+
     if @message.save
       flash[:success] = "Message sent."
       redirect_to received_messages_url

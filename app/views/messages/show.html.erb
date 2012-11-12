@@ -12,5 +12,8 @@
 </p>
 
 <p>
-	<%= @message.body %>
+	<% @message.body.split("\n").each do |p|  %>
+	<%= p %>
+	<br/>
+	<% end %>
 </p>

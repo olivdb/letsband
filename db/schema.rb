@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121110174342) do
+ActiveRecord::Schema.define(:version => 20121111182145) do
 
   create_table "bands", :force => true do |t|
     t.string   "name"
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(:version => 20121110174342) do
 
   add_index "cities", ["name", "region_id", "country_id"], :name => "by_name_and_region_id_and_country_id", :unique => true
   add_index "cities", ["name"], :name => "index_cities_on_name"
+
+  create_table "contact_records", :force => true do |t|
+    t.integer  "owner_id"
+    t.integer  "contact_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "contact_records", ["owner_id", "contact_id"], :name => "index_contact_records_on_owner_id_and_contact_id", :unique => true
+  add_index "contact_records", ["owner_id"], :name => "index_contact_records_on_owner_id"
 
   create_table "countries", :force => true do |t|
     t.string   "name"

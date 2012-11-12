@@ -1,7 +1,11 @@
 Letsband::Application.routes.draw do
 
-
-  resources :users
+  resources :contact_records, only: [:create, :destroy] 
+  resources :users do
+    member do
+      get 'contacts'
+    end
+  end
   resources :bands
   resources :cities, only: [:index]
   resources :sessions, only: [:new, :create, :destroy]
@@ -9,6 +13,9 @@ Letsband::Application.routes.draw do
     collection do
       get 'received'
       get 'sent'
+    end
+    member do
+      post 'new'
     end
 end
 

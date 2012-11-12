@@ -13,7 +13,7 @@
     	<h3>Location</h3><%= @band.city.fullname %>
     </p>
 	<p>
-		<h3>Description</h3><%= @band.description %>
+		<h3>Description</h3><% @band.description.split("\n").each do |p| %><%= p %><br/><% end %>
 	</p>
 	<p>
 		<h3>Members (<%= @band.users.count.to_s %>)</h3>

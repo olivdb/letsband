@@ -16,7 +16,12 @@
 		<% end %>
 
 		<%= f.label :recipient %>
-		<%= f.text_field :recipient, placeholder: "Recipient name" %>
+		<% if recipient_id.present? %>
+		<%= f.label :recipient_name, User.find(recipient_id).name %>
+		<%= f.hidden_field :recipient_id, value: recipient_id %>
+		<% else %>
+		<%= f.select :recipient_id, options_from_collection_for_select(current_user.contacts, 'id', 'name'), :prompt => "Select Contact..." %>
+		<% end %>
 
 		<%= f.label :subject %>
 		<%= f.text_field :subject %>

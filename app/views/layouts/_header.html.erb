@@ -9,7 +9,7 @@
                 <li><%= link_to "Bands", bands_path %></li>
                 <li><%= link_to "Musicians", users_path %></li>
                 <li><%= link_to image_tag((current_user.unread_messages? ? "new_" : "") + "mail.png", width: 30, alt: "Mailbox", mouseover: image_path((current_user.unread_messages? ? "new_" : "") + 
-                "mail_over.png")), messages_received_path %></li>
+                "mail_over.png")), received_messages_path %></li>
                 <li id="fat-menu" class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     Account <b class="caret"></b>

@@ -1,0 +1,10 @@
+<% button_text = "Add to Contacts" %>
+<% if signed_in? %>
+	<%= form_for(current_user.contact_records.build(contact_id: @user.id), remote: true) do |f| %>
+	  <div><%= f.hidden_field :contact_id %></div>
+	  <%= f.submit button_text, class: "btn btn-small btn-primary" %>
+	<% end %>
+<% else %>
+	<% store_location %>
+	<%= button_to button_text, signin_path, :method => "get", class: "btn btn-primary btn-small" %>
+<% end %>

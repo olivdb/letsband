@@ -2,13 +2,21 @@
 <div class="row">
   <aside class="span4">
     <section>
-      <table><tr>
-        <td><%= gravatar_for @user %></td>
-        <td><table>
-          <tr><td><h1><%= @user.name %></h1></td></tr>
-          <tr><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %></td></tr>
-        </table></td>
-      </tr></table>
+      <table>
+        <tr>
+          <td rowspan=2><%= gravatar_for @user %></td>
+          <td><h1><%= @user.name %></h1></td>
+        </tr>
+        <tr>
+          <td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %></td>
+        </tr>
+      </table>
+      <div class="profile_buttons">
+        <ul>
+          <li><%= render 'contact_form' %></li>
+          <li><%= button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", class: "btn btn-primary btn-small" %></li>
+        </ul>
+      </div>
     </section>
   </aside>
   <div class="span8">

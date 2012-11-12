@@ -1,5 +1,6 @@
-Classic
+Classical
 Jazz
 Metal
 Neo Metal
+Pop
 Rock & Roll

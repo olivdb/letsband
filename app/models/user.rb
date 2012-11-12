@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
 
 
   belongs_to :city
+  has_many :contact_records, :foreign_key => :owner_id, dependent: :destroy
+  has_many :contacts, :through => :contact_records, :class_name => "User"
   has_many :memberships, dependent: :destroy
   has_many :bands, through: :memberships
   has_many :skills, dependent: :destroy, order: 'priority ASC'

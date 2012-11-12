@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:edit, :update]
-  before_filter :correct_user,   only: [:edit, :update]
+  before_filter :correct_user,   only: [:edit, :update, :contacts]
 
   def new
   	@user = User.new
@@ -89,6 +89,12 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def contacts
+    @user = User.find(params[:id])
+    @users = @user.contacts.paginate(page: params[:page])
+    render :action =>'contacts', :layout => 'messages'
   end
 
   private

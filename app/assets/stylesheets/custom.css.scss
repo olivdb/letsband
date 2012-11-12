@@ -136,6 +136,19 @@ aside {
   }
 }
 
+.profile_buttons {
+  ul { 
+    margin: 10px 0 0 0;
+    li {
+      overflow: auto;
+      margin: 0 0 -15px 0;
+      .to_shift {
+          margin-left: -4px;        
+      }
+    }
+  }
+}
+
 .gravatar {
   /*float: left;*/
   margin-right: 10px;
