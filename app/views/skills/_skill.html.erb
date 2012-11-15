@@ -1,11 +1,11 @@
 <tr>
     <td>
       	<% skill.expertise.times do %>
-        <%=  image_tag(skill.instrument.image_name, size: "32x32", alt: skill.instrument.name) %>
+        <%=  image_tag(skill.instrument.image_path, size: "32x32", alt: skill.instrument.name) %>
         <% end %>
 
         <% (3-skill.expertise).times do %>
-        <%=  image_tag(skill.instrument.image_name, size: "32x32", alt: skill.instrument.name, class: 'halfopacity') %>
+        <%=  image_tag(skill.instrument.image_path, size: "32x32", alt: skill.instrument.name, class: 'halfopacity') %>
         <% end %>
     </td>
     <td>

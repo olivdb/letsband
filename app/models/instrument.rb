@@ -14,5 +14,9 @@ class Instrument < ActiveRecord::Base
   	end
   	}
 
+    def image_path
+      'instruments/' + image_name
+    end
+
 
 end

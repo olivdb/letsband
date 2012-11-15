@@ -1,0 +1,30 @@
+
+<%= form_for @band, onsubmit: "if('#{@band.city.present?}'=='true' && document.getElementById('band_city_name').value == ''){document.getElementById('band_city_name').value = '#{(@band.city.fullname if @band.city.present?)}'; 
+	  document.getElementById('band_city_has_been_selected').value = 1;
+	  document.getElementById('band_city_id').value = '#{(@band.city.id if @band.city.present?)}';}" do |f| %>
+<%= render 'shared/error_messages' %>
+<p>
+	<%= f.label :band_city %>
+	<% if @band.city.present? %>
+	<%= @band.city.fullname %>
+	<% else %>
+	Unknown
+	<% end %>
+</p>
+<p>
+	<%= f.label :update_band_city %>
+	<%= text_field_tag 'band_city_name', (@band.city.fullname if @band.city.present?), class: 'search-query ui-autocomplete-input input-large', placeholder: 'City name', data: {autocomplete_source: cities_path}, id: 'band_city_name',
+	  onclick: 'this.select();',
+	  onblur: "if('#{@band.city.present?}'=='true' && this.value == ''){this.value = '#{(@band.city.fullname if @band.city.present?)}'; 
+	  document.getElementById('band_city_has_been_selected').value = 1;
+	  document.getElementById('band_city_id').value = '#{(@band.city.id if @band.city.present?)}';}"  
+	%> 
+	<%= f.hidden_field :city_id, id: 'band_city_id' %>
+	<%= hidden_field_tag 'band_city_has_been_selected', 0 %>
+</p>
+<p>	
+	<%= hidden_field_tag 'section', 'location' %>
+	<%= submit_tag 'Save', :name => nil, class: 'btn btn-primary' %>
+</p>
+<% end %>
+

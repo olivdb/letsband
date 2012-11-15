@@ -1,4 +1,5 @@
 <% provide(:title, 'Bands') %>
+<%= (button_to "Create a new band", new_band_path, :method => "get", class: "btn btn-primary btn-small") %>
 
 <%= render 'shared/band_form' %>
 

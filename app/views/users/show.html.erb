@@ -38,7 +38,7 @@
           <% @user.memberships.each do |membership| %>
             <li>
             Playing 
-            <%= image_tag(membership.instrument.image_name, size: "32x32", alt: membership.instrument.name) %>
+            <%= image_tag(membership.instrument.image_path, size: "32x32", alt: membership.instrument.name) %>
             in
             <%= link_to membership.band.name, membership.band %>
             </li>

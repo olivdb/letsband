@@ -1,0 +1,55 @@
+<div class="mybands">
+	<table>
+		<% if can? :create, Band %>
+			<tr>
+				<td colspan=3><h3><%= (button_to "Create a new band", new_band_path, :method => "get", class: "btn btn-primary btn-small") %></h3></td>
+			</tr>
+		<% end %>
+		<% @user.memberships.each do |membership| %>
+			<tr id="band_<%=membership.band_id%>">
+				<td><%= image_for membership.band %></td>
+				<td><h3><%= link_to membership.band.name, band_path(membership.band) %><h3></td>
+				<td>
+					<ul>
+					<% if membership.role == "invited" && can?(:convert_to_member, membership) %>
+						<li>
+						<%= (button_to "Accept invitation", convert_to_member_membership_path(membership), :method => "get", class: "btn btn-primary btn-small") %>
+						</li>
+					<% end %>
+					<% if can? :destroy, membership %>
+						<li>
+						<% if (membership.role == "invited") %>
+							<% confirm_message = "Are you sure you want to turn down this invitation ?" %>
+							<% button_label = "Turn down invitation" %>
+						<% else %>
+							<% confirm_message = "Are you sure you want to leave this band ?" %>
+							<% button_label = "Leave" %>
+						<% end %>
+						<%= form_for(membership, html: { method: :delete }, remote: true) do |f| %>
+							<%= f.submit button_label, confirm: confirm_message, class: "btn btn-small btn-primary" %>
+							<!--button class="btn" data-confirm="<%= confirm_message %>" name="commit" type="submit">Leave</button-->
+						<% end %>
+						</li>
+					<% end %>
+
+					<% if can? :update, membership.band %>
+					<li>
+						<%= (button_to "Manage", edit_band_path(membership.band), :method => "get", class: "btn btn-primary btn-small") %>
+						<!-- form_tag(edit_band_path(membership.band), :method => :post) %>
+						<button class="btn" type="submit">Manage</button-->
+					</li>
+					<% end %>
+
+					<% if can? :destroy, membership.band %>
+					<li>
+						<%= form_for(membership, html: { method: :delete }, remote: true) do |f| %>
+							<%= f.submit "Delete", confirm: "Are you sure you want to delete this band ? This operation cannot be reverted.", class: "btn btn-small btn-primary" %>
+							<!--button class="btn" data-confirm = "Are you sure you want to delete this band ? This operation cannot be reverted." name="commit" type="submit">Delete</button-->
+						<% end %>
+					</li>
+					<% end %>
+				</td>           
+			</tr>
+		<% end %>
+	</table>
+</div>

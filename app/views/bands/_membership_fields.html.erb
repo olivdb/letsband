@@ -1,0 +1,37 @@
+<fieldset>
+  <table <%= (local_assigns.has_key? :is_new) ? "class=new" : "" %>>
+  <tr>
+    <% f.object.band_id ||= @band.id %>
+    <% f.object.role ||= 'invited' %>
+    <td>
+        <% if f.object.user_id %>
+          <%= link_to User.find(f.object.user_id).name, user_path(User.find(f.object.user_id)) %>
+        <% else %>
+          <% available_users = current_user.contacts.where('contact_id NOT IN (?)', @band.memberships.map(&:user_id)) %>
+          <%= f.select :user_id, options_from_collection_for_select(available_users, 'id', 'name'), :prompt => "Select Contact..."%>
+        <% end %>
+    </td>
+    <td>
+      <% if can?(:change_instrument, f.object) %>
+        <%= f.select :instrument_id, options_from_collection_for_select(Instrument.all, 'id', 'name', f.object.instrument_id) %>
+      <% else %>
+        <%= f.object.instrument_id ? Instrument.find(f.object.instrument_id).name : 'Unknown' %>
+      <% end %>
+    </td>
+    <td>
+      <% roles = [] %>
+      <% roles.push('invited') if (f.object.role == 'invited') %>
+      <% roles.push('member') if ((f.object.role == 'member') || can?(:convert_to_member, f.object)) %>
+      <% roles.push('manager') if ((f.object.role == 'manager') || can?(:convert_to_manager, f.object)) %>
+      <% roles.push('owner') if ((f.object.role == 'owner') || can?(:convert_to_owner, f.object)) %>
+      <%= f.collection_select :role, roles, :to_s, :humanize %>
+    </td>
+    <td>
+      <% if !f.object.user_id || can?(:destroy, f.object) %>
+        <%= f.hidden_field :_destroy %>
+        <%= link_to image_tag("delete.png", size:'16x16'), "#", class: "remove_fields" %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+</fieldset>

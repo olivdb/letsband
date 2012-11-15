@@ -339,3 +339,61 @@ input, textarea, select, .uneditable-input {
     }
   }
 }
+
+.mybands {
+  table {
+    tr {
+      border-top: 1px solid $grayLighter;
+      &:last-child {
+        border-bottom: 1px solid $grayLighter;
+      }
+      &:first-child {
+        border:none;
+      }
+    }
+  }
+  ul { 
+    margin: 10px 0 0 0;
+    li {
+      overflow: auto;
+      margin: 0 0 -15px 0;
+      text-align:right;
+    }
+  }
+}
+
+.editmemberships {
+  table {
+    width: 80%; 
+    td,th { 
+      width:85px;
+      text-align:center;
+      &:first-child {
+        width: 140px;
+        text-align: left;
+      }
+      &:last-child {
+          width:16px;
+        }
+    }
+    td {
+      &:last-child, &:first-child {
+        padding-bottom:16px;
+      }
+    }
+    select {
+      width:85px;
+    }
+  }
+  .new {
+    td {
+      &:first-child {
+        padding-bottom: 0px;
+        select {
+          width:100%;
+        }
+      }
+    }
+  }
+
+}

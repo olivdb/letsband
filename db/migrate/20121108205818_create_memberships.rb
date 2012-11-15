@@ -7,6 +7,6 @@ class CreateMemberships < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :memberships, [:user_id, :band_id, :instrument_id], unique: true
+    add_index :memberships, [:user_id, :band_id], unique: true
   end
 end

@@ -76,6 +76,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def invite!(invited_user, band, invitation_text)
+    invited_user.memberships.create!(band_id: band.id, role: "invited")  
+  end
+
   private
 
     def create_remember_token

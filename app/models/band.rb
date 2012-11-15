@@ -1,11 +1,17 @@
 class Band < ActiveRecord::Base
-  attr_accessible :city_id, :description, :genre_id, :name
+  attr_accessible :city_id, :description, :genre_id, :name, :image_name, :memberships_attributes
 
   belongs_to :city
   belongs_to :genre
   has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
   has_many :instruments, through: :memberships
+
+  accepts_nested_attributes_for :memberships, allow_destroy: true
+
+  def members
+    User.find(memberships.where('role != ? ', 'invited').map(&:user_id))
+  end
 
   def self.get_filtered(params)
     city = City.find_by_id(params[:band_city_id])

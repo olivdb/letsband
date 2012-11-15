@@ -1,0 +1,32 @@
+<% provide(:title, "Edit band") %> 
+<h1>Manage your band</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+
+   <ul class="nav nav-tabs">
+    <li class=<%= (params[:section].nil? || params[:section] == 'presentation') ? "active" : "" %>>
+      <%= link_to 'Presentation', edit_band_path(@band, section: 'presentation') %>
+    </li>
+    <li class=<%= (params[:section] == 'location') ? "active" : "" %>>
+      <%= link_to 'Location', edit_band_path(@band, section: 'location') %>
+    </li>
+    <li class=<%= (params[:section] == 'members') ? "active" : "" %>>
+      <%= link_to 'Members', edit_band_path(@band, section: 'members') %>
+    </li>
+  </ul>
+   
+  <% case params[:section] %>
+  <% when nil %>
+  <%= render 'bands/edit/band_presentation' %>
+  <% when 'presentation' %>
+  <%= render 'bands/edit/band_presentation' %>
+  <% when 'location' %>
+  <%= render 'bands/edit/band_location' %>
+  <% when 'members' %>
+  <%= render 'bands/edit/band_members' %>
+  <% end %>
+
+
+  </div>
+</div>

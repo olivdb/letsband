@@ -6,6 +6,13 @@ Letsband::Application.routes.draw do
       get 'contacts'
     end
   end
+  resources :memberships, only: [:create, :destroy] do
+    member do
+      get 'convert_to_member'
+      get 'convert_to_manager'
+      get 'convert_to_owner'
+    end
+  end
   resources :bands
   resources :cities, only: [:index]
   resources :sessions, only: [:new, :create, :destroy]

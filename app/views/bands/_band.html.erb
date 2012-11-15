@@ -17,9 +17,11 @@
           end 
         %>
       <p>
-        <b><%= band.users.count.to_s %> members</b>
-        <% band.instruments.sort{ |a,b| a.name.downcase <=> b.name.downcase }.each do |instrument| %>
-          <%=  image_tag(instrument.image_name, size: "32x32", alt: instrument.name) %>
+        <b><%= band.members.count.to_s %> members</b>
+        <% band.memberships.sort{ |a,b| a.instrument.name.downcase <=> b.instrument.name.downcase }.each do |membership| %>
+          <% if membership.role != 'invited' %>
+              <%= image_tag(membership.instrument.image_path, size: "32x32", alt: membership.instrument.name) %>
+          <% end %>
         <% end %>
       </p>
       <p>

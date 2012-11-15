@@ -7,6 +7,7 @@ gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
 gem 'simple-private-messages', '0.0.0', :git => 'git://github.com/jongilbraith/simple-private-messages.git'
+gem 'cancan'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
@@ -14,6 +15,7 @@ group :development, :test do
 end
 
 gem 'annotate', '2.5.0', group: :development
+gem 'thin', group: :development
 
 # Gems used only for assets and not required
 # in production environments by default.
