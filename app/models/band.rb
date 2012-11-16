@@ -9,6 +9,8 @@ class Band < ActiveRecord::Base
 
   accepts_nested_attributes_for :memberships, allow_destroy: true
 
+  validates :name, presence: true
+
   def members
     User.find(memberships.where('role != ? ', 'invited').map(&:user_id))
   end

@@ -37,12 +37,13 @@ class Ability
     manager(membership)
     can :destroy, Band, :id => membership.band_id
     can :destroy, Membership, :band_id => membership.band_id
+    #cannot :destroy, Membership, :id => membership.id unless Membership.where(band_id: membership.band_id, role: "owner").count > 1
     can :convert_to_member, Membership, :band_id => membership.band_id #including other owners!
     cannot :convert_to_member, Membership, :band_id => membership.band_id, :role => "invited"
-    cannot :convert_to_member, Membership, :id => membership.id
+    #cannot :convert_to_member, Membership, :id => membership.id unless Membership.where(band_id: membership.band_id, role: "owner").count > 1
     can :convert_to_manager, Membership, :band_id => membership.band_id #including other owners!
     cannot :convert_to_manager, Membership, :band_id => membership.band_id, :role => "invited"
-    cannot :convert_to_manager, Membership, :id => membership.id
+    #cannot :convert_to_manager, Membership, :id => membership.id unless Membership.where(band_id: membership.band_id, role: "owner").count > 1
     can :convert_to_owner, Membership, :band_id => membership.band_id
     cannot :convert_to_owner, Membership, :band_id => membership.band_id, :role => "invited"
   end

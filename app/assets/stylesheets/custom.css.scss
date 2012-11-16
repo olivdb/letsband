@@ -350,13 +350,18 @@ input, textarea, select, .uneditable-input {
       &:first-child {
         border:none;
       }
+      td {
+        &:last-child {
+          width:126px;
+        }
+      }
     }
   }
   ul { 
     margin: 10px 0 0 0;
     li {
       overflow: auto;
-      margin: 0 0 -15px 0;
+      margin: 0 0 -10px 0;
       text-align:right;
     }
   }
@@ -395,5 +400,4 @@ input, textarea, select, .uneditable-input {
       }
     }
   }
-
 }

@@ -69,28 +69,33 @@ class BandsController < ApplicationController
         end
       end
     elsif(params[:section]=='members')
+      band_has_owner = false
       params[:band][:memberships_attributes].each do |membership|
         if membership[1]["id"]
           if membership[1]["_destroy"] == "1"
             authorize! :destroy, @band.memberships.find(membership[1]["id"])
-          elsif membership[1]["role"] != @band.memberships.find(membership[1]["id"]).role
-            case membership[1]["role"]
-            when "member"
-              authorize! :convert_to_member, @band.memberships.find(membership[1]["id"])
-            when "manager"
-              authorize! :convert_to_manager, @band.memberships.find(membership[1]["id"])
-            when "owner"
-              authorize! :convert_to_owner, @band.memberships.find(membership[1]["id"])
+          else
+            if membership[1]["role"] != @band.memberships.find(membership[1]["id"]).role
+              case membership[1]["role"]
+              when "member"
+                authorize! :convert_to_member, @band.memberships.find(membership[1]["id"])
+              when "manager"
+                authorize! :convert_to_manager, @band.memberships.find(membership[1]["id"])
+              when "owner"
+                authorize! :convert_to_owner, @band.memberships.find(membership[1]["id"])
+              end
             end
+            band_has_owner ||= (membership[1]["role"]=="owner")
           end
         else
           authorize! :create, Membership
           membership[1]["role"] = "invited"
         end
       end
+      @band.errors.add(:base, "You must designate at least one Owner") unless band_has_owner
     end
 
-    if @band.update_attributes(params[:band])
+    if @band.errors.empty? && @band.update_attributes(params[:band])
       flash.now[:success] = "Band data updated"
       render 'show'
     else

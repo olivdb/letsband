@@ -17,7 +17,6 @@
 						</li>
 					<% end %>
 					<% if can? :destroy, membership %>
-						<li>
 						<% if (membership.role == "invited") %>
 							<% confirm_message = "Are you sure you want to turn down this invitation ?" %>
 							<% button_label = "Turn down invitation" %>
@@ -25,6 +24,7 @@
 							<% confirm_message = "Are you sure you want to leave this band ?" %>
 							<% button_label = "Leave" %>
 						<% end %>
+						<li>
 						<%= form_for(membership, html: { method: :delete }, remote: true) do |f| %>
 							<%= f.submit button_label, confirm: confirm_message, class: "btn btn-small btn-primary" %>
 							<!--button class="btn" data-confirm="<%= confirm_message %>" name="commit" type="submit">Leave</button-->
@@ -48,6 +48,7 @@
 						<% end %>
 					</li>
 					<% end %>
+					</ul>
 				</td>           
 			</tr>
 		<% end %>

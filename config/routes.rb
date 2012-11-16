@@ -4,6 +4,7 @@ Letsband::Application.routes.draw do
   resources :users do
     member do
       get 'contacts'
+      post 'edit'
     end
   end
   resources :memberships, only: [:create, :destroy] do

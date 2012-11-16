@@ -1,5 +1,13 @@
 <% provide(:title, 'Bands') %>
-<%= (button_to "Create a new band", new_band_path, :method => "get", class: "btn btn-primary btn-small") %>
+
+<table>
+	<tr>
+		<td><%= (button_to "Create a new band", new_band_path, :method => "get", class: "btn btn-primary btn-small") %></td>
+	<% if signed_in? %>
+		<td><%= (button_to "Manage my bands", edit_user_path(current_user, section: 'bands'), :method => "post", class: "btn btn-primary btn-small") %></td>
+	<% end %>
+	</tr>
+</table>
 
 <%= render 'shared/band_form' %>
 
