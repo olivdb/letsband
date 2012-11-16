@@ -298,6 +298,9 @@ input, textarea, select, .uneditable-input {
       border-top: 1px solid $grayLighter;
       border-right: 1px solid $grayLighter;
     }
+    .invitation {
+      background-color: #d9edf7;
+    }
     .contact {
       background-color: white;
       border-top: 1px solid $grayLighter;
@@ -336,6 +339,25 @@ input, textarea, select, .uneditable-input {
           }
         }
       }
+    }
+  }
+}
+
+.invitation_full {
+  background-color: #d9edf7;
+  p {
+    border-bottom: solid 1px white;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+.message_full {
+  background-color: white;
+  p {
+    border-bottom: solid 1px $grayLighter;
+    &:last-child {
+      border-bottom: none;
     }
   }
 }

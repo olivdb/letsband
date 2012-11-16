@@ -3,7 +3,14 @@
 <%= will_paginate %>
 <div class="messages">
 	<ul>
-		<%= render :partial => "message", :collection => @messages, :locals => { :current_user_is_recipient => true } %>
+		<!-- render :partial => "message", :collection => @messages, :locals => { :current_user_is_recipient => true } -->
+		<% @messages.each do |message| %>
+			<% if message.inviting_band_id.present? %>
+				<%= render :partial => "invitation", :object => message, :locals => { :current_user_is_recipient => true } %>
+			<% else %>
+				<%= render :partial => "message", :object => message, :locals => { :current_user_is_recipient => true } %>
+			<% end %>
+		<% end %>
 	</ul>
 </div>
 <%= will_paginate %>

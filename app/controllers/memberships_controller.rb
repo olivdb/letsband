@@ -6,7 +6,7 @@ class MembershipsController < ApplicationController
     @user = @membership.user
     @membership.destroy
     respond_to do |format|
-      format.html { redirect_to edit_user_path(@user, :section => 'bands') }
+      format.html { render edit_user_path(@user, :section => 'bands') }
       format.js
     end
   end

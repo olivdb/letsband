@@ -21,8 +21,8 @@
     <td>
       <% roles = [] %>
       <% roles.push('invited') if (f.object.role == 'invited') %>
-      <% roles.push('member') if ((f.object.role == 'member') || can?(:convert_to_member, f.object)) %>
-      <% roles.push('manager') if ((f.object.role == 'manager') || can?(:convert_to_manager, f.object)) %>
+      <% roles.push('member') if ((f.object.role == 'member') || can?(:convert_to_member, f.object) || (f.object.user_id == current_user.id && f.object.role == "owner")) %>
+      <% roles.push('manager') if ((f.object.role == 'manager') || can?(:convert_to_manager, f.object) || (f.object.user_id == current_user.id && f.object.role == "owner")) %>
       <% roles.push('owner') if ((f.object.role == 'owner') || can?(:convert_to_owner, f.object)) %>
       <%= f.collection_select :role, roles, :to_s, :humanize %>
     </td>

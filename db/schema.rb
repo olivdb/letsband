@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121114140531) do
+ActiveRecord::Schema.define(:version => 20121116205728) do
 
   create_table "bands", :force => true do |t|
     t.string   "name"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20121114140531) do
     t.datetime "read_at"
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
+    t.integer  "inviting_band_id"
   end
 
   create_table "regions", :force => true do |t|

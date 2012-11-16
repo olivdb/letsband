@@ -70,6 +70,7 @@ class BandsController < ApplicationController
       end
     elsif(params[:section]=='members')
       band_has_owner = false
+      new_members = []
       params[:band][:memberships_attributes].each do |membership|
         if membership[1]["id"]
           if membership[1]["_destroy"] == "1"
@@ -90,12 +91,22 @@ class BandsController < ApplicationController
         else
           authorize! :create, Membership
           membership[1]["role"] = "invited"
+          new_members.push(membership[1]["user_id"])
         end
       end
       @band.errors.add(:base, "You must designate at least one Owner") unless band_has_owner
     end
 
     if @band.errors.empty? && @band.update_attributes(params[:band])
+      #send invitation from curent_user to new_members
+      new_members.each do |new_member|
+        invitation = Message.new
+        invitation.sender = current_user
+        invitation.recipient_id = new_member
+        invitation.subject = invitation.sender.name + " has invited you to join '" + @band.name + "' !"
+        invitation.inviting_band_id = @band.id
+        invitation.save
+      end
       flash.now[:success] = "Band data updated"
       render 'show'
     else

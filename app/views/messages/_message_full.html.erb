@@ -1,0 +1,26 @@
+<% provide(:title, "Message") %> 
+<% friend = current_user?(@message.sender) ? @message.recipient : @message.sender %>
+<div class="message_full">
+<p>
+	Date: <%= @message.created_at %>
+</p>
+<p>
+	<%= gravatar_for friend %>
+	<%= link_to friend.name, friend %>
+</p>
+
+<p>
+	<em><%= @message.subject.blank? ? '(No subject)' : @message.subject %></em>
+</p>
+
+<p>
+	<% @message.body.split("\n").each do |p|  %>
+	<%= p %>
+	<br/>
+	<% end %>
+</p>
+
+<p>
+	<%= link_to 'Reply', new_message_path(recipient_id: friend.id, subject: ((@message.subject[0..2]=='Re:') ? '' : 'Re: ') + @message.subject) %>
+</p>
+</div>
