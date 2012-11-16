@@ -99,13 +99,15 @@ class BandsController < ApplicationController
 
     if @band.errors.empty? && @band.update_attributes(params[:band])
       #send invitation from curent_user to new_members
-      new_members.each do |new_member|
-        invitation = Message.new
-        invitation.sender = current_user
-        invitation.recipient_id = new_member
-        invitation.subject = invitation.sender.name + " has invited you to join '" + @band.name + "' !"
-        invitation.inviting_band_id = @band.id
-        invitation.save
+      if (params[:section]=='members')
+        new_members.each do |new_member|
+          invitation = Message.new
+          invitation.sender = current_user
+          invitation.recipient_id = new_member
+          invitation.subject = invitation.sender.name + " has invited you to join '" + @band.name + "' !"
+          invitation.inviting_band_id = @band.id
+          invitation.save
+        end
       end
       flash.now[:success] = "Band data updated"
       render 'show'
