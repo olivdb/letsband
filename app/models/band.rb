@@ -12,7 +12,7 @@ class Band < ActiveRecord::Base
   validates :name, presence: true
 
   def members
-    User.find(memberships.where('role != ? ', 'invited').map(&:user_id))
+    User.find(memberships.where('role not in (?) ', ['invited', 'open']).map(&:user_id))
   end
 
   def self.get_filtered(params)

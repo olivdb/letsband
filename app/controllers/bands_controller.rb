@@ -71,27 +71,38 @@ class BandsController < ApplicationController
     elsif(params[:section]=='members')
       band_has_owner = false
       new_members = []
-      params[:band][:memberships_attributes].each do |membership|
-        if membership[1]["id"]
-          if membership[1]["_destroy"] == "1"
-            authorize! :destroy, @band.memberships.find(membership[1]["id"])
+      params[:band][:memberships_attributes].each do |key, membership|
+        if membership["id"]
+          if membership["_destroy"] == "1"
+            authorize! :destroy, @band.memberships.find(membership["id"])
           else
-            if membership[1]["role"] != @band.memberships.find(membership[1]["id"]).role
-              case membership[1]["role"]
+            if membership["role"] != @band.memberships.find(membership["id"]).role
+              case membership["role"]
               when "member"
-                authorize! :convert_to_member, @band.memberships.find(membership[1]["id"])
+                authorize! :convert_to_member, @band.memberships.find(membership["id"])
               when "manager"
-                authorize! :convert_to_manager, @band.memberships.find(membership[1]["id"])
+                authorize! :convert_to_manager, @band.memberships.find(membership["id"])
               when "owner"
-                authorize! :convert_to_owner, @band.memberships.find(membership[1]["id"])
+                authorize! :convert_to_owner, @band.memberships.find(membership["id"])
+              when "invited"
+                if membership["user_id"].to_i < 1
+                  params['band']['memberships_attributes'][key]['role'] = "open"
+                  membership["role"] = "open"
+                end
               end
             end
-            band_has_owner ||= (membership[1]["role"]=="owner")
+            band_has_owner ||= (membership["role"]=="owner")
           end
         else
           authorize! :create, Membership
-          membership[1]["role"] = "invited"
-          new_members.push(membership[1]["user_id"])
+          new_member_id = membership["user_id"]
+          if new_member_id.to_i > 0
+            params['band']['memberships_attributes'][key]['role'] = "invited"
+            new_members.push(new_member_id)
+          else
+            params['band']['memberships_attributes'][key]['role'] = "open"
+            membership["role"] = "open"
+          end
         end
       end
       @band.errors.add(:base, "You must designate at least one Owner") unless band_has_owner

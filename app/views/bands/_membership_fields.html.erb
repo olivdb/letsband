@@ -1,13 +1,16 @@
 <fieldset>
-  <table <%= (local_assigns.has_key? :is_new) ? "class=new" : "" %>>
+  <table <%= (f.object.user_id.nil? || f.object.user_id < 1) ? "class=selectable_user" : "" %>>
   <tr>
     <% f.object.band_id ||= @band.id %>
     <% f.object.role ||= 'invited' %>
     <td>
-        <% if f.object.user_id %>
+        <% if f.object.user_id && f.object.user_id > 0 %>
           <%= link_to User.find(f.object.user_id).name, user_path(User.find(f.object.user_id)) %>
         <% else %>
-          <% available_users = current_user.contacts.where('contact_id NOT IN (?)', @band.memberships.map(&:user_id)) %>
+          <% available_users = current_user.contacts.where('contact_id NOT IN (?)', @band.memberships.map(&:user_id).delete_if{ |id| id.nil? || id<=0 }) %>
+          <% open_position = User.new(firstname: "- Open", surname: "Position -") %>
+          <% open_position.id = 0 %>
+          <% available_users.unshift(open_position) %>
           <%= f.select :user_id, options_from_collection_for_select(available_users, 'id', 'name'), :prompt => "Select Contact..."%>
         <% end %>
     </td>
@@ -20,7 +23,7 @@
     </td>
     <td>
       <% roles = [] %>
-      <% roles.push('invited') if (f.object.role == 'invited') %>
+      <% roles.push('invited') if (f.object.role == 'invited') || (f.object.role == 'open') %>
       <% roles.push('member') if ((f.object.role == 'member') || can?(:convert_to_member, f.object) || (f.object.user_id == current_user.id && f.object.role == "owner")) %>
       <% roles.push('manager') if ((f.object.role == 'manager') || can?(:convert_to_manager, f.object) || (f.object.user_id == current_user.id && f.object.role == "owner")) %>
       <% roles.push('owner') if ((f.object.role == 'owner') || can?(:convert_to_owner, f.object)) %>

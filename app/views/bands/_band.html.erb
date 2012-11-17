@@ -19,7 +19,7 @@
       <p>
         <b><%= band.members.count.to_s %> members</b>
         <% band.memberships.sort{ |a,b| a.instrument.name.downcase <=> b.instrument.name.downcase }.each do |membership| %>
-          <% if membership.role != 'invited' %>
+          <% if membership.role != 'invited' && membership.role != 'open' %>
               <%= image_tag(membership.instrument.image_path, size: "32x32", alt: membership.instrument.name) %>
           <% end %>
         <% end %>

@@ -34,8 +34,13 @@
       <% if membership.role != 'invited' %>
 			  <li>
 				  <%= image_tag(membership.instrument.image_path, size: "32x32", alt: membership.instrument.name) %>
+          <% if membership.role != 'open' %>
 				  <%= gravatar_for membership.user, size: 32 %>
 				  <%= link_to membership.user.name, membership.user %>
+          <% else %>
+          <%= image_tag 'unknown_person.png', size: '32x32' %>
+          Open Position (<%= link_to 'apply', new_message_path(recipient_id: @band.memberships.where(role: 'owner').first.user_id) %>)
+          <% end %>
 			  </li>
       <% end %>
 			<% end %>
