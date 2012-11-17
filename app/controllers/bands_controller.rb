@@ -126,7 +126,7 @@ class BandsController < ApplicationController
         params[:band][:memberships_attributes].each do |key, membership|
           hash = { :memberships_attributes => { '0' => membership } }
           if @band.update_attributes(hash)
-            if membership["id"] && membership["user_id"].to_i > 0
+            if !membership["id"] && membership["user_id"].to_i > 0
               invitation = Message.new
               invitation.sender = current_user
               invitation.recipient_id = membership["user_id"]
