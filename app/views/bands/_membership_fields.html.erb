@@ -2,16 +2,33 @@
   <table <%= (f.object.user_id.nil? || f.object.user_id < 1) ? "class=selectable_user" : "" %>>
   <tr>
     <% f.object.band_id ||= @band.id %>
-    <% f.object.role ||= 'invited' %>
     <td>
         <% if f.object.user_id && f.object.user_id > 0 %>
           <%= link_to User.find(f.object.user_id).name, user_path(User.find(f.object.user_id)) %>
+          <%= f.hidden_field :user_id, :value => f.object.user_id %>
         <% else %>
+
           <% available_users = current_user.contacts.where('contact_id NOT IN (?)', @band.memberships.map(&:user_id).delete_if{ |id| id.nil? || id<=0 }) %>
           <% open_position = User.new(firstname: "- Open", surname: "Position -") %>
           <% open_position.id = 0 %>
           <% available_users.unshift(open_position) %>
-          <%= f.select :user_id, options_from_collection_for_select(available_users, 'id', 'name'), :prompt => "Select Contact..."%>
+          <% prompt_text = "Select Contact..." %>
+          <%= f.select :user_id, options_from_collection_for_select(available_users, 'id', 'name'), {:prompt => prompt_text}, {:onchange => 
+            "if (this.options[this.selectedIndex].innerHTML == '#{open_position.name}') 
+              {
+                document.getElementById('#{'role_' + f.object.object_id.to_s}').options.length=0;
+                document.getElementById('#{'role_' + f.object.object_id.to_s}').options[0]=new Option('Open', 'open', true, false)
+              }
+            else if (this.options[this.selectedIndex].innerHTML == '#{prompt_text}')
+              {
+                document.getElementById('#{'role_' + f.object.object_id.to_s}').options.length=0;
+              }
+            else 
+              {
+                document.getElementById('#{'role_' + f.object.object_id.to_s}').options.length=0;
+                document.getElementById('#{'role_' + f.object.object_id.to_s}').options[0]=new Option('Invited', 'invited', true, false)
+              }"
+            } %>
         <% end %>
     </td>
     <td>
@@ -23,11 +40,12 @@
     </td>
     <td>
       <% roles = [] %>
-      <% roles.push('invited') if (f.object.role == 'invited') || (f.object.role == 'open') %>
+      <% roles.push('invited') if (f.object.role == 'invited')  %>
+      <% roles.push('open') if (f.object.role == 'open') %>
       <% roles.push('member') if ((f.object.role == 'member') || can?(:convert_to_member, f.object) || (f.object.user_id == current_user.id && f.object.role == "owner")) %>
       <% roles.push('manager') if ((f.object.role == 'manager') || can?(:convert_to_manager, f.object) || (f.object.user_id == current_user.id && f.object.role == "owner")) %>
       <% roles.push('owner') if ((f.object.role == 'owner') || can?(:convert_to_owner, f.object)) %>
-      <%= f.collection_select :role, roles, :to_s, :humanize %>
+      <%= f.collection_select :role, roles, :to_s, :humanize, {}, {id: 'role_'+f.object.object_id.to_s} %>
     </td>
     <td>
       <% if !f.object.user_id || can?(:destroy, f.object) %>

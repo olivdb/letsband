@@ -27,7 +27,7 @@
       <% @band.description.split("\n").each do |p| %><%= p %><br/><% end %>
     </p>
 	<p class="band_page_element">
-      <table><tr><td><h3>Members (<%= @band.members.count.to_s %>)</h3></td><td><% ( %> (<%= link_to("update", edit_band_path(@band, section: 'members')) %>) <% ) if can? :update, @band %></td></tr></table>
+      <table><tr><td><h3>Members (<%= @band.members.count.to_s %>)</h3></td><td><% ( %> (<%= link_to("update", edit_band_path(@band, section: 'members')) %>) <% ) if can?(:update, @band) %></td></tr></table>
 		<div class="condensed">
 			<ul>
 			<% @band.memberships.sort{ |a,b| a.instrument.name.downcase <=> b.instrument.name.downcase }.each do |membership| %>

@@ -56,6 +56,14 @@ class BandsController < ApplicationController
 
   def update
     if(params[:section]=='location')
+      update_location
+    elsif(params[:section]=='members')
+      update_members
+    end        
+  end
+
+  private
+    def update_location
       if(params[:band_city_has_been_selected] == '0')
         if(!params[:band_city_name].blank?)
           city = City.find_by_fullname(params[:band_city_name]) || City.order(:name).where("LOWER(name) like ?", "#{params[:band_city_name].downcase}%").limit(1).first
@@ -68,9 +76,16 @@ class BandsController < ApplicationController
           #no city update
         end
       end
-    elsif(params[:section]=='members')
+      if @band.update_attributes(params[:band])
+          flash.now[:success] = "Band location updated"
+          render 'show'
+      else
+        render 'edit'
+      end
+    end
+
+    def update_members
       band_has_owner = false
-      new_members = []
       params[:band][:memberships_attributes].each do |key, membership|
         if membership["id"]
           if membership["_destroy"] == "1"
@@ -79,52 +94,58 @@ class BandsController < ApplicationController
             if membership["role"] != @band.memberships.find(membership["id"]).role
               case membership["role"]
               when "member"
-                authorize! :convert_to_member, @band.memberships.find(membership["id"])
+                authorize!(:convert_to_member, @band.memberships.find(membership["id"])) unless ((@band.memberships.find(membership["id"]).user_id == current_user.id) && (@band.memberships.find(membership["id"]).role == "owner"))
               when "manager"
-                authorize! :convert_to_manager, @band.memberships.find(membership["id"])
+                authorize!(:convert_to_manager, @band.memberships.find(membership["id"])) unless ((@band.memberships.find(membership["id"]).user_id == current_user.id) && (@band.memberships.find(membership["id"]).role == "owner"))
               when "owner"
-                authorize! :convert_to_owner, @band.memberships.find(membership["id"])
+                authorize! :convert_to_owner, @band.memberships.find(membership["id"])  
               when "invited"
-                if membership["user_id"].to_i < 1
-                  params['band']['memberships_attributes'][key]['role'] = "open"
-                  membership["role"] = "open"
-                end
+                #puts ">>>>> >_< >>>>"+membership.inspect
+                raise CanCan::AccessDenied.new("Action not authorized! >_<", :convert_to_invited, @band.memberships.find(membership["id"]).user_id)
+              when "open"
+                #puts ">>>>> -_- >>>>"+membership.inspect
+                raise CanCan::AccessDenied.new("Action not authorized! -_-", :convert_to_open, @band.memberships.find(membership["id"]).user_id)
               end
+            end
+            if membership["instrument_id"].to_i != @band.memberships.find(membership["id"]).instrument_id
+              authorize! :change_instrument, @band.memberships.find(membership["id"])
+            end
+            if membership["user_id"].to_i != @band.memberships.find(membership["id"]).user_id
+              #puts ">>>>> O_O >>>>"+membership.inspect
+              raise CanCan::AccessDenied.new("Action not authorized! O_O", :change_user, @band.memberships.find(membership["id"]).user_id)
             end
             band_has_owner ||= (membership["role"]=="owner")
           end
         else
-          authorize! :create, Membership
-          new_member_id = membership["user_id"]
-          if new_member_id.to_i > 0
-            params['band']['memberships_attributes'][key]['role'] = "invited"
-            new_members.push(new_member_id)
-          else
-            params['band']['memberships_attributes'][key]['role'] = "open"
-            membership["role"] = "open"
-          end
+          authorize!(:create, Membership.new(band_id: @band.id))
         end
       end
       @band.errors.add(:base, "You must designate at least one Owner") unless band_has_owner
-    end
 
-    if @band.errors.empty? && @band.update_attributes(params[:band])
-      #send invitation from curent_user to new_members
-      if (params[:section]=='members')
-        new_members.each do |new_member|
-          invitation = Message.new
-          invitation.sender = current_user
-          invitation.recipient_id = new_member
-          invitation.subject = invitation.sender.name + " has invited you to join '" + @band.name + "' !"
-          invitation.inviting_band_id = @band.id
-          invitation.save
+      if @band.errors.empty? #&& @band.update_attributes(params[:band])
+        params[:band][:memberships_attributes].each do |key, membership|
+          hash = { :memberships_attributes => { '0' => membership } }
+          if @band.update_attributes(hash)
+            if membership["id"] && membership["user_id"].to_i > 0
+              invitation = Message.new
+              invitation.sender = current_user
+              invitation.recipient_id = membership["user_id"]
+              invitation.subject = invitation.sender.name + " has invited you to join '" + @band.name + "' !"
+              invitation.inviting_band_id = @band.id
+              invitation.save
+            end
+          end
         end
       end
-      flash.now[:success] = "Band data updated"
-      render 'show'
-    else
-      render 'edit'
+
+      if @band.errors.empty?
+        flash.now[:success] = "Band members updated !"
+        render 'show'
+      else
+        render 'edit'
+      end
     end
-  end
+
+    
 
 end

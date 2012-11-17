@@ -29,8 +29,8 @@ class Ability
     cannot :destroy, Membership, :band_id => membership.band_id, :role => ["manager", "owner"]
     can :destroy, Membership, :band_id => membership.band_id, :id => membership.id
     can :change_instrument, Membership, :band_id => membership.band_id
-    can :create, Membership, :band_id => membership.band_id, :role => "invited" # invite a user
-    cannot :create, Membership, :band_id => membership.band_id, :user_id => Membership.where(:band_id => membership.band_id).map(&:user_id) # probably unnecessary
+    can :create, Membership, :band_id => membership.band_id # invite a user or create an open position
+    #cannot :create, Membership, :band_id => membership.band_id, :user_id => Membership.where(:band_id => membership.band_id).map(&:user_id).delete_if{ |id| id.nil? || id<=0 }
   end
 
   def owner(membership)
@@ -38,13 +38,13 @@ class Ability
     can :destroy, Band, :id => membership.band_id
     can :destroy, Membership, :band_id => membership.band_id
     cannot :destroy, Membership, :id => membership.id unless Membership.where(band_id: membership.band_id, role: "owner").count > 1
-    can :convert_to_member, Membership, :band_id => membership.band_id #including other owners!
-    cannot :convert_to_member, Membership, :band_id => membership.band_id, :role => "invited"
+    can :convert_to_member, Membership, :band_id => membership.band_id, :role => ["manager", "owner"] #including other owners!
+    #cannot :convert_to_member, Membership, :band_id => membership.band_id, :role => ["invited", "open", nil]
     cannot :convert_to_member, Membership, :id => membership.id unless Membership.where(band_id: membership.band_id, role: "owner").count > 1
-    can :convert_to_manager, Membership, :band_id => membership.band_id #including other owners!
-    cannot :convert_to_manager, Membership, :band_id => membership.band_id, :role => "invited"
+    can :convert_to_manager, Membership, :band_id => membership.band_id, :role => ["member", "owner"] #including other owners!
+    #cannot :convert_to_manager, Membership, :band_id => membership.band_id, :role => ["invited", "open", nil]
     cannot :convert_to_manager, Membership, :id => membership.id unless Membership.where(band_id: membership.band_id, role: "owner").count > 1
-    can :convert_to_owner, Membership, :band_id => membership.band_id
-    cannot :convert_to_owner, Membership, :band_id => membership.band_id, :role => "invited"
+    can :convert_to_owner, Membership, :band_id => membership.band_id, :role => ["member", "manager"]
+    #cannot :convert_to_owner, Membership, :band_id => membership.band_id, :role => ["invited", "open", nil]
   end
 end

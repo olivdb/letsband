@@ -64,5 +64,7 @@ class MembershipsController < ApplicationController
     redirect_to :back
   end
 
+  def change_instrument
+  end
 
 end
