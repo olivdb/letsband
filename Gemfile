@@ -8,6 +8,7 @@ gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
 gem 'simple-private-messages', '0.0.0', :git => 'git://github.com/jongilbraith/simple-private-messages.git'
 gem 'cancan'
+gem "paperclip", "~> 3.0"
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
@@ -34,4 +35,5 @@ end
 
 group :production do
   gem 'pg', '0.12.2'
+  gem 'aws-sdk'
 end

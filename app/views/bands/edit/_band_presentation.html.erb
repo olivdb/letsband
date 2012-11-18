@@ -1,5 +1,5 @@
 <p>
-  <%= form_for @band do |f| %>
+  <%= form_for @band, :html => { :multipart => true } do |f| %>
     <%= render 'shared/error_messages' %>
 
     <%= f.label :name %>
@@ -10,6 +10,9 @@
 
     <%= f.label :description %>
     <%= f.text_area :description %>
+
+    <%= f.label :band_picture %>
+    <%= f.file_field :image %>
 
     <br />
     <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>

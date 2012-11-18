@@ -59,10 +59,20 @@ class BandsController < ApplicationController
       update_location
     elsif(params[:section]=='members')
       update_members
+    else 
+      update_presentation
     end        
   end
 
   private
+    def update_presentation
+      if @band.update_attributes(params[:band])
+          flash.now[:success] = "Band presentation updated !"
+          render 'show'
+      else
+        render 'edit'
+      end
+    end
     def update_location
       if(params[:band_city_has_been_selected] == '0')
         if(!params[:band_city_name].blank?)
@@ -77,7 +87,7 @@ class BandsController < ApplicationController
         end
       end
       if @band.update_attributes(params[:band])
-          flash.now[:success] = "Band location updated"
+          flash.now[:success] = "Band location updated !"
           render 'show'
       else
         render 'edit'

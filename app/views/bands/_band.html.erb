@@ -1,7 +1,7 @@
 <li>
   <div class = 'row'>
     <div class = 'span2'>
-       <%= image_for(band, size: 80) %>
+       <%= image_tag band.image.url(:thumb) %><!--= image_for(band, size: 80) -->
     </div>
     <div class = 'span8'>
       <div class="logo"></div>

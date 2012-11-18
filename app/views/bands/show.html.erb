@@ -8,7 +8,7 @@
           <td><% ( %> (<%= link_to("update", edit_band_path(@band, section: 'presentation')) %>) <% ) if can? :update, @band %></td>
         </tr>
         <tr>
-          <td colspan=2><%= image_for @band %></td>
+          <td colspan=2><!--%= image_for @band %--><%= image_tag @band.image.url(:medium) %></td>
         </tr>
       </table>
     </section>
