@@ -16,7 +16,7 @@ class Band < ActiveRecord::Base
 
   accepts_nested_attributes_for :memberships, allow_destroy: true
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 100 }
   validates_attachment :image,
     :content_type => { :content_type => ['image/jpg', 'image/jpeg', 'image/png'] }, 
     :size => { :less_than => 1.megabytes }

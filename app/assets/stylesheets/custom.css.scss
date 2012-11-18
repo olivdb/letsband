@@ -373,6 +373,9 @@ input, textarea, select, .uneditable-input {
         border:none;
       }
       td {
+        &:first-child {
+          width:110px;
+        }
         &:last-child {
           width:126px;
         }
