@@ -1,5 +1,5 @@
 class Band < ActiveRecord::Base
-  attr_accessible :city_id, :description, :genre_id, :name, :image_name, :image, :memberships_attributes
+  attr_accessible :city_id, :description, :genre_id, :name, :image, :memberships_attributes
   has_attached_file :image, :styles => { :medium => ["300x300>", :png] , :medium_2x => ["600x600>", :png], :thumb => ["100x100>", :png], :thumb_2x => ["200x200>", :png] }, :default_url => "/assets/bands/default_:style_band.png"
 
   belongs_to :city
@@ -13,7 +13,7 @@ class Band < ActiveRecord::Base
   validates :name, presence: true
   validates_attachment :image,
     :content_type => { :content_type => ['image/jpg', 'image/jpeg', 'image/png'] }, 
-    :size => { :less_than => 5.megabytes }
+    :size => { :less_than => 1.megabytes }
 
   def members
     User.find(memberships.where('role not in (?) ', ['invited', 'open']).map(&:user_id))
