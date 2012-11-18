@@ -8,7 +8,13 @@
           <td><% ( %> (<%= link_to("update", edit_band_path(@band, section: 'presentation')) %>) <% ) if can? :update, @band %></td>
         </tr>
         <tr>
-          <td colspan=2><!--%= image_for @band %--><%= image_tag @band.image.url(:medium) %></td>
+          <td colspan=2>
+            <% if @band.image.path.nil? %>
+              <%= image_tag @band.image.url(:medium) %>
+            <% else %>
+              <%= image_tag @band.image.url(:medium), size: Paperclip::Geometry.from_file(@band.image.path(:medium)).to_s %>
+            <% end %>
+          </td>
         </tr>
       </table>
     </section>

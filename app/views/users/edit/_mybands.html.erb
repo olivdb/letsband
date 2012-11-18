@@ -7,7 +7,13 @@
 		<% end %>
 		<% @user.memberships.each do |membership| %>
 			<tr id="band_<%=membership.band_id%>">
-				<td><!--%= image_for membership.band %--><%= image_tag membership.band.image.url(:thumb) %></td>
+				<td><!--%= image_for membership.band %--><%= image_tag membership.band.image.url(:thumb), size: Band::THUMB_IMAGE_RESOLUTION %>
+			      <% if membership.band.image.path.nil? %>
+			        <%= image_tag membership.band.image.url(:thumb) %>
+			      <% else %>
+			        <%= image_tag membership.band.image.url(:thumb), size: Paperclip::Geometry.from_file(membership.band.image.path(:thumb)).to_s %>
+			      <% end %>
+				</td>
 				<td><h3><%= link_to membership.band.name, band_path(membership.band) %><h3></td>
 				<td>
 					<ul>
