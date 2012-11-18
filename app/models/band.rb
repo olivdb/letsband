@@ -3,9 +3,10 @@ class Band < ActiveRecord::Base
   MEDIUM_2X_IMAGE_RESOLUTION="600x600"
   THUMB_IMAGE_RESOLUTION="100x100"
   THUMB_2X_IMAGE_RESOLUTION="200X200"
-  
+
   attr_accessible :city_id, :description, :genre_id, :name, :image, :memberships_attributes
-  has_attached_file :image, :styles => { :medium => [MEDIUM_IMAGE_RESOLUTION+">", :png] , :medium_2x => [MEDIUM_2X_IMAGE_RESOLUTION+">", :png], :thumb => [THUMB_IMAGE_RESOLUTION+">", :png], :thumb_2x => [THUMB_2X_IMAGE_RESOLUTION+">", :png] }, :default_url => "/assets/bands/default_:style_band.png"
+  has_attached_file :image, :styles => { :medium => [MEDIUM_IMAGE_RESOLUTION+">", :png] , :medium_2x => [MEDIUM_2X_IMAGE_RESOLUTION+">", :png], :thumb => [THUMB_IMAGE_RESOLUTION+">", :png], :thumb_2x => [THUMB_2X_IMAGE_RESOLUTION+">", :png] }, :default_url => "/assets/bands/:style/default_band.png"
+  after_post_process :save_image_dimensions
 
   belongs_to :city
   belongs_to :genre
@@ -19,6 +20,12 @@ class Band < ActiveRecord::Base
   validates_attachment :image,
     :content_type => { :content_type => ['image/jpg', 'image/jpeg', 'image/png'] }, 
     :size => { :less_than => 1.megabytes }
+
+  def save_image_dimensions
+    geo = Paperclip::Geometry.from_file(image.queued_for_write[:original])
+    self.image_width = geo.width
+    self.image_height = geo.height
+  end
 
   def members
     User.find(memberships.where('role not in (?) ', ['invited', 'open']).map(&:user_id))

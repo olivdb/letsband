@@ -1,11 +1,7 @@
 <li>
   <div class = 'row'>
     <div class = 'span2'>
-      <% if band.image.path.nil? %>
-        <%= image_tag band.image.url(:thumb) %>
-      <% else %>
-        <%= image_tag band.image.url(:thumb), size: Paperclip::Geometry.from_file(band.image.path(:thumb)).to_s %>
-      <% end %>
+      <%= image_tag band.image.url(:thumb), size: band_image_size(band, :thumb) %>
     </div>
     <div class = 'span8'>
       <div class="logo"></div>
