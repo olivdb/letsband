@@ -39,6 +39,8 @@ class User < ActiveRecord::Base
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
 
+  
+
   def should_validate_password?
     updating_password || new_record?
   end
