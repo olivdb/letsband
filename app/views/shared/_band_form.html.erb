@@ -1,3 +1,18 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "http://j.maxmind.com/app/geoip.js" %>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    if (!document.getElementById('band_city_name').value)
+    {
+      var city = geoip_city() + ', ' + geoip_region_name() + ', ' + geoip_country_name().toUpperCase();
+      document.getElementById('band_city_name').value = city;
+    }
+  });
+  </script>
+<% end %>
+
+
+
 <div class='center hero-unit'>
 <%= form_tag bands_path, :method => 'get', onsubmit: "if('#{params[:band_city_name]}' && document.getElementById('band_city_name').value == ''){document.getElementById('band_city_name').value = '#{params[:band_city_name]}'; 
       document.getElementById('band_city_has_been_selected').value = 1;

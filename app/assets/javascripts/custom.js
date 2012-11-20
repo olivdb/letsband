@@ -6,4 +6,5 @@ $(document).ready(function(){
 			$(this).attr("src", $(this).attr('src').replace(/\/(medium|thumb)\//, "/$1_2x/"));
 		});
 	}
+
 });
