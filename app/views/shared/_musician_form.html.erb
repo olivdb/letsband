@@ -7,6 +7,7 @@
       var city = geoip_city() + ', ' + geoip_region_name() + ', ' + geoip_country_name().toUpperCase();
       document.getElementById('user_city_name').value = city;
     }
+    window.alert('geoip: '+geoip_city() + ', ' + geoip_region_name() + ', ' + geoip_country_name());
   });
   </script>
 <% end %>
