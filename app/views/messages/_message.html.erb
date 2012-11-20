@@ -2,11 +2,11 @@
 <li class="<%= message.message_read? ? "read" : "not_read" %>">
 	<table>
 		<tr>
-			<td><%= gravatar_for friend %></td>
+			<td><%= gravatar_for message.sender %></td>
 			<td>
 				<table>
 					<tr>
-						<td class="friend_name"><%= link_to friend.name, friend %></td>
+						<td class="friend_name"><%= (current_user_is_recipient ? "From: ": "To: ") %><%= link_to friend.name, friend %></td>
 						<td><%= link_to("View", message) %></td>
 					</tr>
 					<tr>

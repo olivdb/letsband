@@ -1,18 +1,19 @@
 <% provide(:title, "Invitation") %> 
-<% friend = current_user?(@message.sender) ? @message.recipient : @message.sender %>
+<% friend = current_user?(message.sender) ? message.recipient : message.sender %>
 <div class="invitation_full">
 <p>
-	Date: <%= @message.created_at %>
+	<table><tr><td>
+		<%= gravatar_for message.sender %></td><td>
+		Date: <%= message.created_at %><br/>
+		From: <%= link_to message.sender.name, message.sender %><br/>
+		To: <%= link_to message.recipient.name, message.recipient %>
+	</td></tr></table>
 </p>
 <p>
-	<%= gravatar_for friend %>
-	<%= link_to friend.name, friend %>
+	<em><%= message.subject.blank? ? '(No subject)' : message.subject %></em>
 </p>
-
-	<em><%= @message.subject.blank? ? '(No subject)' : @message.subject %></em>
-
 	<table class="invitation_buttons"><tr>
-	<% membership = Membership.where(band_id: @message.inviting_band_id, user_id: current_user.id).first %>
+	<% membership = Membership.where(band_id: message.inviting_band_id, user_id: current_user.id).first %>
 	<% if (membership.try(:role) == "invited") && can?(:convert_to_member, membership) %>
 		<td><%= (button_to "Accept invitation", convert_to_member_membership_path(membership), :method => "get", class: "btn btn-primary btn-small") %></td>
 	<% end %>
@@ -24,6 +25,8 @@
 	</tr></table>
 
 <p>
-	<%= link_to 'Reply', new_message_path(recipient_id: friend.id, subject: ((@message.subject[0..2]=='Re:') ? '' : 'Re: ') + @message.subject) %>
+	<% if is_last_message_in_thread %>
+	<%= link_to 'Reply', new_message_path(recipient_id: friend.id, subject: ((message.subject[0..2]=='Re:') ? '' : 'Re: ') + message.subject, origin_message_id: message.id) %>
+	<% end %>
 </p>
 </div>

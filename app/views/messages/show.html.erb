@@ -1,5 +1,5 @@
 <% if @message.inviting_band_id.present? %>
-	<%= render 'messages/invitation_full' %>
+	<%= render :partial => 'messages/invitation_full', :locals => { :message => @message, :is_last_message_in_thread => true } %>
 <% else %>
-	<%= render 'messages/message_full' %>
+	<%= render :partial => 'messages/message_full', :locals => { :message => @message, :is_last_message_in_thread => true } %>
 <% end %>

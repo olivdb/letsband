@@ -7,7 +7,7 @@
           <%= link_to User.find(f.object.user_id).name, user_path(User.find(f.object.user_id)) %>
           <%= f.hidden_field :user_id, :value => f.object.user_id %>
         <% else %>
-          <% available_users = current_user.contacts.dup %> <!--.where('contact_id NOT IN (?)', @band.memberships.map(&:user_id).delete_if{ |id| id.nil? || id<=0 }) %-->
+          <% available_users = current_user.contacts | @band.members %> <!--.where('contact_id NOT IN (?)', @band.memberships.map(&:user_id).delete_if{ |id| id.nil? || id<=0 }) %-->
           <% open_position = User.new(firstname: "- Open", surname: "Position -") %>
           <% open_position.id = 0 %>
           <% available_users.unshift(open_position) %>

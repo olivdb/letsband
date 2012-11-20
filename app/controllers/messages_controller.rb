@@ -7,7 +7,10 @@ before_filter :signed_in_user
 
   def new
   	@message = Message.new
-    params[:message] = {:subject => params[:subject]} if params[:subject].present?
+    params[:message] = {}
+    params[:message][:subject] = params[:subject] if params[:subject].present?
+    params[:message][:origin_message_id] = params[:origin_message_id] if params[:origin_message_id].present?
+    puts ">>>>>>>>"+params.inspect
     render :action => 'new', :locals => {:recipient_id => params[:recipient_id]}
   end
 
@@ -17,6 +20,7 @@ before_filter :signed_in_user
     @message.sender_id = current_user.id
     @message.subject = params[:message][:subject]
     @message.body = params[:message][:body]
+    @message.origin_message_id = params[:message][:origin_message_id]
 
     if @message.save
       flash[:success] = "Message sent."

@@ -20,11 +20,14 @@
 		<%= f.label :recipient_name, User.find(recipient_id).name %>
 		<%= f.hidden_field :recipient_id, value: recipient_id %>
 		<% else %>
-		<%= f.select :recipient_id, options_from_collection_for_select(current_user.contacts, 'id', 'name'), :prompt => "Select Contact..." %>
+		<% available_recipients = current_user.contacts %>
+		<% current_user.memberships.each { |m| available_recipients |= m.band.members } %>
+		<%= f.select :recipient_id, options_from_collection_for_select(available_recipients, 'id', 'name'), :prompt => "Select Contact..." %>
 		<% end %>
 
 		<%= f.label :subject %>
 		<%= f.text_field :subject, value: (params[:message] && params[:message][:subject]) ? params[:message][:subject] : ''%>
+		<%= f.hidden_field :origin_message_id, value: params[:message][:origin_message_id] %>
 
 		<%= f.label :body %>
 		<%= f.text_area :body %>

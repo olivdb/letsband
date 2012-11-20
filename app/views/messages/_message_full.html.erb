@@ -1,26 +1,35 @@
 <% provide(:title, "Message") %> 
-<% friend = current_user?(@message.sender) ? @message.recipient : @message.sender %>
+<% friend = current_user?(message.sender) ? message.recipient : message.sender %>
 <div class="message_full">
 <p>
-	Date: <%= @message.created_at %>
+	<table><tr><td>
+		<%= gravatar_for message.sender %></td><td>
+		Date: <%= message.created_at %><br/>
+		From: <%= link_to message.sender.name, message.sender %><br/>
+		To: <%= link_to message.recipient.name, message.recipient %>
+	</td></tr></table>
 </p>
 <p>
-	<%= gravatar_for friend %>
-	<%= link_to friend.name, friend %>
+	<em><%= message.subject.blank? ? '(No subject)' : message.subject %></em>
 </p>
 
 <p>
-	<em><%= @message.subject.blank? ? '(No subject)' : @message.subject %></em>
-</p>
-
-<p>
-	<% @message.body.split("\n").each do |p|  %>
+	<% message.body.split("\n").each do |p|  %>
 	<%= p %>
 	<br/>
 	<% end %>
-</p>
-
-<p>
-	<%= link_to 'Reply', new_message_path(recipient_id: friend.id, subject: ((@message.subject[0..2]=='Re:') ? '' : 'Re: ') + @message.subject) %>
+	<br/>
+	<% if is_last_message_in_thread %>
+	<%= link_to 'Reply', new_message_path(recipient_id: friend.id, subject: ((message.subject[0..2]=='Re:') ? '' : 'Re: ') + message.subject, origin_message_id: message.id) %>
+	<% end %>
 </p>
 </div>
+
+<% if message.origin_message_id.present? %>
+	<% origin_message = Message.find(message.origin_message_id) %>
+	<% if origin_message.inviting_band_id.present? %>
+		<%= render :partial => 'messages/invitation_full', :locals => { :message => origin_message, :is_last_message_in_thread => false } %>
+	<% else %>
+		<%= render :partial => 'messages/message_full', :locals => { :message => origin_message, :is_last_message_in_thread => false } %>
+	<% end %>
+<% end %>
