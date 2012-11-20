@@ -43,10 +43,10 @@ class Ability
     can :convert_to_member, Membership, :band_id => membership.band_id, :role => ["manager", "owner"] #including other owners!
     #cannot :convert_to_member, Membership, :band_id => membership.band_id, :role => ["invited", "open", nil]
     cannot :convert_to_member, Membership, :id => membership.id unless Membership.where(band_id: membership.band_id, role: "owner").count > 1
-    can :convert_to_manager, Membership, :band_id => membership.band_id, :role => ["member", "owner"] #including other owners!
+    can :convert_to_manager, Membership, :band_id => membership.band_id, :role => ["open", "member", "owner"] #including other owners!
     #cannot :convert_to_manager, Membership, :band_id => membership.band_id, :role => ["invited", "open", nil]
     cannot :convert_to_manager, Membership, :id => membership.id unless Membership.where(band_id: membership.band_id, role: "owner").count > 1
-    can :convert_to_owner, Membership, :band_id => membership.band_id, :role => ["member", "manager"]
+    can :convert_to_owner, Membership, :band_id => membership.band_id, :role => ["open", "member", "manager"]
     #cannot :convert_to_owner, Membership, :band_id => membership.band_id, :role => ["invited", "open", nil]
   end
 end
