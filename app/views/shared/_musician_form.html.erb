@@ -1,5 +1,5 @@
 <% content_for :javascript_includes do %>
-  <%= javascript_include_tag "http://j.maxmind.com/app/geoip.js" %>
+  <%= javascript_include_tag "http://www.maxmind.com/app/geoip.js" %>
   <script type="text/javascript">
   $(document).ready(function(){
     if (!document.getElementById('user_city_name').value)
@@ -7,7 +7,6 @@
       var city = geoip_city() + ', ' + geoip_region_name() + ', ' + geoip_country_name().toUpperCase();
       document.getElementById('user_city_name').value = city;
     }
-    window.alert('geoip: '+geoip_city() + ', ' + geoip_region_name() + ', ' + geoip_country_name());
   });
   </script>
 <% end %>
