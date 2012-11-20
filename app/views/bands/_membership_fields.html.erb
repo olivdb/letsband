@@ -34,7 +34,6 @@
               }\r
             else \r
               {\r
-                document.getElementById('#{'role_' + f.object.object_id.to_s}').className = 'role_for_user_' + this.value;
                 var member_role_select = document.getElementsByClassName('role_for_user_' + this.value)[0]; \r
                 document.getElementById('#{'role_' + f.object.object_id.to_s}').options.length=0;
                 for(var i=0;i<member_role_select.options.length;i++) \r
@@ -44,6 +43,7 @@
                   document.getElementById('#{'role_' + f.object.object_id.to_s}').options[i].value = member_role_select.options[i].value; \r
                   document.getElementById('#{'role_' + f.object.object_id.to_s}').selectedIndex = member_role_select.selectedIndex; \r
                 }\r
+                document.getElementById('#{'role_' + f.object.object_id.to_s}').className = 'role_for_user_' + this.value;
               }\r"
             } %>
         <% end %>
