@@ -110,18 +110,16 @@ class BandsController < ApplicationController
               when "owner"
                 authorize! :convert_to_owner, @band.memberships.find(membership["id"])  
               when "invited"
-                #puts ">>>>> >_< >>>>"+membership.inspect
-                raise CanCan::AccessDenied.new("Action not authorized! >_<", :convert_to_invited, @band.memberships.find(membership["id"]).user_id)
+                authorize! :convert_to_invited, @band.memberships.find(membership["id"])  
+                #raise CanCan::AccessDenied.new("Action not authorized! >_<", :convert_to_invited, @band.memberships.find(membership["id"]).user_id)
               when "open"
-                #puts ">>>>> -_- >>>>"+membership.inspect
                 raise CanCan::AccessDenied.new("Action not authorized! -_-", :convert_to_open, @band.memberships.find(membership["id"]).user_id)
               end
             end
             if membership["instrument_id"].to_i != @band.memberships.find(membership["id"]).instrument_id
               authorize! :change_instrument, @band.memberships.find(membership["id"])
             end
-            if membership["user_id"].to_i != @band.memberships.find(membership["id"]).user_id
-              #puts ">>>>> O_O >>>>"+membership.inspect
+            if (membership["user_id"].to_i != @band.memberships.find(membership["id"]).user_id) && @band.memberships.find(membership["id"]).user_id >= 1
               raise CanCan::AccessDenied.new("Action not authorized! O_O", :change_user, @band.memberships.find(membership["id"]).user_id)
             end
             band_has_owner ||= (membership["role"]=="owner")

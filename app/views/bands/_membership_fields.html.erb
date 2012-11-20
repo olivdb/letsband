@@ -7,27 +7,44 @@
           <%= link_to User.find(f.object.user_id).name, user_path(User.find(f.object.user_id)) %>
           <%= f.hidden_field :user_id, :value => f.object.user_id %>
         <% else %>
-
-          <% available_users = current_user.contacts.where('contact_id NOT IN (?)', @band.memberships.map(&:user_id).delete_if{ |id| id.nil? || id<=0 }) %>
+          <% available_users = current_user.contacts.dup %> <!--.where('contact_id NOT IN (?)', @band.memberships.map(&:user_id).delete_if{ |id| id.nil? || id<=0 }) %-->
           <% open_position = User.new(firstname: "- Open", surname: "Position -") %>
           <% open_position.id = 0 %>
           <% available_users.unshift(open_position) %>
           <% prompt_text = "Select Contact..." %>
-          <%= f.select :user_id, options_from_collection_for_select(available_users, 'id', 'name'), {:prompt => prompt_text}, {:onchange => 
-            "if (this.options[this.selectedIndex].innerHTML == '#{open_position.name}') 
-              {
+          <%= f.select :user_id, options_from_collection_for_select(available_users, 'id', 'name'), { :prompt => prompt_text }, { :onchange => 
+            "\r
+            var members = #{@band.members.map(&:id).map(&:to_s).to_s}; \r
+            if (this.options[this.selectedIndex].innerHTML == '#{open_position.name}') \r
+              {\r
+                document.getElementById('#{'role_' + f.object.object_id.to_s}').className = 'role_for_open_user';
+                document.getElementById('#{'role_' + f.object.object_id.to_s}').options.length=0; \r
+                document.getElementById('#{'role_' + f.object.object_id.to_s}').options[0]=new Option('Open', 'open', true, false)  \r
+              }\r
+            else if (this.options[this.selectedIndex].innerHTML == '#{prompt_text}') \r
+              {\r
+                document.getElementById('#{'role_' + f.object.object_id.to_s}').className = 'role_for_no_user';
+                document.getElementById('#{'role_' + f.object.object_id.to_s}').options.length=0; \r
+              }\r
+            else if (jQuery.inArray(this.value, members) == -1) \r
+              {\r
+                document.getElementById('#{'role_' + f.object.object_id.to_s}').className = 'role_for_user_' + this.value;
+                document.getElementById('#{'role_' + f.object.object_id.to_s}').options.length=0; \r
+                document.getElementById('#{'role_' + f.object.object_id.to_s}').options[0]=new Option('Invited', 'invited', true, false) \r
+              }\r
+            else \r
+              {\r
+                document.getElementById('#{'role_' + f.object.object_id.to_s}').className = 'role_for_user_' + this.value;
+                var member_role_select = document.getElementsByClassName('role_for_user_' + this.value)[0]; \r
                 document.getElementById('#{'role_' + f.object.object_id.to_s}').options.length=0;
-                document.getElementById('#{'role_' + f.object.object_id.to_s}').options[0]=new Option('Open', 'open', true, false)
-              }
-            else if (this.options[this.selectedIndex].innerHTML == '#{prompt_text}')
-              {
-                document.getElementById('#{'role_' + f.object.object_id.to_s}').options.length=0;
-              }
-            else 
-              {
-                document.getElementById('#{'role_' + f.object.object_id.to_s}').options.length=0;
-                document.getElementById('#{'role_' + f.object.object_id.to_s}').options[0]=new Option('Invited', 'invited', true, false)
-              }"
+                for(var i=0;i<member_role_select.options.length;i++) \r
+                {\r
+                  document.getElementById('#{'role_' + f.object.object_id.to_s}').options[i] = new Option();
+                  document.getElementById('#{'role_' + f.object.object_id.to_s}').options[i].text = member_role_select.options[i].text; \r
+                  document.getElementById('#{'role_' + f.object.object_id.to_s}').options[i].value = member_role_select.options[i].value; \r
+                  document.getElementById('#{'role_' + f.object.object_id.to_s}').selectedIndex = member_role_select.selectedIndex; \r
+                }\r
+              }\r"
             } %>
         <% end %>
     </td>
@@ -45,7 +62,16 @@
       <% roles.push('member') if ((f.object.role == 'member') || can?(:convert_to_member, f.object) || (f.object.user_id == current_user.id && f.object.role == "owner")) %>
       <% roles.push('manager') if ((f.object.role == 'manager') || can?(:convert_to_manager, f.object) || (f.object.user_id == current_user.id && f.object.role == "owner")) %>
       <% roles.push('owner') if ((f.object.role == 'owner') || can?(:convert_to_owner, f.object)) %>
-      <%= f.collection_select :role, roles, :to_s, :humanize, {}, {id: 'role_'+f.object.object_id.to_s} %>
+      <% html_options =  { id: 'role_'+f.object.object_id.to_s } %>
+      <% html_options[:class] = 'role_for_user_'+f.object.user_id.to_s if f.object.user_id %>
+      <% html_options[:onchange] = "
+        var equal_role_selects = document.getElementsByClassName(this.className); \r 
+        for(var i=0;i<equal_role_selects.length;i++) \r
+        {\r
+          equal_role_selects[i].selectedIndex = this.selectedIndex; \r
+        }\r
+        " %>
+      <%= f.collection_select :role, roles, :to_s, :humanize, {}, html_options %>
     </td>
     <td>
       <% if !f.object.user_id || can?(:destroy, f.object) %>

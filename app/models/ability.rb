@@ -30,6 +30,8 @@ class Ability
     can :destroy, Membership, :band_id => membership.band_id, :id => membership.id
     can :change_instrument, Membership, :band_id => membership.band_id
     can :create, Membership, :band_id => membership.band_id # invite a user or create an open position
+    can :convert_to_invited, Membership, :band_id => membership.band_id, :role => "open"
+    can :convert_to_member, Membership, :band_id => membership.band_id, :role => "open"
     #cannot :create, Membership, :band_id => membership.band_id, :user_id => Membership.where(:band_id => membership.band_id).map(&:user_id).delete_if{ |id| id.nil? || id<=0 }
   end
 
