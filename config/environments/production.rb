@@ -74,10 +74,7 @@
     }
   }
 
+  ENV['RECAPTCHA_PUBLIC_KEY'] = '6LefYtkSAAAAAMtS4l_OQ2i8YXFVF8RgfGgp8sWt'
+  ENV['RECAPTCHA_PRIVATE_KEY'] = '6LefYtkSAAAAAOPASm1Y4Jp7xACK-ghlONAJ42gW'
 
-  Recaptcha.configure do |config|
-    config.public_key  = '6LefYtkSAAAAAMtS4l_OQ2i8YXFVF8RgfGgp8sWt'
-    config.private_key = '6LefYtkSAAAAAOPASm1Y4Jp7xACK-ghlONAJ42gW'
-    config.proxy = 'https://letsband.herokuapp.com'
-  end
 end
