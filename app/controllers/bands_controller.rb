@@ -6,11 +6,12 @@ class BandsController < ApplicationController
   end
 
   def create
-     if verify_recaptcha(timeout: 10) and @band.save
+     if verify_recaptcha(:model => @band, :attribute => :human_test, :message => "The human test (captcha) didn't pass. Please try again!") and @band.save
       current_user.memberships.create!(band_id: @band.id, role: "owner", instrument_id: Instrument.find_by_name('Unknown').id)
       flash[:success] = (@band.name + " is born!")
       redirect_to @band
     else
+      flash.delete(:recaptcha_error)
       render 'new'
     end
   end
