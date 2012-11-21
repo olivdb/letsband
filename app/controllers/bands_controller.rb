@@ -6,7 +6,7 @@ class BandsController < ApplicationController
   end
 
   def create
-     if @band.save
+     if verify_recaptcha(timeout: 10) and @band.save
       current_user.memberships.create!(band_id: @band.id, role: "owner", instrument_id: Instrument.find_by_name('Unknown').id)
       flash[:success] = (@band.name + " is born!")
       redirect_to @band

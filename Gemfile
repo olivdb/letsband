@@ -9,6 +9,7 @@ gem 'bootstrap-will_paginate', '0.0.6'
 gem 'simple-private-messages', '0.0.0', :git => 'git://github.com/jongilbraith/simple-private-messages.git'
 gem 'cancan'
 gem "paperclip", "~> 3.0"
+gem "recaptcha", :require => "recaptcha/rails", :git => 'git://github.com/ambethia/recaptcha.git'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

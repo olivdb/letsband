@@ -17,6 +17,8 @@
     <%= f.label :band_picture %>
     <%= f.file_field :image %>
 
+    <%= recaptcha_tags(ssl: true) %>
+
     <br />
     <%= f.submit "Create band !", class: "btn btn-large btn-primary" %>
 

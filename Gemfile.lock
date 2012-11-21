@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/ambethia/recaptcha.git
+  revision: 39e6d30b31172c7649e733b38b3d9439bc89b040
+  specs:
+    recaptcha (0.3.4)
+
+GIT
   remote: git://github.com/jongilbraith/simple-private-messages.git
   revision: adf783407d924d3d94f33ec50912c65f8cdf5770
   specs:
@@ -198,6 +204,7 @@ DEPENDENCIES
   paperclip (~> 3.0)
   pg (= 0.12.2)
   rails (= 3.2.8)
+  recaptcha!
   rspec-rails (= 2.11.0)
   sass-rails (= 3.2.5)
   simple-private-messages (= 0.0.0)!

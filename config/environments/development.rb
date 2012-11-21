@@ -36,4 +36,13 @@ Letsband::Application.configure do
   config.assets.debug = true
 
   Paperclip.options[:command_path] = "/usr/local/bin/"
+
+  Recaptcha.configure do |config|
+    config.public_key  = '6Lf5YtkSAAAAAJAekLIt45AoMkQ9uKZpWv0qazHW'
+    config.private_key = '6Lf5YtkSAAAAAN2b5lA1rm72Ko_dIquvCkQj7ksO'
+    config.proxy = 'http://localhost'
+  end
+
+  #ENV['RECAPTCHA_PUBLIC_KEY'] = 'MY_PUBLIC_KEY'
+  #ENV['RECAPTCHA_PRIVATE_KEY'] = 'MY_PRIVATE_KEY'
 end

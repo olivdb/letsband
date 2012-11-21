@@ -1,4 +1,4 @@
-Letsband::Application.configure do
+  Letsband::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -73,4 +73,11 @@ Letsband::Application.configure do
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     }
   }
+
+
+  Recaptcha.configure do |config|
+    config.public_key  = '6LefYtkSAAAAAMtS4l_OQ2i8YXFVF8RgfGgp8sWt'
+    config.private_key = '6LefYtkSAAAAAOPASm1Y4Jp7xACK-ghlONAJ42gW'
+    config.proxy = 'https://letsband.herokuapp.com'
+  end
 end
