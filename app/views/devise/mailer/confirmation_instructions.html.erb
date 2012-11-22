@@ -1,0 +1,17 @@
+<% if @resource.unconfirmed_email %>
+
+<p>Hi <%= @resource.firstname %>! </p>
+
+<p>You can confirm your new account email through the link below:</p>
+
+<p><%= link_to 'Confirm my new account email', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+
+<% else %>
+
+<p>Hi <%= @resource.firstname %>! Welcome to Let's Band!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+
+<% end %>

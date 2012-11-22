@@ -11,12 +11,18 @@
 #
 
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :confirmable #:database_authenticatable, :registerable,
+         #:recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :email, :firstname, :surname, :password, :password_confirmation, :city_id, :skills_attributes
   attr_accessor :updating_password
   has_secure_password
   has_private_messages
-  
-
 
   belongs_to :city
   has_many :contact_records, :foreign_key => :owner_id, dependent: :destroy
@@ -38,6 +44,15 @@ class User < ActiveRecord::Base
 
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
+
+
+  def reset_confirmation
+    self.confirmed_at = nil
+    self.confirmation_sent_at = nil
+    self.confirmation_token = nil
+    self.unconfirmed_email = nil
+    save
+  end
 
   def should_validate_password?
     updating_password || new_record?

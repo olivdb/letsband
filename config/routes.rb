@@ -1,5 +1,7 @@
 Letsband::Application.routes.draw do
 
+  devise_for :users, :controllers => {:confirmations => "confirmations"}
+
   resources :contact_records, only: [:create, :destroy] 
   resources :users do
     member do

@@ -1,0 +1,14 @@
+<% provide(:title, 'Resend confirmation instructions') %>
+<h1>Resend confirmation instructions</h1>
+
+<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+  <%= devise_error_messages! %>
+
+
+  <%= f.label :email %>
+  <%= f.text_field :email %> <br/>
+  <%= f.submit "Resend confirmation instructions", class: "btn btn-primary btn-medium" %>
+
+<% end %>
+
+<!--%= render "devise/shared/links" %-->

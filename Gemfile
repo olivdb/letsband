@@ -10,6 +10,7 @@ gem 'simple-private-messages', '0.0.0', :git => 'git://github.com/jongilbraith/s
 gem 'cancan'
 gem "paperclip", "~> 3.0"
 gem "recaptcha", :require => "recaptcha/rails", :git => 'git://github.com/ambethia/recaptcha.git'
+gem "devise"
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

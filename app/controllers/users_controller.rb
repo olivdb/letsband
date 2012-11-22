@@ -13,9 +13,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      sign_in @user
-      flash[:success] = ("Hi " + @user.firstname + "! Welcome to Let's Band!")
-      redirect_to @user
+      @user.send_confirmation_instructions
+      #sign_in @user
+      flash[:success] = ("Hi " + @user.firstname + "! Welcome to Let's Band! A confirmation email has been sent to you that will allow you to active your account.")
+      redirect_to root_path
     else
       render 'new'
     end
@@ -83,7 +84,9 @@ class UsersController < ApplicationController
     end
 
     if @user.update_attributes(params[:user])
-      flash.now[:success] = "Profile updated"
+      extra = (params[:user][:email] != @user.email) ? "You will receive an email to confirm your new account email in a few minutes." : ""
+      flash.now[:success] = "Profile updated. " + extra
+      
       sign_in @user
       render 'show'
     else
