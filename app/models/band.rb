@@ -67,7 +67,8 @@ class Band < ActiveRecord::Base
         selected_genre = { bands: { genre_id: params[:genre_id] } }
       end
 
-      Band.includes(:city)
+      Band.select("bands.*, (#{lat}-cities.latitude)*(#{lat}-cities.latitude) + (#{lon}-cities.longitude)*(#{lon}-cities.longitude) AS distance")
+          .includes(:city)
           .joins('INNER JOIN cities ON bands.city_id = cities.id')
           .joins('INNER JOIN memberships ON bands.id = memberships.band_id')
           .joins('INNER JOIN memberships AS user_m ON bands.id = user_m.band_id')
@@ -76,7 +77,7 @@ class Band < ActiveRecord::Base
           .where(selected_position)
           .where(selected_activity_period, { oldest_date_acceptable: params[:selected_activity_period].to_i.months.ago })
           .where(selected_genre)
-          .order("(#{lat}-cities.latitude)*(#{lat}-cities.latitude) + (#{lon}-cities.longitude)*(#{lon}-cities.longitude) ASC")
+          .order("distance ASC")
           .uniq
           .map{ |b| b }
           .paginate(page: params[:page], per_page: 10)
