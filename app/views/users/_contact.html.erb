@@ -9,7 +9,7 @@
 						<td><%= link_to(image_tag('mail.png', width: 20), new_message_path(recipient_id: contact.id)) %></td>
 					</tr>
 					<tr>
-						<td colspan=1 class="subject"><em><%= City.find(contact.city_id).fullname %></em></td>
+						<td colspan=1 class="subject"><em><%= contact.city_id.present? ? City.find(contact.city_id).fullname : 'Unknown' %></em></td>
 						<td><%= link_to image_tag("delete.png", size:'16x16'), current_user.contact_records.find_by_contact_id(contact.id), method: :delete, remote: true, 
                           data: { confirm: "Are you sure you want to delete this contact?" }, class: 'delete_contact_link' %></td>
 					</tr>
