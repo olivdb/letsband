@@ -59,7 +59,8 @@ class Band < ActiveRecord::Base
       selected_activity_period = ''
       if params[:only_active]
         #selected_activity_period = { bands: { updated_at: params[:selected_activity_period].to_i.months.ago..Time.now } }
-        selected_activity_period = "bands.updated_at > :oldest_date_acceptable or users.last_seen_at > :oldest_date_acceptable"
+        #selected_activity_period = "bands.updated_at > :oldest_date_acceptable or users.last_seen_at > :oldest_date_acceptable"
+        selected_activity_period = "users.last_seen_at > :oldest_date_acceptable"
       end
 
       selected_genre = {}
