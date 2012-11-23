@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <div class="message_full">
+    <p>
+      <table><tr><td>
+        <%= gravatar_for @message.sender, size: 32 %></td>
+        <td>
+          Date: <%= @message.created_at %><br/>
+          From: <%= link_to @message.sender.name, user_url(@message.sender) %><br/>
+        </td></tr></table>
+    </p>
+    <p>
+      <em><%= @message.subject.blank? ? '(No subject)' : @message.subject %></em>
+    </p>
+
+    <p>
+      <% @message.body.split("\n").each do |p|  %>
+      <%= p %>
+      <br/>
+      <% end %>
+      <br/>
+      <%= link_to 'Reply', new_message_url(recipient_id: @message.sender.id, subject: ((@message.subject[0..2]=='Re:') ? '' : 'Re: ') + @message.subject, origin_message_id: @message.id) %>
+    </p>
+    </div>
+
+  </body>
+</html>

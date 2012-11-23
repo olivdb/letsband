@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <div class="invitation_full">
+    <p>
+      <table><tr><td>
+        <%= gravatar_for @message.sender, size: 32 %></td>
+        <td>
+          Date: <%= @message.created_at %><br/>
+          From: <%= link_to @message.sender.name, user_url(@message.sender) %><br/>
+        </td></tr></table>
+    </p>
+    <p>
+      <em><%= @message.subject.blank? ? '(No subject)' : @message.subject %></em>
+    </p>
+
+    <p>
+
+      <%= link_to "View Invitation", message_url(@message) %>
+
+    </p>
+    </div>
+
+  </body>
+</html>

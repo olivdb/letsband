@@ -24,6 +24,7 @@ before_filter :signed_in_user
 
     if @message.save
       flash[:success] = "Message sent."
+      MessageMailer.message_email(@message).deliver
       redirect_to received_messages_url
     else
       render :action => 'new', :locals => {:recipient_id => params[:message][:recipient_id]}

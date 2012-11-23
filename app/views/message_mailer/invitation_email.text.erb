@@ -1,0 +1,4 @@
+<%= @message.subject.blank? ? '(No subject)' : @message.subject.html_safe %>
+===================================================================
+
+To view the invitation, go to <%= message_url(@message) %>
