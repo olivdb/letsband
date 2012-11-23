@@ -143,7 +143,6 @@ class BandsController < ApplicationController
               invitation.subject = invitation.sender.name + " has invited you to join '" + @band.name + "' !"
               invitation.inviting_band_id = @band.id
               invitation.save
-              MessageMailer.invitation_email(invitation).deliver
             end
           end
         end

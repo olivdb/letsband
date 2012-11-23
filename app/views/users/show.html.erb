@@ -1,11 +1,13 @@
 <% provide(:title, @user.name) %>
+<center><table><tr>
+  <td><h1><%= @user.name %></h1></td>
+  <td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %></td>
+</tr></table></center>
 <div class="row">
-  <aside class="span4">
-    <section>
+  <aside class="span2">
       <table>
         <tr>
-          <td rowspan=2><%= gravatar_for @user %></td>
-          <td><h1><%= @user.name %></h1></td>
+          <td><%= gravatar_for @user, size: 100 %></td>
         </tr>
         <tr>
           <td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %></td>
@@ -17,9 +19,8 @@
           <li><%= (button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", class: "btn btn-primary btn-small") unless current_user?(@user) %></li>
         </ul>
       </div>
-    </section>
   </aside>
-  <div class="span8">
+  <div class="span10">
     <p class="profile_element">
       <table><tr><td><h3>Location</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'location')) %>) <% ) if current_user?(@user) %></td></tr></table>
        <%= @user.city.present? ? @user.city.fullname : 'Unknown' %>

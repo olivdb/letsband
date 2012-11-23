@@ -4,15 +4,15 @@
           <%= link_to "Let's Band!", root_path, id: "logo" %>
           <nav>
             <ul class="nav pull-right">
-              <li><%= link_to "Home", root_path %></li>
+              <li><%= link_to "HOME", root_path %></li>
               <% if signed_in? %>
-                <li><%= link_to "Bands", bands_path %></li>
-                <li><%= link_to "Musicians", users_path %></li>
+                <li><%= link_to "BANDS", bands_path %></li>
+                <li><%= link_to "MUSICIANS", users_path %></li>
                 <li><%= link_to image_tag((current_user.unread_messages? ? "new_" : "") + "mail.png", width: 30, alt: "Mailbox", mouseover: image_path((current_user.unread_messages? ? "new_" : "") + 
                 "mail_over.png")), received_messages_path %></li>
                 <li id="fat-menu" class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    Account <b class="caret"></b>
+                    ACCOUNT <b class="caret"></b>
                   </a>
                   <ul class="dropdown-menu">
                     <li><%= link_to "My Profile", current_user %></li>
