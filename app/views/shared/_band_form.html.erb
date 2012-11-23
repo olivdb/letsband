@@ -19,10 +19,16 @@
       document.getElementById('band_city_id').value = '#{params[:band_city_id]}';}" do %>
   <p>
     I'm looking for a <b>music band</b> playing
-
-    <%= select_tag 'genre_id', options_from_collection_for_select(Genre.all, 'id', 'name', params[:genre_id]), { class: 'input-medium search-query' } %>  
-
-    in
+    <%
+      available_genres = Genre.all
+      any_genre = Genre.new(name: "Any Genre")
+      any_genre.id = 0
+      available_genres.unshift(any_genre)
+    %>
+    <%= select_tag 'genre_id', options_from_collection_for_select(available_genres, 'id', 'name', params[:genre_id]), { class: 'input-medium search-query' } %>  
+  </p>
+  <p>
+    near
 
     <%= text_field_tag 'band_city_name', params[:band_city_name], class: 'search-query ui-autocomplete-input input-large', placeholder: 'City name', data: {autocomplete_source: cities_path}, id: 'band_city_name',
       onclick: 'this.select();',
@@ -36,6 +42,33 @@
 
     <%= submit_tag 'Find !', :name => nil, class: 'btn btn-primary' %>
   </p>
+  <div class="extra_options">
+  <p>
+    <table>
+      <tr>
+        <td>Only show bands that:</td>
+        <td>
+          <% 
+              available_instruments = Instrument.all.delete_if{|i| i.name == "Unknown"}
+              any_instrument = Instrument.new(name: 'Any Instrument')
+              any_instrument.id = 0 
+              available_instruments.unshift(any_instrument)
+          %>
+          <%= check_box_tag 'only_open_position', '1', params[:only_open_position] %> have an open position for a <%= select_tag 'selected_position', options_from_collection_for_select(available_instruments, 'id', 'name', params[:selected_position]), { class: 'input-medium search-query' } %> player
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <%
+              available_periods = [['Month', 1], ['2 Months', 2], ['3 Months', 3], ['6 Months', 6], ['Year', 12]]
+          %>
+          <%= check_box_tag 'only_active', '1', params[:only_active] %> have been active in the last <%= select_tag 'selected_activity_period', options_for_select(available_periods, params[:selected_activity_period]), { class: 'input-medium search-query' } %>
+        </td>
+      </tr>
+    </table>
+  </p>
+  </div>
 <% end %>
 </div>
 

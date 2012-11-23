@@ -47,11 +47,39 @@ class Band < ActiveRecord::Base
       lat1 = lat - dlat
       lat2 = lat + dlat
 
+      selected_position = {}
+      if params[:only_open_position]
+        if params[:selected_position].to_i >= 1
+          selected_position = { memberships: { role: "open", instrument_id: params[:selected_position] } }
+        else
+          selected_position = { memberships: { role: "open" } }
+        end
+      end
+
+      selected_activity_period = ''
+      if params[:only_active]
+        #selected_activity_period = { bands: { updated_at: params[:selected_activity_period].to_i.months.ago..Time.now } }
+        selected_activity_period = "bands.updated_at > :oldest_date_acceptable or users.last_seen_at > :oldest_date_acceptable"
+      end
+
+      selected_genre = {}
+      if params[:genre_id].to_i >=1
+        selected_genre = { bands: { genre_id: params[:genre_id] } }
+      end
+
       Band.includes(:city)
           .joins('INNER JOIN cities ON bands.city_id = cities.id')
-          .where(cities: { country_id: city.country_id, latitude: lat1..lat2, longitude: lon1..lon2 }, genre_id: params[:genre_id])
+          .joins('INNER JOIN memberships ON bands.id = memberships.band_id')
+          .joins('INNER JOIN memberships AS user_m ON bands.id = user_m.band_id')
+          .joins('INNER JOIN users on users.id = user_m.user_id')
+          .where(cities: { country_id: city.country_id, latitude: lat1..lat2, longitude: lon1..lon2 })
+          .where(selected_position)
+          .where(selected_activity_period, { oldest_date_acceptable: params[:selected_activity_period].to_i.months.ago })
+          .where(selected_genre)
           .order("(#{lat}-cities.latitude)*(#{lat}-cities.latitude) + (#{lon}-cities.longitude)*(#{lon}-cities.longitude) ASC")
-          .paginate(page: params[:page], per_page: 50)
+          .uniq
+          .map{ |b| b }
+          .paginate(page: params[:page], per_page: 10)
 
     else
       Band.where('NULL').paginate(page: params[:page])

@@ -1,4 +1,5 @@
 class BandsController < ApplicationController
+
   before_filter :signed_in_user, except: [:index, :show]
   load_and_authorize_resource except: :index
   
