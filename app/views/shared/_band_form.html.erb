@@ -38,43 +38,27 @@
     %> 
     <%= hidden_field_tag 'band_city_id', params[:band_city_id] %> 
     <%= hidden_field_tag 'band_city_has_been_selected', 0 %>
-
-
-    <%= submit_tag 'Find !', :name => nil, class: 'btn btn-primary' %>
   </p>
   <div class="extra_options">
   <p>
-    <table>
-      <tr>
-        <td>Only show bands that:</td>
-        <td>
           <% 
               available_instruments = Instrument.all.delete_if{|i| i.name == "Unknown"}
               any_instrument = Instrument.new(name: 'Any Instrument')
               any_instrument.id = 0 
               available_instruments.unshift(any_instrument)
           %>
-          <%= check_box_tag 'only_open_position', '1', params[:only_open_position] %> have an open position for a <%= select_tag 'selected_position', options_from_collection_for_select(available_instruments, 'id', 'name', params[:selected_position]), { class: 'input-medium search-query' } %> player
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>
+          <%= check_box_tag 'only_open_position', '1', params[:only_open_position] %> with an open position for a <%= select_tag 'selected_position', options_from_collection_for_select(available_instruments, 'id', 'name', params[:selected_position]), { class: 'input-medium search-query' } %> player
+  </p>
+  <p>
           <%
               available_periods = [['Month', 1], ['2 Months', 2], ['3 Months', 3], ['6 Months', 6], ['Year', 12]]
           %>
-          <%= check_box_tag 'only_active', '1', params[:only_active] %> have been active in the last <%= select_tag 'selected_activity_period', options_for_select(available_periods, params[:selected_activity_period]), { class: 'input-medium search-query' } %>
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>
-
-          <%= check_box_tag 'only_band_name', '1', params[:only_band_name] %> have names that contain <%= text_field_tag 'band_name', params[:band_name], class: 'search-query input-large', placeholder: 'Band name' %>
-        </td>
-      </tr>
-    </table>
+          <%= check_box_tag 'only_active', '1', params[:only_active] %> active in the last <%= select_tag 'selected_activity_period', options_for_select(available_periods, params[:selected_activity_period]), { class: 'input-medium search-query' } %>
   </p>
+  <p>
+          <%= check_box_tag 'only_band_name', '1', params[:only_band_name] %> whose name contains <%= text_field_tag 'band_name', params[:band_name], class: 'search-query input-large', placeholder: 'Band name' %>
+  </p>
+  <%= submit_tag 'Find !', :name => nil, class: 'btn btn-primary btn-large' %>
   </div>
 <% end %>
 </div>

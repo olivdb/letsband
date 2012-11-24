@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123202118) do
+ActiveRecord::Schema.define(:version => 20121124113230) do
 
   create_table "bands", :force => true do |t|
     t.string   "name"
@@ -61,6 +61,18 @@ ActiveRecord::Schema.define(:version => 20121123202118) do
 
   add_index "countries", ["code"], :name => "index_countries_on_code", :unique => true
   add_index "countries", ["name"], :name => "index_countries_on_name", :unique => true
+
+  create_table "favorite_genres", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "genre_id"
+    t.boolean  "looking_for_band"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "favorite_genres", ["genre_id"], :name => "index_favorite_genres_on_genre_id"
+  add_index "favorite_genres", ["user_id", "genre_id"], :name => "index_favorite_genres_on_user_id_and_genre_id", :unique => true
+  add_index "favorite_genres", ["user_id"], :name => "index_favorite_genres_on_user_id"
 
   create_table "genres", :force => true do |t|
     t.string   "name"

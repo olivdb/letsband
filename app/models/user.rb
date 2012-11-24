@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :email, :firstname, :surname, :password, :password_confirmation, :city_id, :skills_attributes
+  attr_accessible :email, :firstname, :surname, :password, :password_confirmation, :city_id, :skills_attributes, :favorite_genres_attributes
   attr_accessor :updating_password
   has_secure_password
   has_private_messages
@@ -30,9 +30,12 @@ class User < ActiveRecord::Base
   has_many :memberships, dependent: :destroy
   has_many :bands, through: :memberships
   has_many :skills, dependent: :destroy, order: 'priority ASC'
+  has_many :favorite_genres, dependent: :destroy
   has_many :instruments, through: :skills  
+  has_many :genres, through: :favorite_genres
 
   accepts_nested_attributes_for :skills, allow_destroy: true
+  accepts_nested_attributes_for :favorite_genres, allow_destroy: true
 
   validates :firstname, presence: true, length: { maximum: 20 }
   validates :surname, presence: true, length: { maximum: 30 }
@@ -97,14 +100,25 @@ class User < ActiveRecord::Base
         selected_activity_period = { users: { last_seen_at: params[:selected_user_activity_period].to_i.months.ago..Time.now } }
       end
 
+      selected_genre = {}
+      if params[:only_looking_for_band]
+        if params[:selected_genre].to_i >= 1
+          selected_genre = { favorite_genres: { genre_id: [params[:selected_genre], Genre.find_by_name("Unknown").try(:id)].delete_if{|g|g.nil?}, looking_for_band: true } }
+        else
+          selected_genre = { favorite_genres: { looking_for_band: true } }
+        end
+      end
+
       User.select(select)
           .includes(:city)
           .joins('LEFT JOIN skills ON skills.user_id = users.id')
+          .joins('LEFT JOIN favorite_genres ON favorite_genres.user_id = users.id')
           .joins('INNER JOIN cities ON users.city_id = cities.id')
           .where(selected_city)
           .where(selected_instrument)
           .where(user_name)
           .where(selected_activity_period)
+          .where(selected_genre)
           .order(order)
           .uniq
           .map{ |u| u }

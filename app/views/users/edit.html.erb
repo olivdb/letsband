@@ -17,6 +17,9 @@
     <li class=<%= (params[:section] == 'bands') ? "active" : "" %>>
       <%= link_to 'My Bands', edit_user_path(@user, section: 'bands') %>
     </li>
+    <li class=<%= (params[:section] == 'genres') ? "active" : "" %>>
+      <%= link_to 'My Genres', edit_user_path(@user, section: 'genres') %>
+    </li>
   </ul>
    
   <% case params[:section] %>
@@ -30,6 +33,8 @@
   <%= render 'users/edit/myskills' %>
   <% when 'bands' %>
   <%= render 'users/edit/mybands' %>
+  <% when 'genres' %>
+  <%= render 'users/edit/mygenres' %>
   <% end %>
 
 

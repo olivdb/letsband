@@ -48,5 +48,21 @@
         <% end %>
       </div>
     </p>
+    <p class="profile_element">
+      <table><tr><td><h3>Played Genres</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'genres')) %>) <% ) if current_user?(@user) %></td></tr></table>
+      <div class="condensed">
+        <% if @user.favorite_genres.empty? %>
+          None
+        <% else %>
+          <ul>
+          <% @user.favorite_genres.each do |genre| %>
+            <li>
+            <%= Genre.find(genre.genre_id).name %>
+            </li>
+          <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </p>
   </div>
 </div>

@@ -82,6 +82,21 @@ class UsersController < ApplicationController
         render 'edit'
       end
       return
+    elsif(params[:section]=='genres')
+      @user.favorite_genres.destroy_all
+      params[:user][:favorite_genres_attributes].each do |genre|
+        genre[1]=genre[1].delete_if {|key, value| key  == "id" }
+        hash = { :favorite_genres_attributes => { '0' => genre[1] } }
+        @user.update_attributes(hash)
+      end
+      sign_in @user
+      if !@user.errors.any?
+        flash.now[:success] = "Profile updated"
+        render 'show'
+      else
+        render 'edit'
+      end
+      return
     end
 
     if @user.update_attributes(params[:user])

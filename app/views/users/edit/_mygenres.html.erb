@@ -1,0 +1,24 @@
+
+  <%= form_for @user do |f| %>
+    <%= render 'shared/error_messages' %>
+
+    <p>
+    <div class='editgenres'>
+    <table>
+    	<tr>
+    		<th>Genre</th><th>Looking for band?</th><th>  </th>
+    	</tr>
+    </table>
+    <%= f.fields_for :favorite_genres do |builder| %>
+      <%= render 'favorite_genre_fields', f: builder %>
+    <% end %>
+    
+	
+	<%= link_to_add_fields "Add Played Genre", f, :favorite_genres %>
+	</div>
+	</p>
+    <p>
+      <%= hidden_field_tag "section", "genres" %>
+      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+    </p>
+  <% end %>

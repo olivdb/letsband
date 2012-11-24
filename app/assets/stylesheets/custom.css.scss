@@ -246,6 +246,34 @@ input, textarea, select, .uneditable-input {
   }
 }
 
+.editgenres {
+  table {
+    width: 100%; 
+    th {
+      width:85px;
+      text-align:center;
+      &:last-child {
+          width:16px;
+        }
+    }
+    td {
+      padding-top: 10px;
+      width:85px;
+
+      select {
+        width:120px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-left: 40px;
+      }
+      &:last-child {
+        width:32px;
+      }
+    }
+  }
+
+}
+
 
 /* image transparency */
 .halfopacity
