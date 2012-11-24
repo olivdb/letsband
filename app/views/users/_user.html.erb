@@ -17,7 +17,13 @@
         %>
       </p>
       <p>
-        <% skills = Skill.where(user_id:  user.id, instrument_id: params[:instrument_id]) %>
+        <% 
+          instruments = {}
+          if params[:instrument_id].to_i >= 1
+            instruments = { instrument_id: params[:instrument_id] }
+          end
+          skills = Skill.where(user_id:  user.id).where(instruments) 
+        %>
         <%= render partial: 'skills', object: skills %>
       </p>
     </div>

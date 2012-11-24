@@ -66,6 +66,13 @@
           <%= check_box_tag 'only_active', '1', params[:only_active] %> have been active in the last <%= select_tag 'selected_activity_period', options_for_select(available_periods, params[:selected_activity_period]), { class: 'input-medium search-query' } %>
         </td>
       </tr>
+      <tr>
+        <td></td>
+        <td>
+
+          <%= check_box_tag 'only_band_name', '1', params[:only_band_name] %> have names that contain <%= text_field_tag 'band_name', params[:band_name], class: 'search-query input-large', placeholder: 'Band name' %>
+        </td>
+      </tr>
     </table>
   </p>
   </div>

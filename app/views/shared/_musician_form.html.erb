@@ -19,9 +19,17 @@
   <p>
     I'm looking for a <b>musician</b> playing
     
-    <%= select_tag 'instrument_id', options_from_collection_for_select(Instrument.all, 'id', 'name', params[:instrument_id]), { class: 'input-medium search-query' } %>  
+    <% 
+        available_instruments = Instrument.all.delete_if{|i| i.name == "Unknown"}
+        any_instrument = Instrument.new(name: 'Any Instrument')
+        any_instrument.id = 0 
+        available_instruments.unshift(any_instrument)
+    %>
 
-    in
+    <%= select_tag 'instrument_id', options_from_collection_for_select(available_instruments, 'id', 'name', params[:instrument_id]), { class: 'input-medium search-query' } %>
+  </p>
+  <p>
+    near
 
     <%= text_field_tag 'user_city_name', params[:user_city_name], class: 'search-query ui-autocomplete-input input-large', placeholder: 'City name', data: {autocomplete_source: cities_path}, id: 'user_city_name',
       onclick: 'this.select();',
@@ -34,5 +42,29 @@
 
     <%= submit_tag 'Find !', :name => nil, class: 'btn btn-primary' %>
   </p>
+
+  <div class="extra_options">
+  <p>
+    <table>
+      <tr>
+        <td>Only show musicians that:</td>
+        <td>
+          <%
+              available_periods_users = [['Month', 1], ['2 Months', 2], ['3 Months', 3], ['6 Months', 6], ['Year', 12]]
+          %>
+          <%= check_box_tag 'only_active_users', '1', params[:only_active_users] %> have been active in the last <%= select_tag 'selected_user_activity_period', options_for_select(available_periods_users, params[:selected_user_activity_period]), { class: 'input-medium search-query' } %>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+
+          <%= check_box_tag 'only_user_name', '1', params[:only_user_name] %> have names that contain <%= text_field_tag 'user_name', params[:user_name], class: 'search-query input-large', placeholder: 'User name' %>
+        </td>
+      </tr>
+    </table>
+  </p>
+  </div>
+
 <% end %>
 </div>

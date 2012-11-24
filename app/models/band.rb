@@ -50,10 +50,15 @@ class Band < ActiveRecord::Base
       selected_position = {}
       if params[:only_open_position]
         if params[:selected_position].to_i >= 1
-          selected_position = { memberships: { role: "open", instrument_id: params[:selected_position] } }
+          selected_position = { memberships: { role: "open", instrument_id: [params[:selected_position], Instrument.find_by_name("Unknown").id] } }
         else
           selected_position = { memberships: { role: "open" } }
         end
+      end
+
+      band_name = {}
+      if params[:only_band_name]
+        band_name = "LOWER(bands.name) like ?", "%#{params[:band_name].downcase}%"
       end
 
       selected_activity_period = ''
@@ -77,6 +82,7 @@ class Band < ActiveRecord::Base
           .where(cities: { country_id: city.country_id, latitude: lat1..lat2, longitude: lon1..lon2 })
           .where(selected_position)
           .where(selected_activity_period, { oldest_date_acceptable: params[:selected_activity_period].to_i.months.ago })
+          .where(band_name)
           .where(selected_genre)
           .order("distance ASC")
           .uniq

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  require "will_paginate/array"
   before_filter :signed_in_user, only: [:edit, :update]
   before_filter :correct_user,   only: [:edit, :update, :contacts]
 

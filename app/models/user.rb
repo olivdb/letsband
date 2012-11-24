@@ -78,12 +78,37 @@ class User < ActiveRecord::Base
       lat1 = lat - dlat
       lat2 = lat + dlat
 
-      User.includes(:city)
-          .joins(:skills)
+      selected_city = { cities: { country_id: city.country_id, latitude: lat1..lat2, longitude: lon1..lon2 } }
+      select = "users.*, (#{lat}-cities.latitude)*(#{lat}-cities.latitude) + (#{lon}-cities.longitude)*(#{lon}-cities.longitude) AS distance"
+      order = "distance ASC"
+
+      selected_instrument = {}
+      if params[:instrument_id].to_i >=1
+        selected_instrument = { skills: { instrument_id: params[:instrument_id] } }
+      end
+
+      user_name = {}
+      if params[:only_user_name]
+        user_name = "LOWER(users.firstname || ' ' || users.surname) like ?", "%#{params[:user_name].downcase}%"
+      end
+
+      selected_activity_period = {}
+      if params[:only_active_users]
+        selected_activity_period = { users: { last_seen_at: params[:selected_user_activity_period].to_i.months.ago..Time.now } }
+      end
+
+      User.select(select)
+          .includes(:city)
+          .joins('LEFT JOIN skills ON skills.user_id = users.id')
           .joins('INNER JOIN cities ON users.city_id = cities.id')
-          .where(cities: { country_id: city.country_id, latitude: lat1..lat2, longitude: lon1..lon2 }, skills: { instrument_id: params[:instrument_id] })
-          .order("(#{lat}-cities.latitude)*(#{lat}-cities.latitude) + (#{lon}-cities.longitude)*(#{lon}-cities.longitude) ASC")
-          .paginate(page: params[:page], per_page: 50)
+          .where(selected_city)
+          .where(selected_instrument)
+          .where(user_name)
+          .where(selected_activity_period)
+          .order(order)
+          .uniq
+          .map{ |u| u }
+          .paginate(page: params[:page], per_page: 10)
 
     else
       User.where('NULL').paginate(page: params[:page])
