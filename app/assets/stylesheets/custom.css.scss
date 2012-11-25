@@ -16,7 +16,10 @@ html {
 
 body {
   padding-top: 60px;
+  background-image: url('images/bck.png');
+  background-repeat: repeat-x;
 }
+
 
 section {
   overflow: auto;
@@ -452,5 +455,40 @@ input, textarea, select, .uneditable-input {
         }
       }
     }
+  }
+}
+
+
+.small_form {
+  margin-top: 20px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 5px;
+  padding-top: 20px;
+
+  p {
+    font-size: 35px;
+  }
+  table {
+    margin-left: 10%;
+    margin-right: 10%;
+    width:80%;
+    tr {
+      td {
+        border: solid blue 0px;
+        p {
+          text-align: left;
+          font-size:18px;
+        }
+        input, select {
+          width:100%;
+        }
+      }
+    }
+  }
+  .btn {
+    font-size: 30px;
+    font-weight: bold;
   }
 }

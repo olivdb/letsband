@@ -22,6 +22,7 @@
 		<% else %>
 		<% available_recipients = current_user.contacts %>
 		<% current_user.memberships.each { |m| available_recipients |= m.band.members } %>
+		<% available_recipients.sort!{ |a,b| a.name.downcase <=> b.name.downcase } %>
 		<%= f.select :recipient_id, options_from_collection_for_select(available_recipients, 'id', 'name'), :prompt => "Select Contact..." %>
 		<% end %>
 
