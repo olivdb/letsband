@@ -1,68 +1,70 @@
 <% provide(:title, @user.name) %>
-<center><table><tr>
-  <td><h1><%= @user.name %></h1></td>
-  <td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %></td>
-</tr></table></center>
-<div class="row">
-  <aside class="span2">
-      <table>
-        <tr>
-          <td><%= gravatar_for @user, size: 100 %></td>
-        </tr>
-        <tr>
-          <td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %></td>
-        </tr>
-      </table>
-      <div class="profile_buttons">
-        <ul>
-          <li><%= render 'contact_form' %></li>
-          <li><%= (button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", class: "btn btn-primary btn-small") unless current_user?(@user) %></li>
-        </ul>
-      </div>
-  </aside>
-  <div class="span10">
-    <p class="profile_element">
-      <table><tr><td><h3>Location</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'location')) %>) <% ) if current_user?(@user) %></td></tr></table>
-       <%= @user.city.present? ? @user.city.fullname : 'Unknown' %>
-    </p>
-    <p class="profile_element">
-      <table><tr><td><h3>Skills</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'skills')) %>) <% ) if current_user?(@user) %></td></tr></table>
-      <%= !@user.skills.empty? ? render(partial: 'skills', object: @user.skills) : 'Unknown' %>
-    </p>
-    <p class="profile_element">
-      <table><tr><td><h3>Memberships</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'bands')) %>) <% ) if current_user?(@user) %></td></tr></table>
-      <div class="condensed">
-        <% if @user.memberships.empty? %>
-          None
-        <% else %>
+<div class="profile">
+  <center><table><tr>
+    <td><h1><%= @user.name %></h1></td>
+    <td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %></td>
+  </tr></table></center>
+  <div class="row">
+    <aside class="span2">
+        <table>
+          <tr>
+            <td><%= gravatar_for @user, size: 100 %></td>
+          </tr>
+          <tr>
+            <td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %></td>
+          </tr>
+        </table>
+        <div class="profile_buttons">
           <ul>
-          <% @user.memberships.each do |membership| %>
-            <li>
-            Playing 
-            <%= image_tag(membership.instrument.image_path, size: "32x32", alt: membership.instrument.name) %>
-            in
-            <%= link_to membership.band.name, membership.band %>
-            </li>
-          <% end %>
+            <li><%= render 'contact_form' %></li>
+            <li><%= (button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", class: "btn btn-primary btn-small") unless current_user?(@user) %></li>
           </ul>
-        <% end %>
-      </div>
-    </p>
-    <p class="profile_element">
-      <table><tr><td><h3>Played Genres</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'genres')) %>) <% ) if current_user?(@user) %></td></tr></table>
-      <div class="condensed">
-        <% if @user.favorite_genres.empty? %>
-          None
-        <% else %>
-          <ul>
-          <% @user.favorite_genres.each do |genre| %>
-            <li>
-            <%= Genre.find(genre.genre_id).name %>
-            </li>
+        </div>
+    </aside>
+    <div class="span10">
+      <p class="profile_element">
+        <table><tr><td><h3>Location</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'location')) %>) <% ) if current_user?(@user) %></td></tr></table>
+         <%= @user.city.present? ? @user.city.fullname : 'Unknown' %>
+      </p>
+      <p class="profile_element">
+        <table><tr><td><h3>Skills</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'skills')) %>) <% ) if current_user?(@user) %></td></tr></table>
+        <%= !@user.skills.empty? ? render(partial: 'skills', object: @user.skills) : 'Unknown' %>
+      </p>
+      <p class="profile_element">
+        <table><tr><td><h3>Memberships</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'bands')) %>) <% ) if current_user?(@user) %></td></tr></table>
+        <div class="condensed">
+          <% if @user.memberships.empty? %>
+            None
+          <% else %>
+            <ul>
+            <% @user.memberships.each do |membership| %>
+              <li>
+              Playing 
+              <%= image_tag(membership.instrument.image_path, size: "32x32", alt: membership.instrument.name) %>
+              in
+              <%= link_to membership.band.name, membership.band %>
+              </li>
+            <% end %>
+            </ul>
           <% end %>
-          </ul>
-        <% end %>
-      </div>
-    </p>
+        </div>
+      </p>
+      <p class="profile_element">
+        <table><tr><td><h3>Played Genres</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'genres')) %>) <% ) if current_user?(@user) %></td></tr></table>
+        <div class="condensed">
+          <% if @user.favorite_genres.empty? %>
+            None
+          <% else %>
+            <ul>
+            <% @user.favorite_genres.each do |genre| %>
+              <li>
+              <%= Genre.find(genre.genre_id).name %>
+              </li>
+            <% end %>
+            </ul>
+          <% end %>
+        </div>
+      </p>
+    </div>
   </div>
 </div>
