@@ -10,7 +10,7 @@
             any_genre.id = 0 
             available_genres.unshift(any_genre)
         %>
-        <%= select_tag 'selected_genre', options_from_collection_for_select(available_genres, 'id', 'name', params[:selected_genre]), { class: 'input-medium search-query', disabled: params[:only_looking_for_band]!='1' } %>
+        <%= select_tag 'selected_genre', options_from_collection_for_select(available_genres, 'id', 'name', params[:selected_genre]), { class: 'input-medium', disabled: params[:only_looking_for_band]!='1' } %>
       </td>
     </tr>
   </table>
@@ -21,7 +21,7 @@
         <%
             available_periods_users = [['Month', 1], ['2 Months', 2], ['3 Months', 3], ['6 Months', 6], ['Year', 12]]
         %>
-        <%= select_tag 'selected_user_activity_period', options_for_select(available_periods_users, params[:selected_user_activity_period]), { class: 'input-medium search-query', disabled: params[:only_active_users]!='1' } %>
+        <%= select_tag 'selected_user_activity_period', options_for_select(available_periods_users, params[:selected_user_activity_period]), { class: 'input-medium', disabled: params[:only_active_users]!='1' } %>
       </td>
     </tr>
   </table>

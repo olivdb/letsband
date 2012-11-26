@@ -10,7 +10,7 @@
           any_instrument.id = 0 
           available_instruments.unshift(any_instrument)
         %>
-        <%= select_tag 'selected_position', options_from_collection_for_select(available_instruments, 'id', 'name', params[:selected_position]), { class: 'input-medium search-query', disabled: params[:only_open_position]!='1' } %>
+        <%= select_tag 'selected_position', options_from_collection_for_select(available_instruments, 'id', 'name', params[:selected_position]), { class: 'input-medium', disabled: params[:only_open_position]!='1' } %>
       </td>
     </tr>
   </table>
@@ -21,7 +21,7 @@
         <%
           available_periods = [['Month', 1], ['2 Months', 2], ['3 Months', 3], ['6 Months', 6], ['Year', 12]]
         %>
-        <%= select_tag 'selected_activity_period', options_for_select(available_periods, params[:selected_activity_period]), { class: 'input-medium search-query', disabled: params[:only_active]!='1' } %>
+        <%= select_tag 'selected_activity_period', options_for_select(available_periods, params[:selected_activity_period]), { class: 'input-medium', disabled: params[:only_active]!='1' } %>
       </td>
     </tr>
   </table>

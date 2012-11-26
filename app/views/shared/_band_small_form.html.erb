@@ -28,7 +28,7 @@
           any_genre.id = 0
           available_genres.unshift(any_genre)
         %>
-        <%= select_tag 'genre_id', options_from_collection_for_select(available_genres, 'id', 'name', params[:genre_id]), { class: 'input-medium search-query' } %>
+        <%= select_tag 'genre_id', options_from_collection_for_select(available_genres, 'id', 'name', params[:genre_id]), { class: 'input-medium' } %>
       </td>
     </tr>
     <tr>

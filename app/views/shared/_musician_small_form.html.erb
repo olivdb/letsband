@@ -27,7 +27,7 @@
             available_instruments.unshift(any_instrument)
         %>
 
-        <%= select_tag 'instrument_id', options_from_collection_for_select(available_instruments, 'id', 'name', params[:instrument_id]), { class: 'input-medium search-query' } %>
+        <%= select_tag 'instrument_id', options_from_collection_for_select(available_instruments, 'id', 'name', params[:instrument_id]), { class: 'input-medium' } %>
       </td>
     </tr>
     <tr>
