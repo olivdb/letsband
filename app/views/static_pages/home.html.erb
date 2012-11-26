@@ -1,10 +1,10 @@
 <%= image_tag 'images/big_logo.png' %>
 <div class='row'>
 	<div class='patch span6'>
-		<%= render 'shared/musician_small_form' %>
+		<%= render partial: 'shared/musician_small_form', locals: {form_class: 'small_form'} %>
 	</div>
 	<div class='patch span6'>
-		<%= render 'shared/band_small_form' %> 
+		<%= render partial: 'shared/band_small_form', locals: {form_class: 'small_form'} %> 
 	</div>
 </div>
 

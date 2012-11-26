@@ -11,7 +11,7 @@
   </script>
 <% end %>
 
-<div class='center hero-unit small_form'>
+<div class="center hero-unit <%= "#{form_class}" %>">
 <%= form_tag users_path, :method => 'get', onsubmit: "if('#{params[:user_city_name]}' && document.getElementById('user_city_name').value == ''){document.getElementById('user_city_name').value = '#{params[:user_city_name]}'; 
       document.getElementById('user_city_has_been_selected').value = 1;
       document.getElementById('user_city_id').value = '#{params[:user_city_id]}';}" do %>
@@ -44,7 +44,8 @@
       </td>
     </tr>
   </table>
+  <%= content_for?(:options) ? yield(:options) : '' %>
   <br/>
-  <%= submit_tag 'Find !', :name => nil, class: 'btn btn-primary btn-large', style: 'width:100%;'%>
+  <%= submit_tag 'Find !', :name => nil, class: 'btn btn-primary btn-large' %>
 <% end %>
 </div>

@@ -1,0 +1,43 @@
+<% content_for :options do %>
+<div class="extra_options">
+  <table>
+    <tr id="user_genre_row" class="<%= (params[:only_looking_for_band]!='1')? "disabled" : "" %>">
+      <td><%= check_box_tag 'only_looking_for_band', '1', params[:only_looking_for_band], onclick: 'document.getElementById("selected_genre").disabled=!this.checked; document.getElementById("user_genre_row").className = (this.checked ? "" : "disabled");' %></td><td><p>who is looking for a band playing</p></td>
+      <td id="user_genre_select">
+        <% 
+            available_genres = Genre.all
+            any_genre = Genre.new(name: 'Any Genre')
+            any_genre.id = 0 
+            available_genres.unshift(any_genre)
+        %>
+        <%= select_tag 'selected_genre', options_from_collection_for_select(available_genres, 'id', 'name', params[:selected_genre]), { class: 'input-medium search-query', disabled: params[:only_looking_for_band]!='1' } %>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr id="user_activity_row" class="<%= (params[:only_active_users]!='1')? "disabled" : "" %>">
+      <td><%= check_box_tag 'only_active_users', '1', params[:only_active_users], onclick: 'document.getElementById("selected_user_activity_period").disabled=!this.checked; document.getElementById("user_activity_row").className = (this.checked ? "" : "disabled");' %></td><td><p>who has connected in the last</p></td>
+      <td id="user_activity_select">
+        <%
+            available_periods_users = [['Month', 1], ['2 Months', 2], ['3 Months', 3], ['6 Months', 6], ['Year', 12]]
+        %>
+        <%= select_tag 'selected_user_activity_period', options_for_select(available_periods_users, params[:selected_user_activity_period]), { class: 'input-medium search-query', disabled: params[:only_active_users]!='1' } %>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr id="user_name_row" class="<%= (params[:only_user_name]!='1')? "disabled" : "" %>">
+      <td><%= check_box_tag 'only_user_name', '1', params[:only_user_name], onclick: 'document.getElementById("user_name").disabled=!this.checked; document.getElementById("user_name_row").className = (this.checked ? "" : "disabled");'  %></td><td><p>whose name contains</p></td>
+      <td id="user_name_field">
+        <%= text_field_tag 'user_name', params[:user_name], class: 'search-query input-large', disabled: params[:only_user_name]!='1', placeholder: 'User name' %>
+      </td>
+    </tr>
+  </table>
+</div>
+<% end %>
+
+<div class="pull-right">
+<%= render partial: 'shared/musician_small_form', locals: {form_class: 'large_form'} %>
+</div>
+
+<% 23.times do %> <br/> <% end %>

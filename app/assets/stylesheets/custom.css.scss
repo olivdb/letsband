@@ -459,7 +459,7 @@ input, textarea, select, .uneditable-input {
 }
 
 
-.small_form {
+.large_form,.small_form {
   margin-top: 20px;
 
   padding-left: 20px;
@@ -476,7 +476,6 @@ input, textarea, select, .uneditable-input {
     width:80%;
     tr {
       td {
-        border: solid blue 0px;
         p {
           text-align: left;
           font-size:18px;
@@ -488,7 +487,63 @@ input, textarea, select, .uneditable-input {
     }
   }
   .btn {
+    width:100%;
     font-size: 30px;
     font-weight: bold;
+  }
+}
+
+.large_form {
+  width:600px;
+  table {
+    tr {
+      td {
+        border: solid blue 0px;
+        &:first-child {
+          width:80px;
+        }
+      }
+    }
+  }
+  .extra_options {
+    table {
+      .disabled {
+        color: $grayLight;
+        select, input {
+          color: $grayLight;
+        }
+      }
+      tr {
+        td {
+          p {
+            font-size: 14px;
+          }
+          border: solid red 0px;
+          &:first-child {
+            padding-bottom: 12px;
+            padding-right: 10px;
+            width:10px;
+          }
+        }
+        #user_genre_select {
+          width: 235px;
+        }
+        #user_activity_select {
+          width: 250px;
+        }
+        #user_name_field {
+          width:300px;
+        }
+        #band_instrument_select {
+          width: 170px;
+        }
+        #band_activity_select {
+          width: 170px;
+        }
+        #band_name_field {
+          width:300px;
+        }
+      }
+    }
   }
 }

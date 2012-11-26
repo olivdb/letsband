@@ -1,0 +1,43 @@
+<% content_for :options do %>
+<div class="extra_options">
+  <table>
+    <tr id="band_instrument_row" class="<%= (params[:only_open_position]!='1')? "disabled" : "" %>">
+      <td><%= check_box_tag 'only_open_position', '1', params[:only_open_position], onclick: 'document.getElementById("selected_position").disabled=!this.checked; document.getElementById("band_instrument_row").className = (this.checked ? "" : "disabled");' %></td><td><p>with an open position for a musician playing</p></td>
+      <td id="band_instrument_select">
+        <% 
+          available_instruments = Instrument.all.delete_if{|i| i.name == "Unknown"}
+          any_instrument = Instrument.new(name: 'Any Instrument')
+          any_instrument.id = 0 
+          available_instruments.unshift(any_instrument)
+        %>
+        <%= select_tag 'selected_position', options_from_collection_for_select(available_instruments, 'id', 'name', params[:selected_position]), { class: 'input-medium search-query', disabled: params[:only_open_position]!='1' } %>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr id="band_activity_row" class="<%= (params[:only_active]!='1')? "disabled" : "" %>">
+      <td><%= check_box_tag 'only_active', '1', params[:only_active], onclick: 'document.getElementById("selected_activity_period").disabled=!this.checked; document.getElementById("band_activity_row").className = (this.checked ? "" : "disabled");' %></td><td><p>whose members have connected in the last</p></td>
+      <td id="band_activity_select">
+        <%
+          available_periods = [['Month', 1], ['2 Months', 2], ['3 Months', 3], ['6 Months', 6], ['Year', 12]]
+        %>
+        <%= select_tag 'selected_activity_period', options_for_select(available_periods, params[:selected_activity_period]), { class: 'input-medium search-query', disabled: params[:only_active]!='1' } %>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr id="band_name_row" class="<%= (params[:only_band_name]!='1')? "disabled" : "" %>">
+      <td><%= check_box_tag 'only_band_name', '1', params[:only_band_name], onclick: 'document.getElementById("band_name").disabled=!this.checked; document.getElementById("band_name_row").className = (this.checked ? "" : "disabled");' %></td><td><p>whose name contains</p></td>
+      <td id="band_name_field">
+        <%= text_field_tag 'band_name', params[:band_name], class: 'search-query input-large', disabled: params[:only_band_name]!='1', placeholder: 'Band name' %>
+      </td>
+    </tr>
+  </table>
+</div>
+<% end %>
+
+<div class="pull-right">
+<%= render partial: 'shared/band_small_form', locals: {form_class: 'large_form'} %>
+</div>
+
+<% 23.times do %> <br/> <% end %>

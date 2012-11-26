@@ -13,15 +13,12 @@
 
 
 
-<div class='center hero-unit small_form'>
+<div class="center hero-unit <%= "#{form_class}" %>">
 <%= form_tag bands_path, :method => 'get', onsubmit: "if('#{params[:band_city_name]}' && document.getElementById('band_city_name').value == ''){document.getElementById('band_city_name').value = '#{params[:band_city_name]}'; 
       document.getElementById('band_city_has_been_selected').value = 1;
       document.getElementById('band_city_id').value = '#{params[:band_city_id]}';}" do %>
     <p>I'm looking for a <b>band</b></p>
   <table>
-    <tr>
-      <td colspan=2></td>
-    </tr>
     <tr>
       <td><p>Playing</p></td>
       <td>
@@ -47,22 +44,9 @@
         <%= hidden_field_tag 'band_city_has_been_selected', 0 %>
       </td>
     </tr>
-    <tr>
-      <td colspan=2>
-        
-      </td>
-    </tr>
   </table>
+  <%= content_for?(:options) ? yield(:options) : '' %>
   <br/>
-  <%= submit_tag 'Find !', :name => nil, class: 'btn btn-primary btn-large', style: 'width:100%;'%>
+  <%= submit_tag 'Find !', :name => nil, class: 'btn btn-primary btn-large' %>
 <% end %>
 </div>
-
-
-<!--
-<script src="http://j.maxmind.com/app/geoip.js" charset="ISO-8859-1" type="text/javascript" ></script>
-<script type="text/javascript">
-  var city = geoip_city() + ', ' + geoip_region_name() + ', ' + geoip_country_name();
-  document.getElementById('band_city_name').placeholder = city;
-</script>
--->
