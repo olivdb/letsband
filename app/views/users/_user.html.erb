@@ -1,10 +1,8 @@
-<li>
-  <div class = 'row'>
-    <div class = 'span2'>
-      <%= gravatar_for user, size: 90 %>
-    </div>
-    <div class = 'span8'>
-      <p>
+<div class="result">
+<!--li-->
+  <!--div class = 'row'-->
+    <!--div class = 'span8'-->
+      <!--p-->
       	<%= link_to user.name, user %> from <%= user.city.fullname %> 
         <% 
           ref_city = City.find_by_id(params[:user_city_id])
@@ -15,17 +13,22 @@
         <% 
           end 
         %>
-      </p>
-      <p>
+      <!--/p-->
+      <div class="expertise">
+      <!--p-->
         <% 
           instruments = {}
           if params[:instrument_id].to_i >= 1
             instruments = { instrument_id: params[:instrument_id] }
           end
-          skills = Skill.where(user_id:  user.id).where(instruments) 
+          skills = Skill.where(user_id:  user.id).where(instruments).limit(2) 
         %>
-        <%= render partial: 'skills', object: skills %>
-      </p>
+        <%= render partial: 'search_skills', locals: { skills: skills } %>
+      <!--/p-->
     </div>
-  </div>
-</li>
+    <div class="avatar"><!--div class = 'span2'-->
+      <%= gravatar_for user, size: 90, class: 'avatarfull' %>
+    </div>
+  <!--/div-->
+<!--/li-->
+</div>

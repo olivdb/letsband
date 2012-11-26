@@ -1,0 +1,44 @@
+<ul >
+  <li>
+    Expertise<br />
+    <p>
+    	<% skills.each do |skill| %>
+	    	<% skill.expertise.times do %>
+	        <%=  image_tag(skill.instrument.image_path, size: "32x32", alt: skill.instrument.name, class: 'imgexpertise') %>
+	        <% end %>
+	        <% (3-skill.expertise).times do %>
+	        <%=  image_tag(skill.instrument.image_path, size: "32x32", alt: skill.instrument.name, class: 'imgexpertise halfopacity') %>
+	        <% end %>
+	        </p><p>
+	    <% end %>
+    </p>
+  </li>
+  <li>
+  	Experience (years)<br />
+    <p>
+    	<% skills.each do |skill| %>
+    		<%= image_tag(skill.experience.to_s + '.png', size: "32x32", alt: skill.experience.to_s + ' years of experience', class: 'imgexpertise') %>
+	        </p><p>
+	    <% end %>
+	</p>
+  </li>
+  <li>
+  	Education<br />
+    <p>
+    	<% skills.each do |skill| %>
+    		<% if skill.education == 1 %>
+	        <%= image_tag('school.jpg', size: "32x32", alt: 'Academy student') %>
+	        <% elsif skill.education >= 2 %>
+	        <%= image_tag('degree.png', size: "32x32", alt: 'Academy graduate') %>
+	        <% end %>
+
+	        <% if skill.education == 3 %>
+	        <%= image_tag('school.jpg', size: "32x32", alt: 'Conservatory student') %>
+	        <% elsif skill.education >= 4 %>
+	        <%= image_tag('degree.png', size: "32x32", alt: 'Conservatory graduate') %>
+	        <% end %>
+	        </p><p>
+	    <% end %>
+    </p>
+  </li>
+</ul>

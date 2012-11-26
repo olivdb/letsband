@@ -9,17 +9,19 @@
     <%= render 'layouts/shim' %>
   </head>
   <body>
-    <div id="fullpage">
-      <%= render 'layouts/menu' %>
-      <!--div class="container"-->
-        <% flash.each do |key, value| %>
-          <%= content_tag(:div, value.html_safe, class: "alert alert-#{key}") %>
-        <% end %>
-        <%= render 'layouts/header' %>
+    <div class="fullpage">
+    <%= render 'layouts/header' %>
+
+    <div class="container">
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value.html_safe, class: "alert alert-#{key}") %>
+      <% end %>
+      <div id="page" class="page">
         <%= content_for?(:content) ? yield(:content) : yield %>
-        <%= render 'layouts/footer' %>       
-        <%= debug(params) if Rails.env.development? %>
-      <!--/div-->
+      </div>
+      <!--%= render 'layouts/footer' %-->
+      <%= debug(params) if Rails.env.development? %>
+    </div>
     </div>
   </body>
 </html>

@@ -1,7 +1,8 @@
 <% provide(:title, @user.name) %>
+<div id="page"><div class="page">
 <div class="profile">
   <center><table><tr>
-    <td><h1><%= @user.name %></h1></td>
+    <td><h3><%= @user.name %></h3></td>
     <td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %></td>
   </tr></table></center>
   <div class="row">
@@ -28,7 +29,7 @@
       </p>
       <p class="profile_element">
         <table><tr><td><h3>Skills</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'skills')) %>) <% ) if current_user?(@user) %></td></tr></table>
-        <%= !@user.skills.empty? ? render(partial: 'skills', object: @user.skills) : 'Unknown' %>
+        <%= !@user.skills.empty? ? render(partial: 'profile_skills', locals: { skills: @user.skills }) : 'Unknown' %>
       </p>
       <p class="profile_element">
         <table><tr><td><h3>Memberships</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'bands')) %>) <% ) if current_user?(@user) %></td></tr></table>
@@ -68,3 +69,4 @@
     </div>
   </div>
 </div>
+</div></div>

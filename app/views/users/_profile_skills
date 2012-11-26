@@ -1,0 +1,12 @@
+<div class="skills">
+	<% if skills.count > 0 %>
+	<table>
+	    <tr>
+	      <th style="text-align:left;">Expertise</th>
+	      <th>Experience (years)</th>
+	      <th><% if skills.where('education > 0').count > 0 %>Education<% end %></th>
+	    </tr>
+	    <%= render skills %>
+	</table>
+	<% end %>
+</div>
