@@ -10,7 +10,6 @@ before_filter :signed_in_user
     params[:message] = {}
     params[:message][:subject] = params[:subject] if params[:subject].present?
     params[:message][:origin_message_id] = params[:origin_message_id] if params[:origin_message_id].present?
-    puts ">>>>>>>>"+params.inspect
     render :action => 'new', :locals => {:recipient_id => params[:recipient_id]}
   end
 
