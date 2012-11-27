@@ -69,10 +69,12 @@ class UsersController < ApplicationController
       end
     elsif(params[:section]=='skills')
       @user.skills.destroy_all
-      params[:user][:skills_attributes].each do |skill|
-        skill[1]=skill[1].delete_if {|key, value| key  == "id" }
-        hash = { :skills_attributes => { '0' => skill[1] } }
-        @user.update_attributes(hash)
+      if params[:user]
+        params[:user][:skills_attributes].each do |skill|
+          skill[1]=skill[1].delete_if {|key, value| key  == "id" }
+          hash = { :skills_attributes => { '0' => skill[1] } }
+          @user.update_attributes(hash)
+        end
       end
       sign_in @user
       if !@user.errors.any?
@@ -84,10 +86,12 @@ class UsersController < ApplicationController
       return
     elsif(params[:section]=='genres')
       @user.favorite_genres.destroy_all
-      params[:user][:favorite_genres_attributes].each do |genre|
-        genre[1]=genre[1].delete_if {|key, value| key  == "id" }
-        hash = { :favorite_genres_attributes => { '0' => genre[1] } }
-        @user.update_attributes(hash)
+      if params[:user]
+        params[:user][:favorite_genres_attributes].each do |genre|
+          genre[1]=genre[1].delete_if {|key, value| key  == "id" }
+          hash = { :favorite_genres_attributes => { '0' => genre[1] } }
+          @user.update_attributes(hash)
+        end
       end
       sign_in @user
       if !@user.errors.any?
