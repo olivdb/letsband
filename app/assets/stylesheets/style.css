@@ -106,6 +106,7 @@ background-repeat:repeat-y;
 padding-left:23px;
 padding-right:23px;
 }
+/*
 h1 {
 font-family:arial;
 font-size:11px;
@@ -115,7 +116,7 @@ color:#333333;
 font-family:Times New Roman, serif;
 font-size:18px;
 color:#333333;
- }
+ }*/
  #search_box{
  margin-top:14px;
  display:block;

@@ -1,8 +1,7 @@
 <% provide(:title, @user.name) %>
-<div id="page"><div class="page">
 <div class="profile">
   <center><table><tr>
-    <td><h3><%= @user.name %></h3></td>
+    <td><h1><%= @user.name %></h1></td>
     <td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %></td>
   </tr></table></center>
   <div class="row">
@@ -69,4 +68,3 @@
     </div>
   </div>
 </div>
-</div></div>

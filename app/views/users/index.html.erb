@@ -1,10 +1,13 @@
 <% provide(:title, 'Musicians') %>
 
 <% content_for :header do %>
-<%= render 'shared/musician_large_form' %>
+	<div id="searchplayer">
+	<div class="searchplayer">
+		<%= render 'shared/musician_large_form' %>
+	</div>
+	</div>
 <% end %>
 
-<div id="page"><div class="page">
 <%= will_paginate %>
 
 <div id="result">
@@ -20,4 +23,3 @@
 <%= will_paginate %>
 
 <br/>
-</div></div>
