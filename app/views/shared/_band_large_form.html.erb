@@ -27,7 +27,7 @@
   </table>
   <table>
     <tr id="band_name_row" class="<%= (params[:only_band_name]!='1')? "disabled" : "" %>">
-      <td><%= check_box_tag 'only_band_name', '1', params[:only_band_name], onclick: 'document.getElementById("band_name").disabled=!this.checked; document.getElementById("band_name_row").className = (this.checked ? "" : "disabled");' %></td><td><p>whose name contains</p></td>
+      <td><%= check_box_tag 'only_band_name', '1', params[:only_band_name], onclick: 'document.getElementById("band_name").disabled=!this.checked; document.getElementById("band_name_row").className = (this.checked ? "" : "disabled");' %></td><td><p>whose page contains</p></td>
       <td id="band_name_field">
         <%= text_field_tag 'band_name', params[:band_name], class: 'search-query input-large', disabled: params[:only_band_name]!='1', placeholder: 'Band name' %>
       </td>

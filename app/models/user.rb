@@ -92,7 +92,7 @@ class User < ActiveRecord::Base
 
       user_name = {}
       if params[:only_user_name]
-        user_name = "LOWER(users.firstname || ' ' || users.surname) like ?", "%#{params[:user_name].downcase}%"
+        user_name = "LOWER(users.firstname || ' ' || users.surname) like ?", "%#{escape_like(params[:user_name].downcase)}%"
       end
 
       selected_activity_period = {}
@@ -137,6 +137,10 @@ class User < ActiveRecord::Base
 
     def create_remember_token
       self.remember_token = SecureRandom.urlsafe_base64
+    end
+
+    def escape_like(field)
+      field.gsub('%', '\\\\\%').gsub('_', '\\\\\_').gsub('.', '\\\\\.')
     end
 
 end

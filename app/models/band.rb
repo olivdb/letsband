@@ -58,7 +58,7 @@ class Band < ActiveRecord::Base
 
       band_name = {}
       if params[:only_band_name]
-        band_name = "LOWER(bands.name) like ?", "%#{params[:band_name].downcase}%"
+        band_name = "(LOWER(bands.name) like ?) OR (LOWER(bands.description) like ?)", "%#{escape_like(params[:band_name].downcase)}%", "%#{escape_like(params[:band_name].downcase)}%"
       end
 
       selected_activity_period = ''
@@ -94,4 +94,8 @@ class Band < ActiveRecord::Base
     end
   end
 
+end
+
+def escape_like(field)
+  field.gsub('%', '\\\\\%').gsub('_', '\\\\\_').gsub('.', '\\\\\.')
 end
