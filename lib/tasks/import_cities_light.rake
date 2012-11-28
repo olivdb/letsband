@@ -5,7 +5,7 @@ namespace :db do
 	and populates the 'cities', 'regions' and 'countries' tables of the db"
 
 	task importcitieslight: :environment do
-		country_code_list = ['BE']
+		country_code_list = ['FR','NL','LU','US','CA']
 
 		make_countries_light country_code_list
 		make_regions_light country_code_list
