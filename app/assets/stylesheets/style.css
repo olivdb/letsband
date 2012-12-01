@@ -283,7 +283,7 @@ color:#B6C5D7;
 .input-city{
 height:14px;width:183px;float:right;
 }
-.input-genre{
+.input-genre, .input-instrument{
 width:184px;float:right;
 padding-left:2px;
 border-radius:3px;

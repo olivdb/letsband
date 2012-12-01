@@ -23,8 +23,8 @@
         <%= content_for?(:content) ? yield(:content) : yield %>
         <% if request.path != root_path %>
           </div></div>
+          <%= render 'layouts/footer' %>  
         <% end %>
-        <%= render 'layouts/footer' %>       
         <%= debug(params) if Rails.env.development? %>
       <!--/div-->
     <% if request.path != root_path %></div><% end %>
