@@ -41,9 +41,6 @@ margin: 0;
 #footer A:hover, #menu A:hover { text-decoration: none; color: #fff; }
 
 
-#menu{
-	/*background-image:url('images/menu.png');*/
-}
 
 #footer{
 	background-image:url('images/footer.png');
@@ -90,7 +87,7 @@ margin: 0;
 	font-weight: bold;
 	text-decoration:none;
 }
-
+.footer ul {margin-right:12px;}
 
 #header{
 width:1024px;
