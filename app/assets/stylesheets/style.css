@@ -57,7 +57,7 @@ margin: 0;
 	list-style-type: none;
 	float:right;
 	margin-top:2px;
-	margin-left:6px;
+	padding-left:6px;
 	
 }
 .expertise ul li, .narrow_menu ul li, #footer ul li {
