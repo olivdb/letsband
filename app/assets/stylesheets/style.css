@@ -18,7 +18,7 @@ margin: 0;
  width:100%;
 }
 .narrow_menu {
-  padding-right:23px;	
+  	
   width:1024px;
   background-repeat:no-repeat;
   margin:0;
@@ -50,14 +50,15 @@ margin: 0;
 
 
 #footer{
-	background-image:url('images/footer.png');
+	background-image:url('images/menu.png');
 }
 
 .expertise ul, .narrow_menu ul, #footer ul {
 	list-style-type: none;
 	float:right;
 	margin-top:2px;
-	padding-left:6px;
+	margin-left:6px;
+	
 }
 .expertise ul li, .narrow_menu ul li, #footer ul li {
 	float: left;
