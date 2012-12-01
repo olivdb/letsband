@@ -20,6 +20,7 @@ margin: 0;
 .narrow_menu {
   padding-right:23px;	
   width:1024px;
+
 }
 .menu, .footer {
 	background-color:#000;
@@ -31,6 +32,9 @@ margin: 0;
   height:27px;
   background-color:#000;
 }
+#menu{
+  background-image:url('images/menu.png');
+  background-repeat:no-repeat;}
 #footer A:link, #menu A:link { text-decoration: none; color : #999999; }
 #footer A:visited, #menu A:visited { text-decoration: none; color : #999999; }
 #footer A:active, #menu A:active { text-decoration: none; color : #999999; }
