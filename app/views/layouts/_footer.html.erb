@@ -1,7 +1,12 @@
+<% if request.path == root_path %>
+<div class="wide_footer"></div>
+
+<% else %>
 <div id="footer">
 <div class="footer">
-	<ul>
+<div class="narrow_footer">
+<ul>
 		<li><a href="<%= contact_path %>">contact</a></li> 
 	</ul>
-</div>
+<% end %>
 </div>

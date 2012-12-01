@@ -1,5 +1,10 @@
 <div id="menu">
 <div class="menu">
+<% if request.path == root_path %>
+  <div class="wide_menu">
+<% else %>
+  <div class="narrow_menu">
+<% end %>
   <ul>
     <li><%= link_to "home", root_path %></li>
     <% if signed_in? %>
@@ -22,8 +27,9 @@
         </ul>
       </li>
     <% else %>
-      <li><%= link_to "sign in", signin_path %></li>
+      <li><%= link_to "Sign in", signin_path %></li>
     <% end %>
   </ul>
+  </div>
 </div>
 </div>

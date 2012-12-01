@@ -1,19 +1,73 @@
-
-<div class="row-fluid">
-   <div class="span12 pagination-centered"><%= image_tag 'logo_hd.png', width: 434 %></div>
-</div>
-<!--div class="row-fluid">
-	<div class="span2"></div>
-	<div class="offset2 span8 pagination-centered"><%= render partial: 'shared/combined_small_form', locals: {form_class: 'small_form'} %></div>
-	<div class="span2"></div>
-</div-->
-<div class='row-fluid'>
-	<div class='patch span6'>
-		<%= render partial: 'shared/musician_small_form', locals: {form_class: 'small_form'} %>
-	</div>
-	<div class='patch span6'>
-		<%= render partial: 'shared/band_small_form', locals: {form_class: 'small_form'} %> 
-	</div>
-</div>
-
+<div class="center">
+ <%= image_tag "home/left.png", alt:"" %>
+ <%= image_tag "home/logo_hd.png", alt:"", width: 434 %>
+ <%= image_tag "home/right.png", alt:"" %>
+ <br/>
+ <div id="amp_full">
+	 <ul class="amp_fieldul">
+<li class="amp">
+		<div class="amp_field">
+		<div class="amp_fieldh1">I'm looking for a band</div>
+			
+		<span class="amp_fieldh2" style="margin-top:4px;">Playing </span>
+			
+			<%
+			available_genres = Genre.all
+			any_genre = Genre.new(name: "Any Genre")
+			any_genre.id = 0
+			available_genres.unshift(any_genre)
+			%>
+			<%= select_tag 'genre_id', options_from_collection_for_select(available_genres, 'id', 'name', params[:genre_id]), { class: 'input-genre' } %>
+			
+			
+		<span class="amp_fieldh2" style="margin-top:2px;clear:right;">Near</span>
+			
+			<%= text_field_tag 'band_city_name', params[:band_city_name], class: 'search-query ui-autocomplete-input input-large input-city', placeholder: 'City name', data: {autocomplete_source: cities_path}, id: 'band_city_name',
+      onclick: 'this.select();',
+      onblur: "if('#{params[:band_city_name]}' && this.value == ''){this.value = '#{params[:band_city_name]}'; 
+      document.getElementById('band_city_has_been_selected').value = 1;
+      document.getElementById('band_city_id').value = '#{params[:band_city_id]}';}"  
+    %> 
+    <%= hidden_field_tag 'band_city_id', params[:band_city_id] %> 
+    <%= hidden_field_tag 'band_city_has_been_selected', 0 %>
+			
+			
+		<button class="btn btn-block btn-primary" style="width:240px;"  type="button">Let's band !</button>
+		</div>
+	</li>
+	    
+		
+		 <li class="amp">
+		<div class="amp_field">
+		<div class="amp_fieldh1">I'm looking for a band</div>
+		<span class="amp_fieldh2" style="margin-top:4px;">Playing </span>
+			
+			<%
+			available_genres = Genre.all
+			any_genre = Genre.new(name: "Any Genre")
+			any_genre.id = 0
+			available_genres.unshift(any_genre)
+			%>
+		<%= select_tag 'genre_id', options_from_collection_for_select(available_genres, 'id', 'name', params[:genre_id]), { class: 'input-genre' } %>
+			
+			
+		<span class="amp_fieldh2" style="margin-top:2px;clear:right;">Near</span>
+			<%= text_field_tag 'band_city_name', params[:band_city_name], class: 'search-query ui-autocomplete-input input-large input-city', placeholder: 'City name', data: {autocomplete_source: cities_path}, id: 'band_city_name',
+      onclick: 'this.select();',
+      onblur: "if('#{params[:band_city_name]}' && this.value == ''){this.value = '#{params[:band_city_name]}'; 
+      document.getElementById('band_city_has_been_selected').value = 1;
+      document.getElementById('band_city_id').value = '#{params[:band_city_id]}';}"  
+    %> 
+    <%= hidden_field_tag 'band_city_id', params[:band_city_id] %> 
+    <%= hidden_field_tag 'band_city_has_been_selected', 0 %>
+			
+			
+		<button class="btn btn-block btn-primary" style="width:240px;"  type="button">Let's band !</button>
+		</div>
+	</li>
+		
+		
+  </ul>
+  </div>
+<br/>
 
