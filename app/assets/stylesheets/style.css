@@ -67,9 +67,10 @@ margin: 0;
 .wide_menu ul {
 	float: none;
 	list-style-type: none;
-	margin-top:2px;
-	padding-left:6px;
 	text-align: center;
+	width:150px;
+	margin-left:auto;
+	margin-right:auto;
 }
 .wide_menu ul li {
 	float: none;
@@ -83,7 +84,6 @@ margin: 0;
 	font-family:arial;
 	font-weight: bold;
 	text-decoration:none;
-	padding-left:6px;
 }
 
 
