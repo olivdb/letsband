@@ -19,7 +19,7 @@ class Band < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 100 }
   validates_attachment :image,
     :content_type => { :content_type => ['image/jpg', 'image/jpeg', 'image/png'] }, 
-    :size => { :less_than => 1.megabytes }
+    :size => { :less_than => 250.kilobytes }
 
   def save_image_dimensions
     geo = Paperclip::Geometry.from_file(image.queued_for_write[:original])
