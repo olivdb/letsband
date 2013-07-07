@@ -16,14 +16,16 @@
       <!--div class="container"-->
         <%= render 'layouts/header' %>
         <% if request.path != root_path %>
-          <div id="page"><div class="page">
+ <div id="page">
+  <div id="header">
         <% end %>
         <% flash.each do |key, value| %>
           <%= content_tag(:div, value.html_safe, class: "alert alert-#{key}") %>
         <% end %>
         <%= content_for?(:content) ? yield(:content) : yield %>
         <% if request.path != root_path %>
-          </div></div>
+</div>
+</div>
           <%= render 'layouts/footer' %>  
         <% end %>
         <%= debug(params) if Rails.env.development? %>

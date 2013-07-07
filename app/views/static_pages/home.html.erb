@@ -16,11 +16,12 @@
   </script>
 <% end %>
 
-<div class="center">
+<div class="center-logo">
+
 <%= image_tag "home/left.png", alt:"" %>
 <%= image_tag "home/logo_hd.png", alt:"", width: 434 %>
 <%= image_tag "home/right.png", alt:"" %>
-<br/>
+</div>
 <div id="amp_full">
  	<ul class="amp_fieldul">
 		<li class="amp">
@@ -36,9 +37,9 @@
             any_instrument.id = 0 
             available_instruments.unshift(any_instrument)
         %>
-        <%= select_tag 'instrument_id', options_from_collection_for_select(available_instruments, 'id', 'name', params[:instrument_id]), { class: 'input-medium input-instrument' } %>
+        <%= select_tag 'instrument_id', options_from_collection_for_select(available_instruments, 'id', 'name', params[:instrument_id]), { class: 'input_search' } %>
 		<span class="amp_fieldh2" style="margin-top:2px;clear:right;">Near</span>
-		<%= text_field_tag 'user_city_name', params[:user_city_name], class: 'search-query ui-autocomplete-input input-large input-city', placeholder: 'City name', data: {autocomplete_source: cities_path}, id: 'user_city_name',
+		<%= text_field_tag 'user_city_name', params[:user_city_name], class: 'text input-x1', placeholder: 'City name', data: {autocomplete_source: cities_path}, id: 'user_city_name',
           onclick: 'this.select();',
           onblur: "if('#{params[:user_city_name]}' && this.value == ''){this.value = '#{params[:user_city_name]}'; 
           document.getElementById('user_city_has_been_selected').value = 1;
@@ -64,9 +65,9 @@
 			any_genre.id = 0
 			available_genres.unshift(any_genre)
 		%>
-		<%= select_tag 'genre_id', options_from_collection_for_select(available_genres, 'id', 'name', params[:genre_id]), { class: 'input-genre' } %>
+		<%= select_tag 'genre_id', options_from_collection_for_select(available_genres, 'id', 'name', params[:genre_id]), { class: 'input_search' } %>
 		<span class="amp_fieldh2" style="margin-top:2px;clear:right;">Near</span>
-		<%= text_field_tag 'band_city_name', params[:band_city_name], class: 'search-query ui-autocomplete-input input-large input-city', placeholder: 'City name', data: {autocomplete_source: cities_path}, id: 'band_city_name',
+		<%= text_field_tag 'band_city_name', params[:band_city_name], class: 'text input-x1', placeholder: 'City name', data: {autocomplete_source: cities_path}, id: 'band_city_name',
 			onclick: 'this.select();',
 			onblur: "if('#{params[:band_city_name]}' && this.value == ''){this.value = '#{params[:band_city_name]}'; 
 			document.getElementById('band_city_has_been_selected').value = 1;
@@ -79,6 +80,6 @@
 		<% end %>
 		</li>
 	</ul>
-</div>
+
 <br/>
 
