@@ -36,20 +36,25 @@ font-family:arial;
 font-size:12px;
 margin:4px;
 }
+
 .result_part {width:200px;margin-right: 10px; border-right:1px dashed #B9B9B9;} 
 .result_part2 {width:140px; margin-right: 10px;border-right:1px dashed #B9B9B9;} 
 .result_part3 {width:140px; margin-right: 10px;border-right:1px dashed #B9B9B9;} 
-.result_part4 {width:200px; } 
+.result_part4 {width:140px; margin-right: 10px; } 
 .result_part4 a {color:#4665A6;text-decoration:none;} 
 .result_part4 a:hover {color:#9A0643;} 
 .contact a {color:#414141;text-decoration:none;font-weight: bold; font-family:arial;
 font-size:12px;
 }
 a:hover {color:#4665A6;}
+a:visited {color:#1E3E6D;}
+a:active {color:#1E3E6D;}
+a{color:#1E3E6D;}
 
 .result_user  h1:hover{
 text-decoration:underline;
 }
+.ico{width:10px;height:9px;}
 
 .text {
 font-family:arial;

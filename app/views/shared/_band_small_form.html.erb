@@ -68,9 +68,10 @@
 
 <!--search box 2-->
 <div class="center hero-unit <%= "#{form_class}" %>">
-<%= form_tag bands_path, :method => 'get', onsubmit: "if('#{params[:band_city_name]}' && document.getElementById('band_city_name').value == ''){document.getElementById('band_city_name').value = '#{params[:band_city_name]}'; 
-      document.getElementById('band_city_has_been_selected').value = 1;
-      document.getElementById('band_city_id').value = '#{params[:band_city_id]}';}" do %>
+<%= form_tag users_path, :method => 'get', onsubmit: "if('#{params[:user_city_name]}' && document.getElementById('user_city_name').value == ''){document.getElementById('user_city_name').value = '#{params[:user_city_name]}'; 
+      document.getElementById('user_city_has_been_selected').value = 1;
+      document.getElementById('user_city_id').value = '#{params[:user_city_id]}';}" do %>
+
 <div class="search_box2">
     <h1>I'm looking for a <strong>musician</strong></h1>
     <div class="search_box_in">
@@ -109,6 +110,7 @@
 
   <br/>
   </div>
+
   <%= submit_tag 'Let´s band!', :name => nil, class: 'btn btn-block btn-primary ' %>
 <% end %>
     </div>   

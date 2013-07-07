@@ -8,7 +8,7 @@
       	<%= link_to user.name, user %>
         </h1>
         <div class="result_part">
-<div class="text"><img src="img/home.png" width="9px" height="10px" /> Lives in <strong>
+<div class="text"><%= image_tag "img/home.png", alt:"", class:'ico'  %> Lives in <strong>
 
         <% 
           ref_city = City.find_by_id(params[:user_city_id])
@@ -21,8 +21,8 @@
         %>
       
       </strong></div>
-<div class="text"><img src="img/sex.png" width="9px" height="10px" /> Male, 25-year-old</div>
-            <div class="text"><img src="img/music.png" width="9px" height="10px" /> Alternative Rock, Pop Rock</strong></div>
+<div class="text"><%= image_tag "img/sex.png", alt:"", class:'ico'   %> Male, 25-year-old</div>
+            <div class="text"><%= image_tag "img/music.png", alt:"", class:'ico' %> Alternative Rock, Pop Rock</strong></div>
           </div>
         </div>
 
@@ -37,17 +37,16 @@
 <div  style="float:left;">
           <h1 style="color:#4E4E4E;">Education</h1>
           <div class="result_part3">
-            <div class="text_edu"><img src="img/edu.png" width="9px" height="10px" /> Self-Taught / <strong>2 years</strong></div>
-            <div class="text_edu"><img src="img/edu.png" width="9px" height="10px" /> Music Student / <strong>7 years</strong></div>
+            <div class="text_edu"><%= image_tag "img/edu.png", alt:"", class:'ico'  %> Self-Taught / <strong>2 years</strong></div>
+            <div class="text_edu"><%= image_tag "img/edu.png", alt:"", class:'ico'  %> Music Student / <strong>7 years</strong></div>
           </div>
         </div>
-        <div  style="float:left;">
-          <h1 style="color:#4E4E4E;">Currently &amp; Past Playing Bands</h1>
+
+<div  style="float:left;">
+          <h1 style="color:#4E4E4E;">Education</h1>
           <div class="result_part4">
             <div class="text_band"><a href="">Silent Screaming</a> , <a href="">Pacific Highway</a></div>
           </div>
+          </div>
         </div>
-    </div>
-
-      
       

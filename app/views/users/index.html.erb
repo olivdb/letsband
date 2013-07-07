@@ -1,31 +1,19 @@
 <% provide(:title, 'Musicians') %>
 
-<% content_for :header do %>
-	<div id="searchplayer">
-	<div class="searchplayer">
-		<%= render 'shared/musician_large_form' %>
-	</div>
-	</div>
-<% end %>
 
+		<%= render 'shared/band_large_form' %>
+<div style="text-align:right;"><%= will_paginate %></div>
 
-
-<%= will_paginate %>
-
-  <div id="result">
-    
-   
-    
-
-<ul class="users">
+<div id="result">
+<!--ul class="users"-->
   <%= render @users %>
-</ul>
-
+<!--/ul-->
 </div>
 
-<%= will_paginate %>
+<% if @users.any? %>
+	<div id="bckpage"></div>
+<% end %>
 
-
-
+<div style="text-align:center;"><%= will_paginate %></div>
 
 <br/>
