@@ -27,6 +27,8 @@ border-bottom:1px solid #BDBFBF;
 clear:left;
 }
 .avatar {width:74px;height:74px;background-image:url('img/bg_avatar.png');padding:4px;background-repeat:no-repeat;float:left;}
+.avatar_size {width:64px; height: 65px;}
+.avatar_position {margin-left:-5px;}
 .result_user h1 {
 color:#1E3E6D;
 font-weight:bold;

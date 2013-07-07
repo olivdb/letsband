@@ -8,18 +8,24 @@
 	</div>
 <% end %>
 
+
+
 <%= will_paginate %>
 
-<div id="result">
-<!--ul class="users"-->
+  <div id="result">
+    
+   
+    
+
+<ul class="users">
   <%= render @users %>
-<!--/ul-->
+</ul>
+
 </div>
 
-<% if @users.any? %>
-	<div id="bckpage"></div>
-<% end %>
-
 <%= will_paginate %>
+
+
+
 
 <br/>

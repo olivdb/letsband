@@ -1,5 +1,6 @@
 <% provide(:title, 'Bands') %>
 
+
 <!-- table>
 	<tr>
 		<td><%= (button_to "Create a new band", new_band_path, :method => "get", class: "btn btn-primary btn-small") %></td>
@@ -13,8 +14,18 @@
 
 <%= will_paginate %>
 
+  <div id="result">
+    
+   
+    
+
 <ul class="users">
   <%= render @bands %>
 </ul>
 
+</div>
+
 <%= will_paginate %>
+
+
+ 

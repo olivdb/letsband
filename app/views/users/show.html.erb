@@ -8,7 +8,7 @@
     <aside class="span2">
         <table>
           <tr>
-            <td><%= gravatar_for @user, size: 100 %></td>
+            <td><%= gravatar_for @user, class: 'avatar_size avatar_position'  %></td>
           </tr>
           <tr>
             <td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %></td>

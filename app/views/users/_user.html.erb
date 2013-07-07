@@ -1,9 +1,15 @@
-<div class="result">
-<!--li-->
-  <!--div class = 'row'-->
-    <!--div class = 'span8'-->
-      <!--p-->
-      	<%= link_to user.name, user %> from <%= user.city.fullname %> 
+<div class="result_user">
+      <div class="avatar"><img style="border:1px solid #BDBFBF;">
+        <%= gravatar_for user, class: 'avatar_size avatar_position' %> 
+      </div>
+        <div style="float:left;">
+          <h1>
+
+      	<%= link_to user.name, user %>
+        </h1>
+        <div class="result_part">
+<div class="text"><img src="img/home.png" width="9px" height="10px" /> Lives in <strong>
+
         <% 
           ref_city = City.find_by_id(params[:user_city_id])
           if user.city.id != ref_city.id 
@@ -13,22 +19,35 @@
         <% 
           end 
         %>
-      <!--/p-->
-      <div class="expertise">
-      <!--p-->
-        <% 
-          instruments = {}
-          if params[:instrument_id].to_i >= 1
-            instruments = { instrument_id: params[:instrument_id] }
-          end
-          skills = Skill.where(user_id:  user.id).where(instruments).limit(2) 
-        %>
-        <%= render partial: 'search_skills', locals: { skills: skills } %>
-      <!--/p-->
+      
+      </strong></div>
+<div class="text"><img src="img/sex.png" width="9px" height="10px" /> Male, 25-year-old</div>
+            <div class="text"><img src="img/music.png" width="9px" height="10px" /> Alternative Rock, Pop Rock</strong></div>
+          </div>
+        </div>
+
+<div  style="float:left;">
+          <h1 style="color:#4E4E4E;">Instruments</h1>
+          <div class="result_part2">
+            <div class="ico_instru"><img src="img/ico_guitar.png"  /><img src="img/ico_guitar.png"  /><img src="img/ico_guitar2.png"  /><img src="img/ico_guitar2.png"  /><img src="img/ico_guitar2.png"  /></div>
+            <div class="ico_instru"><img src="img/ico_violin.png"  /><img src="img/ico_violin.png"  /><img src="img/ico_violin.png"  /><img src="img/ico_violin.png"  /><img src="img/ico_violin.png"  /></div>
+          </div>
+        </div>
+
+<div  style="float:left;">
+          <h1 style="color:#4E4E4E;">Education</h1>
+          <div class="result_part3">
+            <div class="text_edu"><img src="img/edu.png" width="9px" height="10px" /> Self-Taught / <strong>2 years</strong></div>
+            <div class="text_edu"><img src="img/edu.png" width="9px" height="10px" /> Music Student / <strong>7 years</strong></div>
+          </div>
+        </div>
+        <div  style="float:left;">
+          <h1 style="color:#4E4E4E;">Currently &amp; Past Playing Bands</h1>
+          <div class="result_part4">
+            <div class="text_band"><a href="">Silent Screaming</a> , <a href="">Pacific Highway</a></div>
+          </div>
+        </div>
     </div>
-    <div class="avatar"><!--div class = 'span2'-->
-      <%= gravatar_for user, size: 90, class: 'avatarfull' %>
-    </div>
-  <!--/div-->
-<!--/li-->
-</div>
+
+      
+      
