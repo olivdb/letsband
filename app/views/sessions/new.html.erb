@@ -1,5 +1,8 @@
 <% provide(:title, "Sign in") %>
+
+<center>
 <h1>Sign in</h1>
+<div class="text2 well well-small" style="width:300px;">
 
 <div class="row">
   <div class="span6 offset3">
@@ -10,10 +13,13 @@
 
       <%= f.label :password %>
       <%= f.password_field :password %>
-
-      <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+<br/>
+      <%= f.submit "Sign in", class: "btn btn-medium btn-success", style:"width:74%;"  %>
     <% end %>
 
     <p>New user? <%= link_to "Sign up now!", signup_path %></p>
   </div>
 </div>
+</div>
+</center>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
