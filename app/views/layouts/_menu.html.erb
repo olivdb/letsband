@@ -1,30 +1,33 @@
 <div id="bgmenu_black">
   <%= image_tag "img/logo_menu.png", alt:"Lets band!", class:"logo_menu" %>
-  <ul>
-    <li><%= link_to "home", root_path %></li>
-    <% if signed_in? %>
-      <li><%= link_to "bands", bands_path %></li>
-      <li><%= link_to "musicians", users_path %></li>
+ <nav>
+        <ul class="nav" >
+          <li><%= link_to "home", root_path %></li> - 
+          <% if signed_in? %>
+            <li><%= link_to "bands", bands_path %></li> - 
+            <li><%= link_to "musicians", users_path %></li> - 
+            <li><%= link_to image_tag((current_user.unread_messages? ? "new_" : "") + "mail.png", width: 14, height:8, alt: "mailbox", mouseover: image_path((current_user.unread_messages? ? "new_" : "") + 
+            "ico2.png")), received_messages_path %></li>
+            <li id="" class="dropdown">
+              <a href="#" class="dropdown-toggle "  data-toggle="dropdown">
+              account <b class="caret"></b> </a>
+              
+              <ul class="dropdown-menu" >
+                <li style="color:#FFF;"><%= current_user.firstname %></li>
+                  <hr style="color:#FFF;line-height:1px;"/>
 
-          <li id="fat-menu" class="dropdown">
-       <li> <a href="#" class="-toggle" data-toggle="dropdown">
-          account <%= link_to image_tag((current_user.unread_messages? ? "new_" : "") + "ico2.png", width: 14, height: 8, alt: "mailbox", mouseover: image_path((current_user.unread_messages? ? "new_" : "") + 
-      "ico1.png")), received_messages_path %></li> <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li><%= link_to "my profile", current_user %></li>
-          <li><%= link_to "edit my profile", edit_user_path(current_user) %></li>
-          <li><%= link_to "manage my bands", edit_user_path(current_user, :section => 'bands') %></li>
-          <li class="divider"></li>
-          <li>
-            <%= link_to "sign out", signout_path, method: "delete" %>
-          </li>
+                <li><%= link_to "my profile", current_user %></li>
+                <li><%= link_to "edit my profile", edit_user_path(current_user) %></li>
+                <li><%= link_to "manage my bands", edit_user_path(current_user, :section => 'bands') %></li>
+                              <li>
+                  <%= link_to "sign out", signout_path, method: "delete" %>
+
+                </li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%= link_to "sign in", signin_path %></li>
+          <% end %>
         </ul>
-      </li>
-    <% else %>
-      <li><%= link_to "sign in", signin_path %><b class="caret"></b></li>
-         
-
-    <% end %>
-	 </ul>
+      </nav>
   </div>
