@@ -27,26 +27,19 @@
         <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'location')) %>) <% ) if current_user?(@user) %>
          
       </p>
-      <p class="">
-       <h3>Skills</h3>
-        <%= !@user.skills.empty? ? render(partial: 'profile_skills', locals: { skills: @user.skills }) : 'Unknown' %>
-
-      <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'skills')) %>) <% ) if current_user?(@user) %>
-      </p>
+      
       <p class="">
        <h3>Memberships</h3>
         <div class="condensed">
           <% if @user.memberships.empty? %>
             None
           <% else %>
-            <ul>
             <% @user.memberships.each do |membership| %>
-              <li>
-              Playing 
-              <%= image_tag(membership.instrument.image_path, size: "32x32", alt: membership.instrument.name) %>
-              in
-              <%= link_to membership.band.name, membership.band %>
-              </li>
+              
+              
+              
+              <%= link_to membership.band.name, membership.band %> : <%= (membership.instrument.name) %>
+              <br/>
             <% end %>
             </ul>
           <% end %>
@@ -70,6 +63,12 @@
           <% end %>
           <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'genres')) %>) <% ) if current_user?(@user) %>
         </div>
+      </p>
+      <p>
+       <h3>Skills</h3>
+        <%= !@user.skills.empty? ? render(partial: 'profile_skills', locals: { skills: @user.skills }) : 'Unknown' %>
+
+      <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'skills')) %>) <% ) if current_user?(@user) %>
       </p>
     </div>
     </div>
