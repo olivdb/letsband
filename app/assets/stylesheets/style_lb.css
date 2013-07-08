@@ -116,6 +116,7 @@ clear:both;
 }
 #bgmenu_black ul
 {
+	color:#0F0F11;
 margin: 0;
 padding: 0;
 list-style-type: none;
@@ -129,7 +130,7 @@ letter-spacing: 1px;
 font-family:sans-serif;
 font-family: arial;}
 
-#bgmenu_black ul li { display: inline; }
+#bgmenu_black ul li { display: inline;  }
 
 #bgmenu_black ul li a
 {
@@ -153,7 +154,7 @@ height:40px;
 min-height: 40px;
 word-spacing:12px;
 clear:both;
-
+ 	
 
 
 

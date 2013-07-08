@@ -1,18 +1,23 @@
 <% provide(:title, @band.name) %>
 
-  <div id="result">
+  <div id="result" class="text2">
  
        <h1><%= @band.name %></h1>
-           <% ( %> (<%= link_to("update", edit_band_path(@band, section: 'presentation')) %>) <% ) if can? :update, @band %>
+           
                 <%= image_tag @band.image.url(:medium), size: band_image_size(@band, :medium) %>
-      <h3>Location</h3><% ( %> (<%= link_to("update", edit_band_path(@band, section: 'location')) %>) <% ) if can? :update, @band %>
-      <p class="text"><%= image_tag 'img/home.png', class:'ico' %> <%= @band.city.present? ? @band.city.fullname : 'Unknown' %>  </p>
+                <br />
+                <% ( %> (<%= link_to("update", edit_band_path(@band, section: 'presentation')) %>) <% ) if can? :update, @band %>
+      <h3>Location</h3>
+      <%= image_tag 'img/home.png', class:'ico' %> <%= @band.city.present? ? @band.city.fullname : 'Unknown' %> <br />
+
+<% ( %> (<%= link_to("update", edit_band_path(@band, section: 'location')) %>) <% ) if can? :update, @band %>
+      
      
-      <h3>Members (<%= @band.members.count.to_s %>)</h3><% ( %> (<%= link_to("update", edit_band_path(@band, section: 'members')) %>) <% ) if can?(:update, @band) %>
+      <h3>Members (<%= @band.members.count.to_s %>)</h3>
       <ul style="list-style-type: none;margin:0;padding:0;" >
         <% @band.memberships.sort{ |a,b| a.instrument.name.downcase <=> b.instrument.name.downcase }.each do |membership| %>
         <% if membership.role != 'invited' %>
-          <li class="text">           
+          <li class="text2">           
           <%= image_tag 'img/sex.png',  class:'ico' %>
           <% if membership.role != 'open' %>
            <%= link_to membership.user.name, membership.user %> : <%= membership.instrument.name %>
@@ -22,12 +27,14 @@
           </li>
         <% end %>
         <% end %>
+        <% ( %> (<%= link_to("update", edit_band_path(@band, section: 'members')) %>) <% ) if can?(:update, @band) %>
         </ul>
-      <h3>Genre</h3><% ( %> (<%= link_to("update", edit_band_path(@band, section: 'presentation')) %>) <% ) if can? :update, @band %>
-        <p class="text"><%= image_tag 'img/music.png',  class:'ico'  %> <%= @band.genre.present? ? @band.genre.name : 'Unknown' %></p>
-      <h3>Description</h3><% ( %> (<%= link_to("update", edit_band_path(@band, section: 'presentation')) %>) <% ) if can? :update, @band %>
-      <span class="text">
-        <% @band.description.split("\n").each do |p| %><%= p %><br/><% end %></span>
+      <h3>Genre</h3>
+       <%= image_tag 'img/music.png',  class:'ico'  %> <%= @band.genre.present? ? @band.genre.name : 'Unknown' %> <br/>
+       <% ( %> (<%= link_to("update", edit_band_path(@band, section: 'presentation')) %>) <% ) if can? :update, @band %>
+      <h3>Description</h3>
+      
+        <% @band.description.split("\n").each do |p| %><%= p %><br/><% end %><% ( %> (<%= link_to("update", edit_band_path(@band, section: 'presentation')) %>) <% ) if can? :update, @band %>
       
   		<br/><br/>
 
