@@ -1,12 +1,13 @@
-<li>
-  <div class = 'row'>
-    <div class = 'span2'>
-      <%= image_tag band.image.url(:thumb), size: band_image_size(band, :thumb) %>
+
+      <div class="result_user">
+<div class="avatar"><img style="border:1px solid #BDBFBF;">
+      <%= image_tag band.image.url(:thumb), class: 'avatar_size avatar_position' %>
     </div>
-    <div class = 'span8'>
-      <div class="logo"></div>
-      <p>
-      	<%= link_to band.name, band %> in <%= band.city.fullname %>
+
+
+          <div class="logo"></div>
+
+      <p><h1><%= link_to band.name, band %></h1><div class="text"><%= image_tag "img/home.png", alt:"", class:'ico'  %> Playing near <strong><%= band.city.fullname %></strong>
         <% 
           ref_city = City.find_by_id(params[:band_city_id])
           if band.city.id != ref_city.id 
@@ -15,18 +16,15 @@
           (<%= (distance_ref_city.round(1)).to_s %> km from <%= ref_city.name %>)
         <% 
           end 
-        %>
-      <p>
-        <b><%= band.members.count.to_s %> members</b>
+        %></div>
+        <div class="text">
+           <%= image_tag "img/sex.png", alt:"", class:'ico'  %> <%= band.members.count.to_s %> members</div>
         <% band.memberships.sort{ |a,b| a.instrument.name.downcase <=> b.instrument.name.downcase }.each do |membership| %>
           <% if membership.role != 'invited' && membership.role != 'open' %>
-              <%= image_tag(membership.instrument.image_path, size: "32x32", alt: membership.instrument.name) %>
+              
           <% end %>
         <% end %>
-      </p>
-      <p>
-        <%= band.description %>
-      </p>
+               <div class="text"><%= image_tag "img/music.png", alt:"", class:'ico' %> <%= band.genre.name %></strong></div>
+
     </div>
-  </div>
-</li>
+  
