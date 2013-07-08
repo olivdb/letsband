@@ -232,7 +232,7 @@ padding-left:0;
 padding-bottom:0;
 padding-top:0;
 }
-.input-x2{width:272px; float:right;}
+.input-x2{width:272px; height:14px;max-height: 13px; float:right;}
 .input-x1 {
 
 width:183px;
