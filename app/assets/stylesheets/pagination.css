@@ -169,6 +169,8 @@
 .pager .previous > a,
 .pager .previous > span {
   float: left;
+    background-color: #fff;
+
 }
 .pager .disabled > a,
 .pager .disabled > a:hover,

@@ -58,9 +58,10 @@ margin:4px;
 font-size:12px;
 }
 a:hover {color:#4665A6;}
-a:visited {color:#1E3E6D;}
-a:active {color:#1E3E6D;}
-a{color:#1E3E6D;}
+a:visited {color:#03437F;}
+a:active {color:#03437F;}
+a:link {color:#03437F;}
+a{color:#03437F;}
 
 .result_user  h1:hover{
 text-decoration:underline;

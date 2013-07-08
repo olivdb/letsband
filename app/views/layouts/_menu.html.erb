@@ -6,11 +6,9 @@
           <% if signed_in? %>
             <li><%= link_to "bands", bands_path %></li> - 
             <li><%= link_to "musicians", users_path %></li> - 
-            <li><%= link_to image_tag((current_user.unread_messages? ? "new_" : "") + "mail.png", width: 14, height:8, alt: "mailbox", mouseover: image_path((current_user.unread_messages? ? "new_" : "") + 
-            "ico2.png")), received_messages_path %></li>
             <li id="" class="dropdown">
               <a href="#" class="dropdown-toggle "  data-toggle="dropdown">
-              account <b class="caret"></b> </a>
+              my account <b class="caret"></b> </a>
               
               <ul class="dropdown-menu" >
                 <li style="color:#FFF;"><%= current_user.firstname %></li>
@@ -19,12 +17,14 @@
                 <li><%= link_to "my profile", current_user %></li>
                 <li><%= link_to "edit my profile", edit_user_path(current_user) %></li>
                 <li><%= link_to "manage my bands", edit_user_path(current_user, :section => 'bands') %></li>
+                <li><%= link_to "read my messages", received_messages_path %></li>
                               <li>
                   <%= link_to "sign out", signout_path, method: "delete" %>
 
                 </li>
               </ul>
             </li>
+
           <% else %>
             <li><%= link_to "sign in", signin_path %></li>
           <% end %>

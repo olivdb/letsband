@@ -5,14 +5,40 @@
 <div style="text-align:right;"><%= will_paginate %></div>
 
 <div id="result">
-<!--ul class="users"-->
-  <%= render @users %>
-<!--/ul-->
+
 </div>
 
-<% if @users.any? %>
-	<div id="bckpage"></div>
+<% if @users.empty? %>
+<div class="text2 well well-small" style="width:100%;">
+<h3>Title explications musicians</h3>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis cursus varius nulla non lacinia. Curabitur dictum ligula sit amet imperdiet molestie. Cras fringilla diam neque, vel pharetra diam luctus id. Integer a consequat dui. Vivamus adipiscing porttitor dui, ac ullamcorper purus placerat quis. Integer tincidunt laoreet ipsum ut tristique. Curabitur adipiscing nibh sit amet risus placerat adipiscing. Morbi non purus ultrices, luctus velit nec, facilisis turpis.</p>
+<p>
+Vestibulum semper leo dolor, quis ultrices mauris ullamcorper et. Suspendisse lacinia lobortis nisl, nec aliquam nunc mattis id. Proin rutrum tempus augue vel semper. Pellentesque ultrices justo at dolor dapibus, eu egestas magna vestibulum. Vivamus eu scelerisque metus, nec varius libero. Quisque dictum, quam non molestie imperdiet, enim tellus dictum eros, eu molestie leo risus eu ipsum. Morbi rutrum dignissim volutpat. Integer eu fringilla felis. Phasellus non felis pulvinar, pellentesque risus et, cursus orci. Pellentesque sit amet libero turpis. Nulla sagittis tempus diam, vel fermentum velit adipiscing et.</p>
+<p>
+Nullam mollis aliquet vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus mi ligula, convallis a aliquam vitae, volutpat id odio. Sed ut hendrerit velit. Quisque a risus lacus. Morbi sollicitudin id ante sit amet rutrum. Morbi commodo felis sapien, nec placerat libero molestie a. Nulla odio magna, tristique a congue vel, gravida id metus. Praesent quis velit sed massa consequat bibendum. Pellentesque pharetra volutpat libero eget fermentum.
+</p>
+</div>
+
+
+<br /><br /><br /><br />
+<% else %>
+<ul class="users">
+  <%= render @users %>
+  <div id="bckpage"></div>
+
+</ul>
 <% end %>
+<% if @users.any? %>
+	
+<% end %>
+
+</div>
+
+
+
+
+
 
 <div style="text-align:center;"><%= will_paginate %></div>
 
