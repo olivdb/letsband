@@ -17,6 +17,7 @@
 <% end %>
 
 
+
 <div class="center hero-unit <%= "#{form_class}" %>">
 <%= form_tag bands_path, :method => 'get', onsubmit: "if('#{params[:band_city_name]}' && document.getElementById('band_city_name').value == ''){document.getElementById('band_city_name').value = '#{params[:band_city_name]}'; 
       document.getElementById('band_city_has_been_selected').value = 1;
@@ -25,17 +26,6 @@
     <h1>I'm looking for a <strong>band</strong></h1>
     <div class="search_box_in">
       <div class="subnavitem">Playing 
-        <% 
-            available_instruments = Instrument.all.delete_if{|i| i.name == "Unknown"}
-            any_instrument = Instrument.new(name: 'Any Instrument')
-            any_instrument.id = 0 
-            available_instruments.unshift(any_instrument)
-        %>
-        <%= select_tag 'instrument_id', options_from_collection_for_select(available_instruments, 'id', 'name', params[:instrument_id]), { class: 'input_search' } %>
-  
-                
-      </div>
-      <div class="subnavitem">Option2 
         <%
       available_genres = Genre.all
       any_genre = Genre.new(name: "Any Genre")
@@ -43,24 +33,34 @@
       available_genres.unshift(any_genre)
     %>
     <%= select_tag 'genre_id', options_from_collection_for_select(available_genres, 'id', 'name', params[:genre_id]), { class: 'input_search' } %>
+  
+                
+      </div>
+      <div class="subnavitem">Option2 
+       <% 
+            available_instruments = Instrument.all.delete_if{|i| i.name == "Unknown"}
+            any_instrument = Instrument.new(name: 'Any Instrument')
+            any_instrument.id = 0 
+            available_instruments.unshift(any_instrument)
+        %>
+        <%= select_tag 'instrument_id', options_from_collection_for_select(available_instruments, 'id', 'name', params[:instrument_id]), { class: 'input_search' } %>
       </div>
       <div class="subnavitem"> Near     
 
 
-      <%= text_field_tag 'band_city_name', params[:band_city_name], class: 'text input-x2', placeholder: '', data: {autocomplete_source: cities_path}, id: 'band_city_name',
+           <%= text_field_tag 'user_city_name', params[:user_city_name], class: 'text input-x2', placeholder: 'City name', data: {autocomplete_source: cities_path}, id: 'user_city_name',
           onclick: 'this.select();',
-          onblur: "if('#{params[:band_city_name]}' && this.value == ''){this.value = '#{params[:band_city_name]}'; 
-          document.getElementById('band_city_has_been_selected').value = 1;
-          document.getElementById('band_city_id').value = '#{params[:band_city_id]}';}"  
+          onblur: "if('#{params[:user_city_name]}' && this.value == ''){this.value = '#{params[:user_city_name]}'; 
+          document.getElementById('user_city_has_been_selected').value = 1;
+          document.getElementById('user_city_id').value = '#{params[:user_city_id]}';}"  
         %> 
-        <%= hidden_field_tag 'band_city_id', params[:band_city_id] %> 
-        <%= hidden_field_tag 'band_city_has_been_selected', 0 %>
-
+        <%= hidden_field_tag 'user_city_id', params[:user_city_id] %> 
+        <%= hidden_field_tag 'user_city_has_been_selected', 0 %>
+    <%= submit_tag 'Let\'s band!', :name => nil, class: 'btn btn-block btn-primary', style: '' %> 
+    <% end %>
 
   <br/>
   </div>
-  <%= submit_tag 'Let´s band!', :name => nil, class: 'btn btn-block btn-primary ' %>
-<% end %>
     </div>   
     </div>
 
@@ -76,17 +76,16 @@
     <h1>I'm looking for a <strong>musician</strong></h1>
     <div class="search_box_in">
       <div class="subnavitem">Playing 
-        <% 
+       <% 
             available_instruments = Instrument.all.delete_if{|i| i.name == "Unknown"}
             any_instrument = Instrument.new(name: 'Any Instrument')
             any_instrument.id = 0 
             available_instruments.unshift(any_instrument)
         %>
         <%= select_tag 'instrument_id', options_from_collection_for_select(available_instruments, 'id', 'name', params[:instrument_id]), { class: 'input_search' } %>
-  
                 
       </div>
-      <div class="subnavitem">Option2 
+      <div class="subnavitem">Genre 
         <%
       available_genres = Genre.all
       any_genre = Genre.new(name: "Any Genre")
@@ -98,20 +97,20 @@
       <div class="subnavitem"> Near     
 
 
-      <%= text_field_tag 'band_city_name', params[:band_city_name], class: 'text input-x2', placeholder: '', data: {autocomplete_source: cities_path}, id: 'band_city_name',
+     <%= text_field_tag 'user_city_name', params[:user_city_name], class: 'text input-x2', placeholder: 'City name', data: {autocomplete_source: cities_path}, id: 'user_city_name',
           onclick: 'this.select();',
-          onblur: "if('#{params[:band_city_name]}' && this.value == ''){this.value = '#{params[:band_city_name]}'; 
-          document.getElementById('band_city_has_been_selected').value = 1;
-          document.getElementById('band_city_id').value = '#{params[:band_city_id]}';}"  
+          onblur: "if('#{params[:user_city_name]}' && this.value == ''){this.value = '#{params[:user_city_name]}'; 
+          document.getElementById('user_city_has_been_selected').value = 1;
+          document.getElementById('user_city_id').value = '#{params[:user_city_id]}';}"  
         %> 
-        <%= hidden_field_tag 'band_city_id', params[:band_city_id] %> 
-        <%= hidden_field_tag 'band_city_has_been_selected', 0 %>
+        <%= hidden_field_tag 'user_city_id', params[:user_city_id] %> 
+        <%= hidden_field_tag 'user_city_has_been_selected', 0 %>
+    <%= submit_tag 'Let\'s band!', :name => nil, class: 'btn btn-block btn-primary', style: '' %> 
 
 
   <br/>
   </div>
 
-  <%= submit_tag 'Let´s band!', :name => nil, class: 'btn btn-block btn-primary ' %>
 <% end %>
     </div>   
     </div>

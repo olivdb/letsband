@@ -821,7 +821,7 @@ a.menu:after,
   position: absolute;
   top: 34px;
   z-index: 900;
-  height: 200px;
+  height: 160px;
   min-width: 170px;
   max-width: 200px;
   _width: 160px;
