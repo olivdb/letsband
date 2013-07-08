@@ -5,16 +5,15 @@
     <% if signed_in? %>
       <li><%= link_to "bands", bands_path %></li>
       <li><%= link_to "musicians", users_path %></li>
-      <li></li>
-      <li id="fat-menu" class="dropdown">
-       <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <li id="fat-menu" class="dropdowndropdown">
+       <li> <a href="#" class="-toggle" data-toggle="dropdown">
           account <%= link_to image_tag((current_user.unread_messages? ? "new_" : "") + "ico2.png", width: 14, height: 8, alt: "mailbox", mouseover: image_path((current_user.unread_messages? ? "new_" : "") + 
       "ico1.png")), received_messages_path %></li> <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <li><%= link_to "My Profile", current_user %></li>
-          <li><%= link_to "Edit My Profile", edit_user_path(current_user) %></li>
-          <li><%= link_to "Manage My Bands", edit_user_path(current_user, :section => 'bands') %></li>
+          <li><%= link_to "my profile", current_user %></li>
+          <li><%= link_to "edit my profile", edit_user_path(current_user) %></li>
+          <li><%= link_to "manage my bands", edit_user_path(current_user, :section => 'bands') %></li>
           <li class="divider"></li>
           <li>
             <%= link_to "sign out", signout_path, method: "delete" %>
