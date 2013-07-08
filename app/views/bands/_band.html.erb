@@ -5,9 +5,8 @@
     </div>
 
 
-          <div class="logo"></div>
 
-      <p><h1><%= link_to band.name, band %></h1><div class="text"><%= image_tag "img/home.png", alt:"", class:'ico'  %> Playing near <strong><%= band.city.fullname %></strong>
+      <h1><%= link_to band.name, band %></h1><div class="text"><%= image_tag "img/home.png", alt:"", class:'ico'  %> Playing near <strong><%= band.city.fullname %></strong>
         <% 
           ref_city = City.find_by_id(params[:band_city_id])
           if band.city.id != ref_city.id 
@@ -18,13 +17,15 @@
           end 
         %></div>
         <div class="text">
-           <%= image_tag "img/sex.png", alt:"", class:'ico'  %> <%= band.members.count.to_s %> members</div>
+           <%= image_tag "img/sex.png", alt:"", class:'ico'  %> <%= band.members.count.to_s %> actif members</div>
         <% band.memberships.sort{ |a,b| a.instrument.name.downcase <=> b.instrument.name.downcase }.each do |membership| %>
           <% if membership.role != 'invited' && membership.role != 'open' %>
               
           <% end %>
         <% end %>
-               <div class="text"><%= image_tag "img/music.png", alt:"", class:'ico' %> <%= band.genre.name %></strong></div>
+               <div class="text"><%= image_tag "img/music.png", alt:"", class:'ico' %> Genre : <%= band.genre.name %></strong></div>
 
     </div>
+
+
   

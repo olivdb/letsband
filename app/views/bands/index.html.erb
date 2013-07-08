@@ -9,10 +9,10 @@
 	<% end %>
 	</tr>
 </table -->
-
 <%= render 'shared/band_large_form' %>
 
-<%= will_paginate %>
+
+<div style="text-align:right;"><%= will_paginate %></div>
 
   <div id="result">
     
@@ -20,12 +20,14 @@
     
 
 <ul class="users">
+
   <%= render @bands %>
 </ul>
 
 </div>
 
-<%= will_paginate %>
+
+<div style="text-align:center;"><%= will_paginate %></div>
 
 
  
