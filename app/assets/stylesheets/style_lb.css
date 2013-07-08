@@ -4,6 +4,8 @@ background-repeat:repaet-x repeat-y;
 }
 body {
 margin:0;
+font-family:arial;
+
 
 }
 
@@ -11,6 +13,13 @@ h1 {
 font-family: arial;
 font-size:20px;
 color:#022756;}
+
+h3 {
+font-family: arial;
+font-size:16px;
+color:#022756;
+margin-bottom: 2px;
+margin-top: 2px;}
 
 .logo_menu {float:left;margin-left:20%;margin-top:5px;}
 #result{
@@ -38,7 +47,7 @@ font-size:12px;
 margin:4px;
 }
 
-.result_part {widSth:200px;margin-right: 10px; border-right:1px dashed #B9B9B9;} 
+.result_part {width:200px;margin-right: 10px; border-right:1px dashed #B9B9B9;} 
 .result_part2 {width:140px; margin-right: 10px;border-right:1px dashed #B9B9B9;} 
 .result_part3 {width:140px; margin-right: 10px;border-right:1px dashed #B9B9B9;} 
 .result_part4 {width:140px; margin-right: 10px; } 
