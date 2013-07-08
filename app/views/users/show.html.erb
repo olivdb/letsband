@@ -1,37 +1,40 @@
 <% provide(:title, @user.name) %>
-<div class="profile">
-  <center><table><tr>
-    <td><h1><%= @user.name %></h1></td>
-    <td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %></td>
-  </tr></table></center>
-  <div class="row">
-    <aside class="span2">
-        <table>
-          <tr>
-            <td><%= gravatar_for @user, class: 'avatar_size avatar_position'  %></td>
-          </tr>
-          <tr>
-            <td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %></td>
-          </tr>
-        </table>
-        <div class="profile_buttons">
-          <ul>
-            <li><%= render 'contact_form' %></li>
-            <li><%= (button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", class: "btn btn-primary btn-small") unless current_user?(@user) %></li>
-          </ul>
-        </div>
-    </aside>
-    <div class="span10">
-      <p class="profile_element">
-        <table><tr><td><h3>Location</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'location')) %>) <% ) if current_user?(@user) %></td></tr></table>
-         <%= @user.city.present? ? @user.city.fullname : 'Unknown' %>
+<div class="profile text2">
+ <p>
+    <h1><%= @user.name %></h1>
+    <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %>
+</p>
+ <p>     <h3>Avatar</h3>
+    
+  <div class="avatar"><span style="border:1px solid #BDBFBF;">
+
+              <%= gravatar_for @user, class: 'avatar_size '  %>
+
+</div>
+<% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %>
+
+       
+        
+            <%= render 'contact_form' %>
+            <%= (button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", class: "btn btn-success btn-small") unless current_user?(@user) %>
+          </p>
+        
+    
+    <div class="">
+      <p style="clear:left;">
+        <h3>Location</h3>
+<%= @user.city.present? ? @user.city.fullname : 'Unknown' %><br/>
+        <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'location')) %>) <% ) if current_user?(@user) %>
+         
       </p>
-      <p class="profile_element">
-        <table><tr><td><h3>Skills</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'skills')) %>) <% ) if current_user?(@user) %></td></tr></table>
+      <p class="">
+       <h3>Skills</h3>
         <%= !@user.skills.empty? ? render(partial: 'profile_skills', locals: { skills: @user.skills }) : 'Unknown' %>
+
+      <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'skills')) %>) <% ) if current_user?(@user) %>
       </p>
-      <p class="profile_element">
-        <table><tr><td><h3>Memberships</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'bands')) %>) <% ) if current_user?(@user) %></td></tr></table>
+      <p class="">
+       <h3>Memberships</h3>
         <div class="condensed">
           <% if @user.memberships.empty? %>
             None
@@ -47,24 +50,27 @@
             <% end %>
             </ul>
           <% end %>
+          <br/>
+          <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'bands')) %>) <% ) if current_user?(@user) %>
         </div>
       </p>
-      <p class="profile_element">
-        <table><tr><td><h3>Played Genres</h3></td><td><% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'genres')) %>) <% ) if current_user?(@user) %></td></tr></table>
+      <p class="">
+       <h3>Played Genres</h3>
         <div class="condensed">
           <% if @user.favorite_genres.empty? %>
             None
           <% else %>
-            <ul>
+            
             <% @user.favorite_genres.each do |genre| %>
-              <li>
+              
               <%= Genre.find(genre.genre_id).name %>
-              </li>
+              <br />
             <% end %>
-            </ul>
+           
           <% end %>
+          <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'genres')) %>) <% ) if current_user?(@user) %>
         </div>
       </p>
     </div>
-  </div>
-</div>
+    </div>
+  
