@@ -1,10 +1,10 @@
 <% provide(:title, "Edit user") %> 
 
-<h1 class="center">Update your profile</h1><br/>
-<div class="row text2">
-  <div class="span6 offset3">
+<br/>
+<div class="text2" >
+<h1>Update your profile</h1>
 
-   <ul class="nav nav-tabs">
+   <ul class="nav2 nav2-pills nav2-stacked" style="margin-left:-15px;">
     <li class=<%= (params[:section].nil? || params[:section] == 'general') ? "active" : "" %>>
       <%= link_to 'General', edit_user_path(@user, section: 'general') %>
     </li>
@@ -21,7 +21,8 @@
       <%= link_to 'My Favorite Genres', edit_user_path(@user, section: 'genres') %>
     </li>
   </ul>
-   
+  </div>
+  <br /><br /><br />
   <% case params[:section] %>
   <% when nil %>
   <%= render 'users/edit/general' %>
@@ -38,5 +39,3 @@
   <% end %>
 
 
-  </div>
-</div>
