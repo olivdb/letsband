@@ -37,7 +37,7 @@
             any_instrument.id = 0 
             available_instruments.unshift(any_instrument)
         %>
-        <%= select_tag 'instrument_id', options_from_collection_for_select(available_instruments, 'id', 'name', params[:instrument_id]), { class: 'input_search' } %>
+        <%= select_tag 'instrument_id', options_from_collection_for_select(available_instruments, 'id', 'name', params[:instrument_id]), { class: 'input_search_amp' } %>
 		<span class="amp_fieldh2" style="margin-top:2px;clear:right;">Near</span>
 		<%= text_field_tag 'user_city_name', params[:user_city_name], class: 'text input-x1', placeholder: 'City name', data: {autocomplete_source: cities_path}, id: 'user_city_name',
           onclick: 'this.select();',
@@ -65,7 +65,7 @@
 			any_genre.id = 0
 			available_genres.unshift(any_genre)
 		%>
-		<%= select_tag 'genre_id', options_from_collection_for_select(available_genres, 'id', 'name', params[:genre_id]), { class: 'input_search' } %>
+		<%= select_tag 'genre_id', options_from_collection_for_select(available_genres, 'id', 'name', params[:genre_id]), { class: 'input_search_amp' } %>
 		<span class="amp_fieldh2" style="margin-top:2px;clear:right;">Near</span>
 		<%= text_field_tag 'band_city_name', params[:band_city_name], class: 'text input-x1', placeholder: 'City name', data: {autocomplete_source: cities_path}, id: 'band_city_name',
 			onclick: 'this.select();',

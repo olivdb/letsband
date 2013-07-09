@@ -6,8 +6,7 @@
   <h1><%= link_to user.firstname, user %></h1>
   <div class="result_part">
      <div class="text"><%= image_tag "img/home.png", alt:"", class:'ico'  %> 
-      Lives in 
-      <strong>
+
         <% 
           ref_city = City.find_by_id(params[:user_city_id])
           if user.city.id != ref_city.id 
@@ -17,7 +16,7 @@
         <% 
           end 
         %>
-      </strong>
+
       </div>
       <div class="text"><%= image_tag "img/sex.png", alt:"", class:'ico'   %> Male, 25-year-old</div>
       <div class="text"><%= image_tag "img/music.png", alt:"", class:'ico' %> 
@@ -41,8 +40,8 @@
 <div  style="float:left;">
           <h1 style="color:#4E4E4E;">Instruments</h1>
           <div class="result_part2">
-            <div class="ico_instru"><%= image_tag "img/ico_guitar.png", alt:"", class:''   %><%= image_tag "img/ico_guitar.png", alt:"", class:''   %><%= image_tag "img/ico_guitar2.png", alt:"", class:''   %><%= image_tag "img/ico_guitar2.png", alt:"", class:''   %><%= image_tag "img/ico_guitar2.png", alt:"", class:''   %></div>
-            <div class="ico_instru"><%= image_tag "img/ico_violin.png", alt:"", class:''   %><%= image_tag "img/ico_violin.png", alt:"", class:''   %><%= image_tag "img/ico_violin.png", alt:"", class:''   %><%= image_tag "img/ico_violin.png", alt:"", class:''   %><%= image_tag "img/ico_violin.png", alt:"", class:''   %></div>
+            <div class="ico_instru"><%= image_tag "img/ico_guitar.png", alt:"", class:''   %><%= image_tag "img/ico_guitar.png", alt:"", class:''   %><%= image_tag "img/ico_guitar2.png", alt:"", class:''   %></div>
+            <div class="ico_instru"><%= image_tag "img/ico_violin.png", alt:"", class:''   %><%= image_tag "img/ico_violin.png", alt:"", class:''   %><%= image_tag "img/ico_violin.png", alt:"", class:''   %></div>
           </div>
         </div>
 

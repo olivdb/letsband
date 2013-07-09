@@ -21,7 +21,7 @@ color:#022756;
 margin-bottom: 2px;
 margin-top: 2px;}
 
-.logo_menu {float:left;margin-left:20%;margin-top:5px;}
+.logo_menu {float:left;margin-left:25%;margin-top:5px;}
 #result{
 clear:both;
 width:100%;
@@ -48,10 +48,10 @@ font-size:12px;
 margin:4px;
 }
 
-.result_part {width:200px;margin-right: 10px; border-right:1px dashed #B9B9B9;} 
-.result_part2 {width:140px; margin-right: 10px;border-right:1px dashed #B9B9B9;} 
-.result_part3 {width:140px; margin-right: 10px;border-right:1px dashed #B9B9B9;} 
-.result_part4 {width:140px; margin-right: 10px; } 
+.result_part {width:140px;margin-right: 20px; border-right:1px dashed #B9B9B9;} 
+.result_part2 {width:80px; margin-right: 20px;border-right:1px dashed #B9B9B9;} 
+.result_part3 {width:140px; margin-right: 20px;border-right:1px dashed #B9B9B9;} 
+.result_part4 {width:140px; margin-right: 20px; } 
 .result_part4 a {color:#4665A6;text-decoration:none;} 
 .result_part4 a:hover {color:#9A0643;} 
 .contact a {color:#414141;text-decoration:none;font-weight: bold; font-family:arial;
@@ -102,7 +102,7 @@ height:29px;
 color:#4665A6;
 }
 #page {
-width:60%;
+width:768px;
 margin-left:auto;
 margin-right:auto;
 clear:both;
@@ -125,7 +125,7 @@ margin: 0;
 padding: 0;
 list-style-type: none;
 text-align: right;
-margin-right:20%;
+margin-right:15%;
 padding-right: 12px;
 padding-top:12px;
 font-variant:small-caps;
@@ -199,19 +199,21 @@ text-decoration: underline;
 
 
 .search_box{
-width:350px ; 
+width:300px ; 
 height:140px;
 margin-top:10px;
 margin-bottom:5%;
 float:right;
 text-align:left;
 }.search_box2{
-width:350px ; 
+width:300px ; 
 height:140px;
+margin-left: 40px;
 margin-top:10px;
 margin-bottom:5%;
 float:left;
 text-align:left;
+
 }
 .search_box2 h1 {
 font-family: arial;
@@ -247,6 +249,15 @@ background-repeat: repeat;
 }
 .input_search{
 float:right;
+width:78%;
+height:22px;
+font-size:13px;
+padding-left:0;
+padding-bottom:0;
+padding-top:0;
+}
+.input_search_amp{
+float:right;
 width:82%;
 height:22px;
 font-size:13px;
@@ -254,7 +265,7 @@ padding-left:0;
 padding-bottom:0;
 padding-top:0;
 }
-.input-x2{width:272px; height:14px;max-height: 13px; float:right;}
+.input-x2{width:220px; height:14px;max-height: 13px; float:right;}
 .input-x1 {
 
 width:183px;
