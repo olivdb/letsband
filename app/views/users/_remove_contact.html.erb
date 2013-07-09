@@ -1,4 +1,4 @@
 <%= form_for(current_user.contact_records.find_by_contact_id(@user.id),
              html: { method: :delete }, remote: true) do |f| %>
-  <%= f.submit "Remove from Contacts", class: "btn btn-small to_shift" %>
+  <%= f.submit "Remove Contact", class: "btn btn-danger btn-small to_shift" %>
 <% end %>

@@ -1,16 +1,13 @@
 <div class="result_user">
-      <div class="avatar img-rounded"><span style="border:1px solid #BDBFBF;">
-        <%= gravatar_for user, class: 'avatar_size ' %> </span>
-      </div>
-        <div style="float:left;">
-          <h1>
-
-      	<%= link_to user.firstname, user %>
-         
-        </h1>
-        <div class="result_part">
-<div class="text"><%= image_tag "img/home.png", alt:"", class:'ico'  %> Lives in <strong>
-
+    <div class="avatar img-rounded" >
+      <%= gravatar_for user, class: 'avatar_size avatar-border' %>
+    </div>
+  <div style="float:left;">
+  <h1><%= link_to user.firstname, user %></h1>
+  <div class="result_part">
+     <div class="text"><%= image_tag "img/home.png", alt:"", class:'ico'  %> 
+      Lives in 
+      <strong>
         <% 
           ref_city = City.find_by_id(params[:user_city_id])
           if user.city.id != ref_city.id 
@@ -20,26 +17,26 @@
         <% 
           end 
         %>
-      
-      </strong></div>
-<div class="text"><%= image_tag "img/sex.png", alt:"", class:'ico'   %> Male, 25-year-old</div>
-            <div class="text"><%= image_tag "img/music.png", alt:"", class:'ico' %> <% if user.favorite_genres.empty? %>
-none
-<% else %>
+      </strong>
+      </div>
+      <div class="text"><%= image_tag "img/sex.png", alt:"", class:'ico'   %> Male, 25-year-old</div>
+      <div class="text"><%= image_tag "img/music.png", alt:"", class:'ico' %> 
+        <% if user.favorite_genres.empty? %>
+        none
+        <% else %>
+        <% i = 1 %>
+        <% user.favorite_genres.first(2).each do |genre| %>          
+        <%= Genre.find(genre.genre_id).name %>
+        <% if i != user.favorite_genres.first(2).count %>
+         ,
+        <% end %>
+        <% i = i + 1 %>
+        <% end %>
+        <% end %>
 
-<% i = 1 %>
-<% user.favorite_genres.first(2).each do |genre| %>          
-    <%= Genre.find(genre.genre_id).name %>
-  <% if i != user.favorite_genres.first(2).count %>
-    ,
-  <% end %>
-    <% i = i + 1 %>
-<% end %>
-<% end %>
-
-</strong></div>
           </div>
-        </div>
+   </div>
+   </div>
 
 <div  style="float:left;">
           <h1 style="color:#4E4E4E;">Instruments</h1>

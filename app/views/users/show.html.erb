@@ -16,7 +16,7 @@
        
         
             <%= render 'contact_form' %>
-            <%= (button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", class: "btn btn-success btn-small") unless current_user?(@user) %>
+            <%= (button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", style:"width:113px;", class: "btn btn-success btn-small") unless current_user?(@user) %>
           </p>
         
     

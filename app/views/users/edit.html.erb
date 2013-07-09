@@ -1,8 +1,7 @@
 <% provide(:title, "Edit user") %> 
 
 <h1 class="center">Update your profile</h1><br/>
-
-<div class="row">
+<div class="row text2">
   <div class="span6 offset3">
 
    <ul class="nav nav-tabs">
@@ -19,7 +18,7 @@
       <%= link_to 'My Bands', edit_user_path(@user, section: 'bands') %>
     </li>
     <li class=<%= (params[:section] == 'genres') ? "active" : "" %>>
-      <%= link_to 'My Genres', edit_user_path(@user, section: 'genres') %>
+      <%= link_to 'My Favorite Genres', edit_user_path(@user, section: 'genres') %>
     </li>
   </ul>
    

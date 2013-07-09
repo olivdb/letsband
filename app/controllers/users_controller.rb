@@ -104,7 +104,7 @@ class UsersController < ApplicationController
 
     if @user.update_attributes(params[:user])
       extra = (params[:user][:email] != @user.email) ? "You will receive an email to confirm your new account email in a few minutes." : ""
-      flash.now[:success] = "Profile updated. " + extra
+      flash.now[:success] = "Profile updated" + extra
       
       sign_in @user
       render 'show'

@@ -68,6 +68,9 @@ text-decoration:underline;
 }
 .ico{width:10px;height:9px;}
 
+.avatar-border  {border:1px solid #B3B6B6;}
+
+
 .text {
 font-family:arial;
 font-size:11px;
@@ -145,6 +148,10 @@ color: #EEF8FF;
 color: #fff;
 
 }
+
+
+
+
 
 
 
