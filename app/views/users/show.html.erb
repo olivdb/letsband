@@ -6,11 +6,16 @@
 </p>
  <p>     <h3>Avatar</h3>
     
-  <div class="avatar"><span style="border:1px solid #BDBFBF;">
+  <div class="avatar">
 
-              <%= gravatar_for @user, class: 'avatar_size '  %>
+              <%= gravatar_for @user, class: 'avatar_size avatar-border'  %>
 
 </div>
+
+
+
+
+
 <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %>
 
        

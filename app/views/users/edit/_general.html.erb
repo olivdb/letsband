@@ -1,9 +1,18 @@
 <p>
   <%= form_for @user do |f| %>
     <%= render 'shared/error_messages' %>
+    <p>
+    <div class="avatar-profile">
+
+              <%= gravatar_for @user, class: 'avatar_size avatar-border'  %>
+
+</div>
+  <a href="http://gravatar.com/emails">Change photo</a>
+</p>
+
 
     <%= f.label :name %>
-    <%= f.text_field :firstname, placeholder: "First name", class: "half_width" %>
+    <%= f.text_field :firstname, placeholder: "First name", class: "half_width" %><br/>
     <%= f.text_field :surname, placeholder: "Last name", class: "half_width" %>
 
     <%= f.label :email %>
@@ -14,10 +23,9 @@
 
     <%= f.label :password_confirmation, "Confirmation" %>
     <%= f.password_field :password_confirmation, class: "full_width" %>
-
-    <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+<br />
+    <%= f.submit "Save changes", class: "btn btn-small btn-primary" %>
   <% end %>
 
-  <%= gravatar_for @user %>
-  <a href="http://gravatar.com/emails">Change photo</a>
+ 
 </p>
