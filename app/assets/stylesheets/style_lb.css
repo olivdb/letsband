@@ -20,7 +20,10 @@ font-size:16px;
 color:#022756;
 margin-bottom: 2px;
 margin-top: 2px;}
-
+table.center {
+    margin-left:auto; 
+    margin-right:auto;
+  }
 .logo_menu {float:left;margin-left:25%;margin-top:5px;}
 #result{
 clear:both;

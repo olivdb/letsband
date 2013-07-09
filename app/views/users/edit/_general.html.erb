@@ -1,31 +1,36 @@
-<p>
+
   <%= form_for @user do |f| %>
     <%= render 'shared/error_messages' %>
-    <p>
-    <div class="avatar-profile">
+
+
+<table style="width:100%;" class="well text2 center"><tr><td><a href="http://gravatar.com/emails">Change photo</a></td><td></td><td></td></tr>
+  <tr><td>
+    <div class="avatar">
 
               <%= gravatar_for @user, class: 'avatar_size avatar-border'  %>
 
 </div>
-  <a href="http://gravatar.com/emails">Change photo</a>
-</p>
-
-
+  </td><td></td><td></td></tr><tr>
+ <td> 
     <%= f.label :name %>
-    <%= f.text_field :firstname, placeholder: "First name", class: "half_width" %><br/>
-    <%= f.text_field :surname, placeholder: "Last name", class: "half_width" %>
+    <%= f.text_field :firstname, placeholder: "First name", class: "half_width" %>
+    </td><td>
+        <%= f.label :surname %>
 
+    <%= f.text_field :surname, placeholder: "Last name", class: "half_width" %>
+</td><td>
     <%= f.label :email %>
     <%= f.text_field :email , class: "full_width" %>
-
-    <%= f.label :password %>
+</tr><tr><td>    <%= f.label :password %>
     <%= f.password_field :password, class: "full_width"  %>
-
-    <%= f.label :password_confirmation, "Confirmation" %>
-    <%= f.password_field :password_confirmation, class: "full_width" %>
-<br />
-    <%= f.submit "Save changes", class: "btn btn-small btn-primary" %>
-  <% end %>
-
+    
+</td>
+    <td> <%= f.label :password_confirmation, "Confirmation" %>
+    <%= f.password_field :password_confirmation, class: "full_width" %></td><td>
+   </td></tr>
  
-</p>
+  
+  </table>
+<table><%= f.submit "Save changes", style: "width:100%;", class: "btn  btn-primary" %></table>
+ <% end %>
+ 
