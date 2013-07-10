@@ -36,7 +36,7 @@
   
                 
       </div>
-      <div class="subnavitem">Option2 
+      <div class="subnavitem">Needing 
        <% 
             available_instruments = Instrument.all.delete_if{|i| i.name == "Unknown"}
             any_instrument = Instrument.new(name: 'Any Instrument')
