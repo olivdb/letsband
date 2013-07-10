@@ -2,7 +2,7 @@
 <% provide(:menu, "contacts") %>
 <%= will_paginate %>
 <div class="messages">
-	<ul>
+	<ul class="nav2">
 		<%= render :partial => "contact", :collection => @users, :as => :contact %>
 	</ul>
 </div>

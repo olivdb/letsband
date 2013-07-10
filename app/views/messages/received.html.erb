@@ -2,7 +2,7 @@
 <% provide(:menu, "received") %>
 <%= will_paginate %>
 <div class="messages">
-	<ul>
+	<ul >
 		<!-- render :partial => "message", :collection => @messages, :locals => { :current_user_is_recipient => true } -->
 		<% @messages.each do |message| %>
 			<% if message.inviting_band_id.present? %>
