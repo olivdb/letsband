@@ -10,9 +10,9 @@
 	<% else %>
 	Unknown
 	<% end %>
-</td><td>
+
 	<%= f.label :update_my_city %>
-	<%= text_field_tag 'user_city_name', (@user.city.fullname if @user.city.present?), class: ' ui-autocomplete-input ', placeholder: 'City name',style:'width:90%;', data: {autocomplete_source: cities_path}, id: 'user_city_name',
+	<%= text_field_tag 'user_city_name', (@user.city.fullname if @user.city.present?), class: ' ui-autocomplete-input ', placeholder: 'City name',style:'width:98%;', data: {autocomplete_source: cities_path}, id: 'user_city_name',
 	  onclick: 'this.select();',
 	  onblur: "if('#{@user.city.present?}'=='true' && this.value == ''){this.value = '#{(@user.city.fullname if @user.city.present?)}'; 
 	  document.getElementById('user_city_has_been_selected').value = 1;
