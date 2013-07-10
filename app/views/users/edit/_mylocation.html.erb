@@ -3,7 +3,7 @@
 	  document.getElementById('user_city_has_been_selected').value = 1;
 	  document.getElementById('user_city_id').value = '#{(@user.city.id if @user.city.present?)}';}" do |f| %>
 <%= render 'shared/error_messages' %>
-<table style="width:100%;" class="well text2 center"><tr><td>
+<table style="width:100%;" class="well text2 center"><tr><td style="padding:10px;">
 	<%= f.label :my_city %>
 	<% if @user.city.present? %>
 	<%= @user.city.fullname %>

@@ -6,7 +6,7 @@
 </p>
  <p>     <h3>Avatar</h3>
     
-  <div class="avatar">
+  <div class="avatar-profile">
 
               <%= gravatar_for @user, class: 'avatar_size avatar-border'  %>
 
@@ -28,7 +28,7 @@
     <div class="">
       <p style="clear:left;">
         <h3>Location</h3>
-<%= @user.city.present? ? @user.city.fullname : 'Unknown' %><br/>
+<%= @user.city.present? ? @user.city.name  : 'Unknown' %> - <%= @user.city.country.name %><br/>
         <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'location')) %>) <% ) if current_user?(@user) %>
          
       </p>

@@ -21,7 +21,7 @@
       <div class="text"><%= image_tag "img/sex.png", alt:"", class:'ico'   %> Male, 25-year-old</div>
       <div class="text"><%= image_tag "img/music.png", alt:"", class:'ico' %> 
         <% if user.favorite_genres.empty? %>
-        none
+        None
         <% else %>
         <% i = 1 %>
         <% user.favorite_genres.first(2).each do |genre| %>          
@@ -57,7 +57,7 @@
           <h1 style="color:#4E4E4E;">Curently &amp; Past Playing Band</h1>
           <div class="result_part4">
             <div class="text_band"><% if user.memberships.empty? %>
-            none
+            None
 <% else %>
   <% i = 1 %>
             <% user.memberships.first(4).each do |membership| %>

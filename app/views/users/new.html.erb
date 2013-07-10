@@ -3,7 +3,7 @@
 <h1>Sign up</h1>
 
 
-<div style="width:29%;" class="well text2 center">
+<div style="width:300px;" class="well text2 center">
 
     <%= form_for(@user) do |f| %>
     <%= render 'shared/error_messages' %>
@@ -20,7 +20,7 @@
 
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation, class: "full_width" %>
- <%= f.submit "Create my account !", style: "width:99%;", class: "btn btn-medium btn-success" %>
+ <%= f.submit "Create my account !", style: "width:74%;", class: "btn btn-medium btn-success" %>
       </div>
 
     <% end %>
