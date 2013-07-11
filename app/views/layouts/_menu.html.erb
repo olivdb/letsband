@@ -1,5 +1,9 @@
+<% if request.path != root_path %>
 <div id="bgmenu_black">
-  
+<% end %>
+<% if request.path == root_path %>
+<div id="bgmenu_black2">
+<% end %>
 <%= image_tag "img/logo_menu.png",  alt: "Lets band!", mouseover: "img/logo_menu2.png", class:"logo_menu" %>
 
  <nav>
@@ -28,7 +32,8 @@
             </li>
 
           <% else %>
-            <li><%= link_to "sign in", signin_path %></li>
+            <li><%= link_to "sign in", signin_path %></li> - 
+            <li><%= link_to "sign up", signup_path %></li>
           <% end %>
         </ul>
       </nav>

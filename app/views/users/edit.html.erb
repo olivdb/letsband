@@ -23,6 +23,7 @@
   </ul>
   </div>
 
+
   <% case params[:section] %>
   <% when nil %>
   <%= render 'users/edit/general' %>
@@ -37,5 +38,6 @@
   <% when 'genres' %>
   <%= render 'users/edit/mygenres' %>
   <% end %>
+
 
 

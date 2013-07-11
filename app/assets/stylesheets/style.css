@@ -12,7 +12,7 @@ width:1024px;
 margin-left: auto;
 margin-right: auto;
 }
-#amp_full{width:570px;margin-left:auto;margin-right:auto;}
+.amp_full{width:592px;display:block;margin-left:auto;margin-right:auto;}
 .amp{
 width:276px;
 height:197px;
@@ -26,10 +26,6 @@ margin-left:auto;
 margin-right:auto;
 padding-top:46px;
 width:240px;
-}.amp_fieldul {
-margin-left:auto;
-margin-right:auto;
-width:700px;
 }
 .amp_fieldh1 {
 font-family:arial, sans serif;

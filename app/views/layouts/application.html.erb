@@ -10,11 +10,15 @@
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
   </head>
-  <body>
-    <% if request.path != root_path %><div id="fullpage"><% end %>
+  <% if request.path != root_path %>
+  <body class="backhome">
+    <div id="fullpage">
+            <%= render 'layouts/menu' %>
+      <% end %>
+      <% if request.path == root_path %>
+  <body class="backhome2">
       <%= render 'layouts/menu' %>
-      <!--div class="container"-->
-        <%= render 'layouts/header' %>
+<% end %>
         <% if request.path != root_path %>
  <div id="page">
   <div id="header">

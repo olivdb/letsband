@@ -1,7 +1,7 @@
 <% content_for :content do %>
 <div class="row">
 	<div class="text2">	
-		<ul class="nav2 nav2-pills nav2-stacked">
+		<ul class="nav nav-tabs">
 		  <li class="nav-header"><b>Messages</b></li>
 		  <li <%= (yield(:menu)=="new") ? "class=active" : "" %>><%= link_to 'New', new_message_path %></li>
 		  <li class="divider"></li>

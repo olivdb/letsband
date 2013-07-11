@@ -1,9 +1,10 @@
 <% provide(:title, @user.name) %>
 <div class="profile text2">
- <p>
+ <center>
     <h1><%= @user.name %></h1>
-    <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %>
-</p>
+    
+</center>
+<div class="well text2 center">
  <p>     <h3>Avatar</h3>
     
   <div class="avatar-profile">
@@ -16,12 +17,10 @@
 
 
 
-<% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'general')) %>) <% ) if current_user?(@user) %>
-
        
         
             <%= render 'contact_form' %>
-            <%= (button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", style:"width:113px;", class: "btn btn-success btn-small") unless current_user?(@user) %>
+            <%= (button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", style:"width:113px;padding:3px;", class: "btn btn-success") unless current_user?(@user) %>
           </p>
         
     
@@ -29,8 +28,7 @@
       <p style="clear:left;">
         <h3>Location</h3>
 <%= @user.city.present? ? @user.city.name  : 'Unknown' %> - <%= @user.city.country.name %><br/>
-        <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'location')) %>) <% ) if current_user?(@user) %>
-         
+      
       </p>
       
       <p class="">
@@ -49,7 +47,7 @@
             </ul>
           <% end %>
           <br/>
-          <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'bands')) %>) <% ) if current_user?(@user) %>
+      
         </div>
       </p>
       <p class="">
@@ -66,15 +64,17 @@
             <% end %>
            
           <% end %>
-          <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'genres')) %>) <% ) if current_user?(@user) %>
+       
         </div>
       </p>
       <p>
        <h3>Skills</h3>
         <%= !@user.skills.empty? ? render(partial: 'profile_skills', locals: { skills: @user.skills }) : 'Unknown' %>
 
-      <% ( %> (<%= link_to("update", edit_user_path(current_user, section: 'skills')) %>) <% ) if current_user?(@user) %>
+     
       </p>
+    </div></div>
     </div>
-    </div>
-  
+  <table>
+<% ( %> <%= link_to "Edit my profile", edit_user_path(current_user), style: "width:97%;color:#fff;text-decoration:none;",  class: "btn  btn-primary" %> <% ) if current_user?(@user) %>
+ </table>

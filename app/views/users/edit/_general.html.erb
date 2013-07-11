@@ -3,29 +3,29 @@
     <%= render 'shared/error_messages' %>
 
 
-<table style="width:100%;" class="well text2 center"><tr><td><a href="http://gravatar.com/emails">Change photo</a></td><td></td><td></td></tr>
-  <tr><td>
+<table style="width:100%; padding:10px;" class="well text2 center"><tr><td style="padding-left:10px;padding-top:10px;"><a href="http://gravatar.com/emails">Change photo</a></td><td></td><td></td></tr>
+  <tr><td style="padding:10px;">
     <div class="avatar">
 
               <%= gravatar_for @user, class: 'avatar_size avatar-border'  %>
 
 </div>
   </td><td></td><td></td></tr><tr>
- <td> 
+ <td style="padding:10px;"> 
     <%= f.label :name %>
     <%= f.text_field :firstname, placeholder: "First name", class: "half_width" %>
-    </td><td>
+    </td><td style="padding:10px;">
         <%= f.label :surname %>
 
     <%= f.text_field :surname, placeholder: "Last name", class: "half_width" %>
-</td><td>
+</td><td style="padding:10px;">
     <%= f.label :email %>
     <%= f.text_field :email , class: "full_width" %>
-</tr><tr><td>    <%= f.label :password %>
+</tr><tr><td style="padding:10px;">    <%= f.label :password %>
     <%= f.password_field :password, class: "full_width"  %>
     
 </td>
-    <td> <%= f.label :password_confirmation, "Confirmation" %>
+    <td style="padding:10px;"> <%= f.label :password_confirmation, "Confirmation" %>
     <%= f.password_field :password_confirmation, class: "full_width" %></td><td>
    </td></tr>
  
