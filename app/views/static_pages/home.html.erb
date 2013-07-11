@@ -17,11 +17,14 @@
 <% end %>
 
 <center>
-
+<%= image_tag "home/left.png", alt:"" %>
 <%= image_tag "home/logo_hd.png", alt:"", width: 434 %>
+<%= image_tag "home/right.png", alt:"" %>
+
 	</center>
 
-<div class="amp_full">
+
+
  	<ul class="amp_fieldul">
 		<li class="amp">
 			<%= form_tag users_path, :method => 'get', onsubmit: "if('#{params[:user_city_name]}' && document.getElementById('user_city_name').value == ''){document.getElementById('user_city_name').value = '#{params[:user_city_name]}'; 
@@ -80,4 +83,4 @@
 			<% end %>
 		</li>
 	</ul>
-</div>
+
