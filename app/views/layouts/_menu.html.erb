@@ -4,9 +4,10 @@
 <% if request.path == root_path %>
 <div id="bgmenu_black2">
 <% end %>
+<div class="inner-menu">
 <%= image_tag "img/logo_menu.png",  alt: "Lets band!", mouseover: "img/logo_menu2.png", class:"logo_menu" %>
 
- <nav>
+ <nav class="inner-menu">
         <ul class="nav" >
           <li><%= link_to "home", root_path %></li> - 
           <% if signed_in? %>
@@ -37,4 +38,5 @@
           <% end %>
         </ul>
       </nav>
+    </div>
   </div>

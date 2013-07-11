@@ -4,8 +4,9 @@
 
 
 <div style="width:728px;" class="well text2 center">
-
-
+<table style="width:448px">
+<td style="width:224px;"><label>My Favorite Genres</label></td><td><label>Looking for a band?</label></td>
+</table>
     <%= f.fields_for :favorite_genres do |builder| %>
     
      <%= render 'favorite_genre_fields', f: builder %>

@@ -26,7 +26,7 @@ table.center {
     margin-left:auto; 
     margin-right:auto;
   }
-.logo_menu {float:left;margin-left:20%;margin-top:5px;}
+.logo_menu {float:left;margin-top:5px;}
 #result{
 clear:both;
 width:100%;
@@ -131,7 +131,7 @@ margin: 0;
 padding: 0;
 list-style-type: none;
 text-align: right;
-margin-right:15%;
+
 padding-right: 12px;
 padding-top:12px;
 font-variant:small-caps;
@@ -297,7 +297,7 @@ height:53px;
 clear:both;
 }
 
-
+.inner-menu {width:768px;margin-left:auto;margin-right:auto;}
 #bgmenu_black2  ul
 {
 	color:#0F0F11;
@@ -305,7 +305,7 @@ margin: 0;
 padding: 0;
 list-style-type: none;
 text-align: right;
-margin-right:15%;
+
 padding-right: 12px;
 padding-top:12px;
 font-variant:small-caps;
