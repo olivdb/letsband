@@ -2,7 +2,7 @@
 <% if signed_in? %>
 	<%= form_for(current_user.contact_records.build(contact_id: @user.id), remote: true) do |f| %>
 	  <%= f.hidden_field :contact_id %>
-	  <%= f.submit button_text,  style:"width:113px;padding:3px;",class: "btn btn-primary" %>
+	  <%= f.submit button_text,  style:"width:113px;margin-top:-3px;",class: "btn btn-primary" %>
 	<% end %>
 <% else %>
 	<% store_location %>

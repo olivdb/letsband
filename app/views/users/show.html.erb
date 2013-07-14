@@ -4,55 +4,42 @@
     <h1><%= @user.name %></h1>
     
 </center>
-<div class="well text2 center">
- <p>     <h3>Avatar</h3>
-    
-  <div class="avatar-profile">
-
-              <%= gravatar_for @user, class: 'avatar_size avatar-border'  %>
-
-</div>
-
-
-
-
-
-       
-        
-            <%= render 'contact_form' %>
-            <%= (button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", style:"width:113px;padding:3px;", class: "btn btn-success") unless current_user?(@user) %>
-          </p>
-        
-    
-    <div class="">
-      <p style="clear:left;">
-        <h3>Location</h3>
-        <%= @user.city.present? ? @user.city.name  : 'Unknown City' %> - <%= @user.city.present? ? @user.city.country  : 'Unknown Country'  %><br/>
-
-      
-      </p>
-      
-      <p class="">
-       <h3>Memberships</h3>
-        <div class="condensed">
-          <% if @user.memberships.empty? %>
-            None
-          <% else %>
-            <% @user.memberships.each do |membership| %>
-              
-              
-              
-              <%= link_to membership.band.name, membership.band %> : <%= (membership.instrument.name) %>
-              <br/>
-            <% end %>
-            </ul>
-          <% end %>
-          <br/>
-      
-        </div>
-      </p>
-      <p class="">
-       <h3>Played Genres</h3>
+<table  style="width:100%; padding:10px;" class="well profile_table text2 center">
+  <tr>
+    <td>
+      <h3>Avatar</h3>
+      <div class="avatar">
+      <%= gravatar_for @user, class: 'avatar_size avatar-border'  %>
+      </div>
+      <%= render 'contact_form' %>
+      <%= (button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", style:"width:113px;margin-top:-10px;", class: "btn btn-success") unless current_user?(@user) %>
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+  </tr>
+  <tr>
+    <td>        
+      <h3>Location</h3>
+      <%= @user.city.present? ? @user.city.name  : 'Unknown City' %> - <%= @user.city.present? ? @user.city.country  : 'Unknown Country'  %><br/>
+    </td> 
+    <td>   
+     <h3>Memberships</h3>
+     <div class="condensed">
+       <% if @user.memberships.empty? %>
+         None
+       <% else %>
+      <% @user.memberships.each do |membership| %>
+      <%= link_to membership.band.name, membership.band %> : <%= (membership.instrument.name) %>
+      <br/>
+      <% end %>
+      </ul>
+      <% end %>
+    </div>
+    </td>
+    <td> 
+    <h3>Played Genres</h3>
         <div class="condensed">
           <% if @user.favorite_genres.empty? %>
             None
@@ -66,16 +53,20 @@
            
           <% end %>
        
-        </div>
-      </p>
-      <p>
-       <h3>Skills</h3>
+        </div> 
+    </td>  
+    </tr>
+    <td>
+      <h3>Skills</h3>
         <%= !@user.skills.empty? ? render(partial: 'profile_skills', locals: { skills: @user.skills }) : 'Unknown' %>
-
-     
-      </p>
-    </div></div>
-    </div>
-  <table>
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+  </tr>
+</table>
+  </div>
+<table>
 <% ( %> <%= link_to "Edit my profile", edit_user_path(current_user), style: "width:97%;color:#fff;text-decoration:none;",  class: "btn  btn-primary" %> <% ) if current_user?(@user) %>
- </table>
+</table>
