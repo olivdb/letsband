@@ -30,9 +30,13 @@ table.center {
   .membership_fields select {width:140px;}
   .band_presentation textarea {width:100%;height:100px;}
   .band_presentation select, input {width:100%;}
-  .band_presentation td  {padding: 10px;vertical-align: top;}
-  .editskills th, td{padding: 10px;width:150px;vertical-align: top;}
-  .editskills select {width:100px;}
+  .band_presentation td  {padding: 10px;vertical-align: middle;}
+  .editskills{padding: 10px;vertical-align: top;}
+ 
+  .editskills li {display: inline;list-style-type: none;}
+  .editskills ul {margin:0;padding:2px;}
+ 
+  .editskills select {width:138px;}
 
 
 

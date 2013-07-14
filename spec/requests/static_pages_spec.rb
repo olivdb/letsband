@@ -33,7 +33,7 @@ describe "Static pages" do
     page.should have_selector 'title', text: full_title('Contact')
     click_link "Home"
     page.should have_selector 'title', text: full_title('')
-    click_link "Let's Band!"
+    click_link "Let's band!"
     page.should have_selector 'title', text: full_title('')
   end
 end

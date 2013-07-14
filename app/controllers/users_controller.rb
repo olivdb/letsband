@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       #sign_in @user
-      flash[:success] = ("Hi " + @user.firstname + "! Welcome to Let's Band! A confirmation email has been sent to you that will allow you to activate your account.")
+      flash[:success] = ("Hi " + @user.firstname + "! Welcome to Let's band! A confirmation email has been sent to you that will allow you to activate your account.")
       redirect_to root_path
     else
       render 'new'

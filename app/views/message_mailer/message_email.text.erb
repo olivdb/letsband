@@ -7,5 +7,5 @@
 <% end %>
 
 ====================================================================
-To view this message on Let's Band, go to <%= message_url(@message) %>
+To view this message on Let's band, go to <%= message_url(@message) %>
 To reply to this message, go to <%= new_message_url(recipient_id: @message.sender.id, subject: ((@message.subject[0..2]=='Re:') ? '' : 'Re: ') + @message.subject, origin_message_id: @message.id) %>
