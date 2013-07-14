@@ -2,21 +2,21 @@
   <%= form_for @user do |f| %>
     <%= render 'shared/error_messages' %>
 
-    <p>
-    <div class='editskills'>
-    <table>
+    <table class="editskills text2 well">
     	<tr>
-    		<th>Instrument</th><th>Expertise</th><th>Experience</th><th>Education</th><th>Priority</th><th>  </th>
-    	</tr>
+    		<th><label>Instrument</label></th><th><label>Expertise</label></th><th><label>Experience</label></th><th><label>Education</label></th><th><label>Priority</label></th><th> <label>Delete</label> </th>
+
+    	</tr><tr><td>
+      <%= link_to_add_fields "Add Skill", f, :skills %></td></tr>
     </table>
     <%= f.fields_for :skills do |builder| %>
       <%= render 'skill_fields', f: builder %>
     <% end %>
     
 	
-	<%= link_to_add_fields "Add Skill", f, :skills %>
-	</div>
-	</p>
+	
+
+
     <p>
       <%= hidden_field_tag "section", "skills" %>
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>

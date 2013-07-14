@@ -27,7 +27,8 @@
     <div class="">
       <p style="clear:left;">
         <h3>Location</h3>
-<%= @user.city.present? ? @user.city.name  : 'Unknown' %> - <%= @user.city.country.name %><br/>
+        <%= @user.city.present? ? @user.city.name  : 'Unknown City' %> - <%= @user.city.present? ? @user.city.country  : 'Unknown Country'  %><br/>
+
       
       </p>
       
