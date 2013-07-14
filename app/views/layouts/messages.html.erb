@@ -8,7 +8,7 @@
 		  <li <%= (yield(:menu)=="received") ? "class=active" : "" %>> <%= link_to 'Received' + (current_user.unread_messages? ? ' ('+current_user.unread_message_count.to_s+')' : ''), received_messages_path %></li>
 		  <li <%= (yield(:menu)=="sent") ? "class=active" : "" %>><%= link_to 'Sent', sent_messages_path %></li>
 		  <li class="nav-header"><b>Contacts</b></li>
-		  <li <%= (yield(:menu)=="contacts") ? "class=active" : "" %>><%= link_to 'All', contacts_user_path(current_user) %></li>
+		  <li <%= (yield(:menu)=="contacts") ? "class=active" : "" %>><%= link_to 'Show All', contacts_user_path(current_user) %></li>
 		</ul>
 	</div>
 	<div class="text2">
@@ -16,4 +16,5 @@
 	</div>
 </div>
 <% end %>
+
 <%= render :template => 'layouts/application' %>

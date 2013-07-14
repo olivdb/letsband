@@ -1,24 +1,35 @@
-      <div class="result_user">
+<table style="width:100%;" class="well text2 center band_presentation">
+  <tr>
+    <td style="height:20px;">
 
-<p>
-  <%= form_for @band, :html => { :multipart => true } do |f| %>
-    <%= render 'shared/error_messages' %>
 
-    <%= f.label :name %>
-    <%= f.text_field :name, placeholder: "Band name" %>
 
-    <%= f.label :genre %>
-    <%= f.select :genre_id, options_from_collection_for_select(Genre.all, 'id', 'name', f.object.genre_id) %>
+        <%= form_for @band, :html => { :multipart => true } do |f| %>
+          <%= render 'shared/error_messages' %>
 
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+          <%= f.label :name %>
+          <%= f.text_field :name, placeholder: "Band name" %>
+    </td>
+    <td style="height:20px;">
+      <%= f.label :genre %>
+      <%= f.select :genre_id, options_from_collection_for_select(Genre.all, 'id', 'name', f.object.genre_id) %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </td>
+    <td>
+      <%= f.label :band_picture %>
+      <%= f.file_field :image %>
+    </td>
+</tr>
+</table>
 
-    <%= f.label :band_picture %>
-    <%= f.file_field :image %>
+    <%= f.submit "Save changes",  class: 'btn btn-primary', style: "width:100%;" %>
 
-    <br />
-    <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+
   <% end %>
 
-</p>
-</div>
+

@@ -2,11 +2,11 @@
   <%= form_for @band do |f| %>
     <%= render 'shared/error_messages' %>
 
-    <p>
-    <div class='editmemberships'>
-    <table>
+<div style="width:728px;" class="well text2 center membership_fields">
+    
+    <table >
     	<tr>
-    		<th>Nom</th><th>Instrument</th><th>Status</th><th>  </th>
+    		<td><label>Name</label></td><td><label>Instrument</label></td><td><label>Status</label></td><td></td>
     	</tr>
     </table>
     <%= f.fields_for :memberships do |builder| %>
@@ -15,9 +15,10 @@
   
 	<%= link_to_add_fields "Invite new musician", f, :memberships %>
 	</div>
-	</p>
-    <p>
+
       <%= hidden_field_tag "section", "members" %>
-      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
-    </p>
+      <%= f.submit "Save changes", class: 'btn btn-primary', style: "width:100%;" %>
+
+
+
   <% end %>

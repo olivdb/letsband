@@ -1,7 +1,7 @@
 <fieldset>
   <table>
   <tr>
-    <td>
+    <td >
       <%= f.select :instrument_id, options_from_collection_for_select(Instrument.all, 'id', 'name', f.object.instrument_id) %>
     </td>
     <td>
