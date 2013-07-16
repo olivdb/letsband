@@ -9,15 +9,16 @@
         <li><label>Experience</label></li>
         <li><label>Education</label></li>
         <li><label>Priority</label></li>
-        <li><label>Delete</label></li>
+
       </ul>
 
     
-      <%= link_to_add_fields "Add Skill", f, :skills %>
-
+     
     <%= f.fields_for :skills do |builder| %>
       <%= render 'skill_fields', f: builder %>
     <% end %>
+     <%= link_to_add_fields "Add Skill", f, :skills %>
+
         </div>
 	
 	

@@ -33,13 +33,14 @@ table.center {
   .band_presentation td  {padding: 10px;vertical-align: middle;}
   .editskills{padding: 10px;vertical-align: top;}
  
-  .editskills li {display: inline;list-style-type: none;}
+  .editskills li {display: inline;
+    list-style-type: none;float:left; width:140px;}
   .editskills ul {margin:0;padding:2px;}
- 
   .editskills select {width:138px;}
   .profile_table td {padding:10px;vertical-align: top;}
-
-
+  .general_profile td {padding: 10px;}
+.general_profile {width:100%;}
+.general_profile input {width:220px;}
 .logo_menu {float:left;margin-top:5px;}
 #result{
 clear:both;
