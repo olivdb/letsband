@@ -7,12 +7,11 @@
 <table  style="width:100%; padding:10px;" class="well profile_table text2 center">
   <tr>
     <td>
-      <h3>Avatar</h3>
-      <div class="avatar">
+          <div class="avatar">
       <%= gravatar_for @user, class: 'avatar_size avatar-border'  %>
       </div>
       <%= render 'contact_form' %>
-      <%= (button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", style:"width:113px;margin-top:-10px;", class: "btn btn-success") unless current_user?(@user) %>
+      <%= (button_to "Send Message", new_message_path(recipient_id: @user.id), :method => "post", style:"width:113px;margin-top:-3px;", class: "btn btn-success btn-small") unless current_user?(@user) %>
     </td>
     <td>
     </td>
@@ -22,7 +21,7 @@
   <tr>
     <td>        
       <h3>Location</h3>
-      <%= @user.city.present? ? @user.city.name  : 'Unknown City' %> - <%= @user.city.present? ? @user.city.country  : 'Unknown Country'  %><br/>
+      <%= @user.city.fullname %><br/>
     </td> 
     <td>   
      <h3>Memberships</h3>

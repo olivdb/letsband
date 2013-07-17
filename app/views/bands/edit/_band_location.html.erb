@@ -3,7 +3,7 @@
 	  document.getElementById('band_city_has_been_selected').value = 1;
 	  document.getElementById('band_city_id').value = '#{(@band.city.id if @band.city.present?)}';}" do |f| %>
 <%= render 'shared/error_messages' %>
-<table style="width:100%;" class="well text2 center"><tr><td style="padding:10px;">
+<table class="well text2 center band_location"><tr><td>
 	<%= f.label :band_city %>
 	<% if @band.city.present? %>
 	<%= @band.city.fullname %>

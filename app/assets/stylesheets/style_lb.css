@@ -26,22 +26,35 @@ table.center {
     margin-left:auto; 
     margin-right:auto;
   }
+
   .membership_fields td {width:160px;}
   .membership_fields select {width:140px;}
+
   .band_presentation textarea {width:100%;height:100px;}
+  .band_presentation  select, input {width:100%;}
   .band_presentation select, input {width:100%;}
-  .band_presentation td  {padding: 10px;vertical-align: middle;}
+  .band_presentation td  {padding: 10px;vertical-align: top;}
+
+  .band_location input {width:100%;}
+  .band_location  {width:100%;}
+  .band_location td {padding-left: 10px;padding-right: 40px;padding-top: 10px;padding-bottom: 10px;}
+
   .editskills{padding: 10px;vertical-align: top;}
- 
-  .editskills li {display: inline;
-    list-style-type: none;float:left; width:140px;}
+  .editskills li {display: inline;list-style-type: none;float:left; width:140px;}
   .editskills ul {margin:0;padding:2px;}
   .editskills select {width:138px;}
+
   .profile_table td {padding:10px;vertical-align: top;}
+
   .general_profile td {padding: 10px;}
-.general_profile {width:100%;}
-.general_profile input {width:220px;}
-.logo_menu {float:left;margin-top:5px;}
+  .general_profile {width:100%;}
+  .general_profile input {width:220px;}
+
+  .logo_menu {float:left;margin-top:5px;}
+
+  .table_signup input{width:280px;}
+  .table_signup {width:300px;}
+
 #result{
 clear:both;
 width:100%;
